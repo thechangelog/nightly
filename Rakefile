@@ -1,16 +1,14 @@
 require_relative "helpers"
 require "date"
-require "yaml"
 require "open-uri"
 require "json"
+require "erb"
 require "rubygems"
 require "bundler/setup"
 require "big_query"
 require "hashie/mash"
 require "pry"
 require "dotenv/tasks"
-require "erb"
-
 
 desc "purges caches and generated files"
 task :clean do
@@ -22,6 +20,7 @@ task :preview do
   system "python -m SimpleHTTPServer"
 end
 
+desc "generates a new index.html w/ current data (uses cache in dev)"
 task generate: :dotenv do
   today = Date.today.to_s
   bq = BigQuery::Client.new({
@@ -70,13 +69,11 @@ task generate: :dotenv do
   SQL
 
   top_new = with_cache "top_new" do
-    puts "top_new block called"
     urls = bq.query(top_new_sql)["rows"].map { |row| row["f"].first["v"] }
     urls.map { |url| Hashie::Mash.new JSON.load(open(url)) }
   end
 
   top_watched = with_cache "top_watched" do
-    puts "top_watched block called"
     urls = bq.query(top_watched_sql)["rows"].map { |row| row["f"].first["v"] }
     urls.map { |url| Hashie::Mash.new JSON.load(open(url)) }
   end
