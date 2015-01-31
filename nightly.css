@@ -1,0 +1,285 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 100%;
+    background-color: #fff;
+    margin: 0;
+    padding: 0
+}
+
+.brand {
+    width: 200px
+}
+
+@media (max-width: 480px) {
+    .brand {
+        display: block;
+        width: 180px;
+        margin: 0 auto;
+        position: relative;
+        left: -6px
+    }
+}
+
+.hide-on-desktop {
+    display: none !important
+}
+
+.show-on-desktop {
+    display: block !important
+}
+
+@media (max-width: 480px) {
+    .hide-on-mobile {
+        display: none !important
+    }
+
+    .show-on-mobile {
+        display: block !important
+    }
+
+    .last-of-type-on-mobile {
+        margin-bottom: 0 !important
+    }
+}
+
+.list-item {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.list-item:last-of-type, .list-item.last-of-type {
+    margin-bottom: 0 !important
+}
+
+img.avatar {
+  float: left;
+  margin-right: 10px;
+}
+
+.language {
+  font-size: 12px;
+
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 5px
+}
+
+h2, h4 {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding-top: 0;
+    padding-bottom: 0
+}
+
+h5 {
+    font-size: 11px;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 3px;
+    padding-top: 0;
+    padding-bottom: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase
+}
+
+p, li {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-top: 0;
+    padding-bottom: 0
+}
+
+blockquote {
+    margin: 10px 0
+}
+
+blockquote, p.blockquote, p.bq {
+    border-left: 4px solid #bbb;
+    padding-left: 12px
+}
+
+ul, ol {
+    margin-top: 5px;
+    margin-bottom: 22px;
+    padding-left: 18px
+}
+
+li {
+    margin-top: 0;
+    margin-bottom: 4px
+}
+
+code, pre {
+    margin: 0;
+    padding: 0
+}
+
+pre {
+    display: block;
+    margin-bottom: 10px
+}
+
+code {
+    display: inline-block
+}
+
+pre code {
+    display: block
+}
+
+code {
+    background-color: #2b2d2d;
+    border-radius: 3px;
+    color: #d7d7d7;
+    font-family: "DejaVu Sans Mono", Menlo, Monaco, Consolas, Courier, monospace;
+    font-size: 13px;
+    padding: 10px
+}
+
+p code {
+    background-color: #f8f8f8;
+    border: 1px solid #eaeaea;
+    border-radius: 3px;
+    color: inherit;
+    font-family: "DejaVu Sans Mono", Menlo, Monaco, Consolas, Courier, monospace;
+    font-size: 12px;
+    margin: 0 2px;
+    padding: 2px 5px
+}
+
+@media (max-width: 480px) {
+    table {
+        width: 100%
+    }
+}
+
+.content-block-footer p {
+    font-size: 13px
+}
+
+.image-bleed img {
+    width: 600px
+}
+
+.divider, .divider-10, .divider-20, .divider-40 {
+    display: block;
+    width: 1px
+}
+
+.divider-10 {
+    height: 10px
+}
+
+.divider-20 {
+    height: 20px
+}
+
+.divider-40 {
+    height: 40px
+}
+
+.align-center {
+    text-align: center !important
+}
+
+.align-right {
+    text-align: right !important
+}
+
+.align-left {
+    text-align: left !important
+}
+
+.align-justify {
+    text-align: justify !important
+}
+
+.margin-top-negative-10 {
+    margin-top: -10px
+}
+
+.margin-top-10, .bq-solo {
+    margin-top: 10px !important
+}
+
+.margin-bottom-10, .bq-below {
+    margin-bottom: 10px !important
+}
+
+.content-block-dark h3 {
+    color: #e5e5e5
+}
+
+.content-block-dark h4 {
+    color: #e5e5e5;
+    margin-bottom: 16px
+}
+
+.content-block-dark h4 a {
+    text-decoration: none
+}
+
+.content-block-dark p {
+    color: #e5e5e5;
+    margin-bottom: 14px
+}
+
+.content-block-dark a {
+    color: #fff
+}
+
+.content-block-white h3 {
+    border-bottom: 2px solid #e5e5e5
+}
+
+.content-block-white h3, .content-block-white h4 {
+    color: #2b2d2d
+}
+
+.content-block-white h3 a, .content-block-white h4 a {
+    color: #428bca
+}
+
+.content-block-white h5 {
+    color: #aaa
+}
+
+.content-block-white p {
+    color: #333
+}
+
+.content-block-white a {
+    color: #428bca
+}
+
+.content-block-white a:hover {
+    color: #2b2d2d;
+    text-decoration: underline
+}
+
+.content-block-white em, .content-block-white mark {
+    font-style: normal;
+    padding: 3px;
+    background-color: #fffeca
+}
+
+.content-block-footer {
+    color: #777
+}
+
+.content-block-footer a {
+    color: #2b2d2d
+}
