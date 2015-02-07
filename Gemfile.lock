@@ -44,6 +44,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     retriable (1.4.1)
+    sass (3.4.11)
     signet (0.6.0)
       addressable (~> 2.3)
       extlib (~> 0.9)
@@ -63,3 +64,4 @@ DEPENDENCIES
   dotenv
   hashie
   pry
+  sass

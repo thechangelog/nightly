@@ -10,19 +10,49 @@ require "hashie/mash"
 require "pry"
 require "dotenv/tasks"
 
+DIST_DIR = "dist"
+
 desc "purges caches and generated files"
 task :clean do
-  system "rm -rf index.html *.cache"
+  system "rm -rf #{DIST_DIR} *.cache"
 end
 
 desc "launches local HTTP server"
 task :preview do
-  system "python -m SimpleHTTPServer"
+  system "cd #{DIST_DIR} && python -m SimpleHTTPServer"
 end
 
-desc "generates a new index.html w/ current data (uses cache in dev)"
-task generate: :dotenv do
-  today = Date.today.to_s
+task generate: [:sass, :issue, :index]
+
+task :dist do
+  FileUtils.mkdir_p DIST_DIR
+end
+
+desc "Takes dat scss and makes it dat css"
+task sass: [:dist] do
+  system "sass nightly.scss #{DIST_DIR}/nightly.css"
+end
+
+desc "Processes the site's index w/ current linked list"
+task index: [:dist] do
+  template = ERB.new IO.read "index.erb"
+
+  FileUtils.cd DIST_DIR
+
+  issues= Dir.glob "*/*/*/"
+
+  File.open "index.html", "w" do |file|
+    file.print template.result(binding)
+  end
+end
+
+desc "Processes new issue w/ data from ENV['DATE'] or today"
+task issue: [:dotenv, :dist] do
+  day = Date.parse(ENV["DATE"]) rescue Date.today
+  year = day.year
+  month = day.strftime "%m"
+  day = day.strftime "%d"
+
   bq = BigQuery::Client.new({
     "client_id"     => ENV["BQ_CLIENT_ID"],
     "service_email" => ENV["BQ_SERVICE_EMAIL"],
@@ -33,8 +63,8 @@ task generate: :dotenv do
   top_watched_sql = <<-SQL
   SELECT repo.url, COUNT(repo.name) as cnt FROM
   TABLE_DATE_RANGE(githubarchive:day.events_,
-    TIMESTAMP("#{today}"),
-    TIMESTAMP("#{today}")
+    TIMESTAMP("#{day}"),
+    TIMESTAMP("#{day}")
   )
   WHERE type="WatchEvent"
   GROUP BY repo.id, repo.name, repo.url
@@ -46,8 +76,8 @@ task generate: :dotenv do
   top_new_sql = <<-SQL
   SELECT repo.url, COUNT(repo.name) as cnt FROM
   TABLE_DATE_RANGE(githubarchive:day.events_,
-    TIMESTAMP("#{today}"),
-    TIMESTAMP("#{today}")
+    TIMESTAMP("#{day}"),
+    TIMESTAMP("#{day}")
   )
   WHERE type="WatchEvent"
   AND repo.url in (
@@ -55,8 +85,8 @@ task generate: :dotenv do
       SELECT repo.url,
         JSON_EXTRACT(payload, '$.ref_type') as ref_type,
       FROM (TABLE_DATE_RANGE(githubarchive:day.events_,
-        TIMESTAMP("2015-01-19"),
-        TIMESTAMP("2015-01-19")
+        TIMESTAMP("#{day}"),
+        TIMESTAMP("#{day}")
       ))
       WHERE type="CreateEvent"
     )
@@ -80,7 +110,11 @@ task generate: :dotenv do
 
   template = ERB.new IO.read "nightly.erb"
 
-  File.open "index.html", "w" do |file|
+  nightly_path = "#{DIST_DIR}/#{year}/#{month}/#{day}"
+
+  FileUtils.mkdir_p nightly_path
+
+  File.open "#{nightly_path}/index.html", "w" do |file|
     file.print template.result(binding)
   end
 end

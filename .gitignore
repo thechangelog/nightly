@@ -1,4 +1,5 @@
 .env
 bq-key.p12
-index.html
+dist
 *.cache
+.sass-cache
