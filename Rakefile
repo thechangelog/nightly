@@ -39,8 +39,6 @@ task index: [:dist] do
 
   FileUtils.cd DIST_DIR
 
-  issues= Dir.glob "*/*/*/"
-
   File.open "index.html", "w" do |file|
     file.print template.result(binding)
   end

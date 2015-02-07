@@ -4,9 +4,17 @@
   <title>The Changelog Nightly</title>
 </head>
 <body>
-<% issues.each do |issue| %>
+<% issue_tree.each do |year, months| %>
   <div>
-    <a href="<%= issue %>"><%= issue %></a>
+    <h1><%= year %></h1>
+
+    <% months.each do |month, days| %>
+      <h2><%= month %></h2>
+
+      <% days.each do |day| %>
+        <a href="/<%= year %>/<%= month %>/<%= day %>"><%= day %></a>
+      <% end %>
+    <% end %>
   </div>
 <% end %>
 </body>
