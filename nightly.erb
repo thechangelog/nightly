@@ -22,113 +22,172 @@
 
     <p style="display: none !important;"><%= top_watched.map(&:name).join ", " %> and more!</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff"><tbody><tr><td width="100%" bgcolor="#ffffff"><table width="600" cellpadding="0" cellspacing="0" border="0" align="center"><tbody><tr><td width="600">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff">
-  <tbody>
-    <tr>
-      <td width="100%" bgcolor="#ffffff">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#272727">
+      <tbody>
+        <tr>
+          <td width="100%">
+            <table width="600" cellpadding="0" cellspacing="0" border="0" align="center">
+            <tbody>
+              <tr>
+                <td width="600">
 
-        <table width="600" cellpadding="0" cellspacing="0" border="0" align="center">
-          <tbody>
-            <tr>
-              <td width="600">
+                  <table style="display: none !important;" width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                      <tr>
+                        <td width="100%">
 
-                <img class="divider-10 hide-on-mobile" src="/images/spacer.gif" />
+                          <table width="600" cellpadding="0" cellspacing="0" border="0" align="center">
+                            <tbody>
+                              <tr>
+                                <td width="600">
 
-                <table width="600" cellpadding="20" cellspacing="0" border="0">
-                  <tbody>
-                    <tr>
-                      <td>
+                                  <img class="divider-10 hide-on-mobile" src="/images/spacer.gif" />
 
-                        <a href="http://thechangelog.com/">
-                          <img class="brand" width="200" alt="The Changelog Nightly" src="/images/tcl-weekly-logo.png" />
-                        </a>
+                                  <table width="600" cellpadding="20" cellspacing="0" border="0">
+                                    <tbody>
+                                      <tr>
+                                        <td>
 
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                                          <a href="http://thechangelog.com/">
+                                            <img class="brand" width="200" alt="The Changelog Nightly" src="/images/tcl-weekly-logo.png" />
+                                          </a>
 
-                <img class="divider-10 hide-on-desktop show-on-mobile" src="/images/spacer.gif" />
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
 
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                                  <img class="divider-10 hide-on-desktop show-on-mobile" src="/images/spacer.gif" />
 
-      </td>
-    </tr>
-  </tbody>
-</table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
 
-      <p class="align-right last-of-type content-block-white hide-on-mobile">
-  <webversion>Web Version</webversion> / <forwardtoafriend>Share with a Friend</forwardtoafriend>
-</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-<img class="divider-10" src="/images/spacer.gif" />
+                  <p class="align-right last-of-type content-block-white hide-on-mobile" style="display: none !important;">
+                    <webversion>Web Version</webversion> / <forwardtoafriend>Share with a Friend</forwardtoafriend>
+                  </p>
 
-<table width="600" cellpadding="20" cellspacing="0" border="0" bgcolor="#ffffff"><tbody><tr><td class="content-block content-block-white" bgcolor="#ffffff">
-  <h3>Top New Repos</h3>
+                  <img class="divider-10" src="/images/spacer.gif" style="display: none !important;" />
 
-  <% top_new.each_with_index do |repo, index| %>
-    <div class='list-item <%= 'last-of-type' if index + 1 == top_new.length %>'>
-      <h2>
-        <a href='<%= repo.owner.html_url %>'><%= repo.owner.login %></a> /
-        <a href='<%= repo.html_url %>'><%= repo.name %></a>
-        <span class="language"><em>#<%= repo.language %></em></span>
-      </h2>
-      <p>
-        <img class="avatar" src="<%= repo.owner.avatar_url %>" width="32" height="32">
-        <%= repo.description %>
-      </p>
-    </div>
-  <% end %>
-</td></tr></tbody></table>
-<table width="600" cellpadding="20" cellspacing="0" border="0" bgcolor="#ffffff"><tbody><tr><td class="content-block content-block-white" bgcolor="#ffffff">
-  <h3>Top Watched Repos</h3>
+                  <table width="600" cellpadding="20" cellspacing="0" border="0">
+                    <tbody>
+                      <tr>
+                        <td class="content-block">
 
-  <% top_watched.each_with_index do |repo, index| %>
-    <div class='list-item <%= 'last-of-type' if index + 1 == top_new.length %>'>
-      <h2>
-        <a href='<%= repo.owner.html_url %>'><%= repo.owner.login %></a> /
-        <a href='<%= repo.html_url %>'><%= repo.name %></a>
-        <span class="language"><em>#<%= repo.language %></em></span>
-      </h2>
-      <p>
-        <img class="avatar" src="<%= repo.owner.avatar_url %>" width="32" height="32">
-        <%= repo.description %>
-      </p>
-    </div>
-  <% end %>
+                          <h2>Top New Repositories</h2>
 
-</td></tr></tbody></table>
-      <img class="divider-20" src="/images/spacer.gif" />
-<table width="100%" cellpadding="2" cellspacing="0" border="0" bgcolor="#e5e5e5">
-  <tbody>
-    <tr><td bgcolor="#e5e5e5" width="100%"></td></tr>
-  </tbody>
-</table>
-<table width="600" cellpadding="20" cellspacing="0" border="0" bgcolor="#f5f5f5">
-  <tbody>
-    <tr>
-      <td class="content-block content-block-footer" bgcolor="#f5f5f5">
+                          <p>The top 25 starred repos on GitHub in the past 24 hours.</p>
 
-        <p>You're receiving this email because you opted in at <a href="http://thechangelog.com/nightly/" cm_dontconvertlink>thechangelog.com/nightly</a> - <preferences>manage your subscription</preferences> .</p>
+                          <div class="repositories">
+                            <% top_new.each_with_index do |repo, index| %>
+                              <div class='repository <%= 'last-of-type' if index + 1 == top_new.length %>'>
 
-        <p>Don't want to receive this email anymore? You can <unsubscribe>unsubscribe</unsubscribe>, BUT we'll miss you!</p>
+                                <table>
+                                  <tr>
+                                    <td width="52" valign="top">
+                                      <img class="avatar" src="<%= repo.owner.avatar_url %>" width="40" height="40">
+                                    </td>
+                                    <td valign="top">
+                                      <h3>
+                                        <a href='<%= repo.html_url %>'><%= repo.owner.login %>/<%= repo.name %></a>
+                                      </h3>
+                                      <p>
+                                        <%= repo.language %> &middot; <%= repo.description %>
+                                      </p>
+                                    </td>
+                                  </tr>
+                                </table>
 
-        <p>If you're reading this as a non-subscriber <a href="http://thechangelog.com/nightly/">subscribe here</a>.</p>
+                              </div>
+                            <% end %>
+                          </div>
 
-        <p><a href="https://github.com/thechangelog/ping">Share your news or project</a> / <a href="http://thechangelog.com/sponsorship/">Become a sponsor</a></p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-        <p class="last-of-type">Copyright 2013-2015 <a href="http://riznmedia.com/">RIZN Media</a>, All rights reserved.</p>
+                  <table width="600" cellpadding="20" cellspacing="0" border="0">
+                    <tbody>
+                      <tr>
+                        <td class="content-block">
 
-      </td>
-    </tr>
-  </tbody>
-</table>
+                          <h2>Top Watched Repositories</h2>
 
-    </td></tr></tbody></table></td></tr></tbody></table>
+                          <p>The top 25 watched repos on GitHub in the past 24 hours.</p>
+
+                          <div class="repositories">
+                            <% top_watched.each_with_index do |repo, index| %>
+                              <div class='repository <%= 'last-of-type' if index + 1 == top_new.length %>'>
+
+                                <table>
+                                  <tr>
+                                    <td width="52" valign="top">
+                                      <img class="avatar" src="<%= repo.owner.avatar_url %>" width="40" height="40">
+                                    </td>
+                                    <td valign="top">
+                                      <h3>
+                                        <a href='<%= repo.html_url %>'><%= repo.owner.login %>/<%= repo.name %></a>
+                                      </h3>
+                                      <p>
+                                        <%= repo.language %> &middot; <%= repo.description %>
+                                      </p>
+                                    </td>
+                                  </tr>
+                                </table>
+
+                              </div>
+                            <% end %>
+                          </div>
+
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <img class="divider-20" src="/images/spacer.gif" />
+                  <table width="100%" cellpadding="2" cellspacing="0" border="0" bgcolor="#e5e5e5">
+                    <tbody>
+                      <tr>
+                        <td bgcolor="#e5e5e5" width="100%"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <table width="600" cellpadding="20" cellspacing="0" border="0" bgcolor="#f5f5f5">
+                    <tbody>
+                      <tr>
+                        <td class="content-block content-block-footer" bgcolor="#f5f5f5">
+
+                          <p>You're receiving this email because you opted in at <a href="http://thechangelog.com/nightly/" cm_dontconvertlink>thechangelog.com/nightly</a> - <preferences>manage your subscription</preferences> .</p>
+
+                          <p>Don't want to receive this email anymore? You can <unsubscribe>unsubscribe</unsubscribe>, BUT we'll miss you!</p>
+
+                          <p>If you're reading this as a non-subscriber <a href="http://thechangelog.com/nightly/">subscribe here</a>.</p>
+
+                          <p><a href="https://github.com/thechangelog/ping">Share your news or project</a> / <a href="http://thechangelog.com/sponsorship/">Become a sponsor</a></p>
+
+                          <p class="last-of-type">Copyright 2013-2015 <a href="http://riznmedia.com/">RIZN Media</a>, All rights reserved.</p>
+
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
   </body>
 </html>

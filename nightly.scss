@@ -1,7 +1,7 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     width: 100%;
-    background-color: #fff;
+    // background-color: #000;
     margin: 0;
     padding: 0
 }
@@ -42,85 +42,53 @@ body {
     }
 }
 
-.list-item {
-    margin-bottom: 25px;
-    position: relative;
+///
+
+.repositories {
+    margin-top: 40px;
 }
 
-.list-item:last-of-type, .list-item.last-of-type {
+.repository {
+    margin-bottom: 25px;
+}
+
+.repository:last-of-type, .repository.last-of-type {
     margin-bottom: 0 !important
 }
 
-img.avatar {
-  float: left;
-  margin-right: 10px;
+.content-block h2 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
-.language {
-  font-size: 12px;
-
-}
-
-h3 {
+.content-block h3 {
+    color: #fff;
     font-size: 18px;
     font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 15px;
-    padding-bottom: 5px
-}
-
-h2, h4 {
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1.4;
-    margin-top: 0;
-    margin-bottom: 5px;
-    padding-top: 0;
-    padding-bottom: 0
-}
-
-h5 {
-    font-size: 11px;
-    font-weight: normal;
-    margin-top: 0;
-    margin-bottom: 3px;
-    padding-top: 0;
-    padding-bottom: 0;
-    letter-spacing: 1px;
-    text-transform: uppercase
-}
-
-p, li {
-    font-size: 15px;
-    line-height: 1.5;
-}
-
-p {
+    line-height: 1;
     margin-top: 0;
     margin-bottom: 10px;
     padding-top: 0;
-    padding-bottom: 0
+    padding-bottom: 0;
 }
 
-blockquote {
-    margin: 10px 0
+.content-block h3 a {
+    color: #fff;
+    text-decoration: none;
 }
 
-blockquote, p.blockquote, p.bq {
-    border-left: 4px solid #bbb;
-    padding-left: 12px
-}
-
-ul, ol {
-    margin-top: 5px;
-    margin-bottom: 22px;
-    padding-left: 18px
-}
-
-li {
+p {
+    color: #a8a8a8;
+    font-size: 14px;
+    line-height: 1.5;
     margin-top: 0;
-    margin-bottom: 4px
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
+
+///
 
 code, pre {
     margin: 0;
@@ -223,15 +191,6 @@ p code {
     color: #e5e5e5
 }
 
-.content-block-dark h4 {
-    color: #e5e5e5;
-    margin-bottom: 16px
-}
-
-.content-block-dark h4 a {
-    text-decoration: none
-}
-
 .content-block-dark p {
     color: #e5e5e5;
     margin-bottom: 14px
@@ -259,10 +218,6 @@ p code {
 
 .content-block-white p {
     color: #333
-}
-
-.content-block-white a {
-    color: #428bca
 }
 
 .content-block-white a:hover {
