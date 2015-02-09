@@ -15,6 +15,10 @@ GEM
     bigquery (0.5.1)
       google-api-client (~> 0.8.2)
     coderay (1.1.0)
+    createsend (4.0.2)
+      hashie (~> 3.0)
+      httparty (~> 0.10)
+      json (~> 1.0)
     dotenv (1.0.2)
     extlib (0.9.16)
     faraday (0.9.1)
@@ -30,6 +34,9 @@ GEM
       retriable (~> 1.4)
       signet (~> 0.6)
     hashie (3.3.2)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.2)
     jwt (1.2.0)
@@ -38,6 +45,7 @@ GEM
     method_source (0.8.2)
     minitest (5.5.1)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -62,6 +70,7 @@ PLATFORMS
 
 DEPENDENCIES
   bigquery
+  createsend
   dotenv
   hashie
   pry

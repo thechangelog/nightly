@@ -7,10 +7,12 @@ require "rubygems"
 require "bundler/setup"
 require "big_query"
 require "hashie/mash"
-require "pry"
 require "dotenv/tasks"
+require "createsend"
+require "pry"
 
 DIST_DIR = "dist"
+DAY = Date.parse(ENV["DATE"]) rescue Date.today
 
 desc "purges caches and generated files"
 task :clean do
@@ -46,11 +48,6 @@ end
 
 desc "Processes new issue w/ data from ENV['DATE'] or today"
 task issue: [:dotenv, :dist] do
-  day = Date.parse(ENV["DATE"]) rescue Date.today
-  year = day.year
-  month = day.strftime "%m"
-  day = day.strftime "%d"
-
   bq = BigQuery::Client.new({
     "client_id"     => ENV["BQ_CLIENT_ID"],
     "service_email" => ENV["BQ_SERVICE_EMAIL"],
@@ -61,8 +58,8 @@ task issue: [:dotenv, :dist] do
   top_watched_sql = <<-SQL
   SELECT repo.url, COUNT(repo.name) as cnt FROM
   TABLE_DATE_RANGE(githubarchive:day.events_,
-    TIMESTAMP("#{day}"),
-    TIMESTAMP("#{day}")
+    TIMESTAMP("#{DAY}"),
+    TIMESTAMP("#{DAY}")
   )
   WHERE type="WatchEvent"
   GROUP BY repo.id, repo.name, repo.url
@@ -74,8 +71,8 @@ task issue: [:dotenv, :dist] do
   top_new_sql = <<-SQL
   SELECT repo.url, COUNT(repo.name) as cnt FROM
   TABLE_DATE_RANGE(githubarchive:day.events_,
-    TIMESTAMP("#{day}"),
-    TIMESTAMP("#{day}")
+    TIMESTAMP("#{DAY}"),
+    TIMESTAMP("#{DAY}")
   )
   WHERE type="WatchEvent"
   AND repo.url in (
@@ -83,8 +80,8 @@ task issue: [:dotenv, :dist] do
       SELECT repo.url,
         JSON_EXTRACT(payload, '$.ref_type') as ref_type,
       FROM (TABLE_DATE_RANGE(githubarchive:day.events_,
-        TIMESTAMP("#{day}"),
-        TIMESTAMP("#{day}")
+        TIMESTAMP("#{DAY}"),
+        TIMESTAMP("#{DAY}")
       ))
       WHERE type="CreateEvent"
     )
@@ -108,11 +105,28 @@ task issue: [:dotenv, :dist] do
 
   template = ERB.new IO.read "nightly.erb"
 
-  nightly_path = "#{DIST_DIR}/#{year}/#{month}/#{day}"
+  issue_path = "#{DIST_DIR}/#{DAY.path}"
 
-  FileUtils.mkdir_p nightly_path
+  FileUtils.mkdir_p issue_path
 
-  File.open "#{nightly_path}/index.html", "w" do |file|
+  File.open "#{issue_path}/index.html", "w" do |file|
     file.print template.result(binding)
   end
+end
+
+desc "Sends today's email to Campaign Monitor"
+task email: [:dotenv] do
+  CreateSend::Campaign.create(
+    {api_key: ENV["CAMPAIGN_MONITOR_KEY"]}, # auth
+    ENV["CAMPAIGN_MONITOR_ID"], # client id
+    "Your Nightly Open Source Update – #{DAY}", # subject
+    "Nightly – #{DAY}", # campaign name
+    "The Changelog Nightly", # from name
+    "nightly@changelog.com", # from email
+    "editors@changelog.com", # reply to
+    "http://nightly.changelog.com/#{DAY.path}", # html url
+    nil, # text url
+    ["92703E980C88E895"], # list ids
+    [] # segment ids
+  )
 end

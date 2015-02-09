@@ -2,10 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <title>The Changelog Nightly &nbsp; <%= day %></title>
+    <title>The Changelog Nightly &nbsp; <%= DAY %></title>
 
     <!-- Open Graph for social shares -->
-    <meta property="og:title" content="The Changelog Nightly &nbsp; <%= day %>" />
+    <meta property="og:title" content="The Changelog Nightly &nbsp; <%= DAY %>" />
     <meta property="og:image" content="http://thechangelog.com/og-image.jpg" />
     <meta property="og:description" content="The Changelog Nightly is a free newsletter that unearths the hottest new repos before they blow up. It's nerd to the core and in your inbox each night. No spam!" />
 
@@ -82,7 +82,7 @@
 
                           <h2>Top New Repositories</h2>
 
-                          <p>The top 25 starred repos on GitHub in the past 24 hours.</p>
+                          <p>The 25 most starred repos on GitHub that were created in the past 24 hours.</p>
 
                           <div class="repositories">
                             <% top_new.each_with_index do |repo, index| %>
@@ -118,9 +118,9 @@
                       <tr>
                         <td class="content-block">
 
-                          <h2>Top Watched Repositories</h2>
+                          <h2>Top Starred Repositories</h2>
 
-                          <p>The top 25 watched repos on GitHub in the past 24 hours.</p>
+                          <p>The 25 most starred repos on all of GitHub in the past 24 hours.</p>
 
                           <div class="repositories">
                             <% top_watched.each_with_index do |repo, index| %>
