@@ -44,12 +44,23 @@ body {
 
 ///
 
+.header h1 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
 .repositories {
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .repository {
-    margin-bottom: 25px;
+    border-bottom: 1px solid #373737;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+
 }
 
 .repository:last-of-type, .repository.last-of-type {
@@ -59,7 +70,7 @@ body {
 .content-block h2 {
     color: #fff;
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .content-block h3 {
