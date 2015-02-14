@@ -1,5 +1,4 @@
 require_relative "helpers"
-require "cgi"
 require "date"
 require "open-uri"
 require "json"
@@ -12,9 +11,10 @@ require "dotenv/tasks"
 require "createsend"
 require "pry"
 
-DIST_DIR = "dist"
-DAY = Date.parse(ENV["DATE"]) rescue Date.today
+DAY       = Date.parse(ENV["DATE"]) rescue Date.today
+DIST_DIR  = "dist"
 ISSUE_DIR = "#{DIST_DIR}/#{DAY.path}"
+DATA_FILE = "#{ISSUE_DIR}/data.json"
 
 desc "Launches local HTTP server on DIST_DIR"
 task :preview do
@@ -40,11 +40,9 @@ end
 
 desc "Processes the site's index w/ current linked list"
 task index: [:dist] do
-  template = ERB.new IO.read "index.erb"
+  template = ERB.new File.read "index.erb"
 
-  File.open "#{DIST_DIR}/index.html", "w" do |file|
-    file.print template.result(binding)
-  end
+  File.write "#{DIST_DIR}/index.html", template.result(binding)
 end
 
 namespace :issue do
@@ -52,104 +50,32 @@ namespace :issue do
     FileUtils.mkdir_p ISSUE_DIR
   end
 
-  desc "Generates data.json file for DAY. No-op if file exists"
+  desc "Generates DATA_FILE file for DAY. No-op if file exists"
   task data: [:dotenv, :dir] do
-    data_file = "#{ISSUE_DIR}/data.json"
-
-    if File.exist? data_file
+    if File.exist? DATA_FILE
       next
     end
 
-    bq = BigQuery::Client.new({
-      "client_id"     => ENV["BQ_CLIENT_ID"],
-      "service_email" => ENV["BQ_SERVICE_EMAIL"],
-      "key"           => ENV["BQ_KEY"],
-      "project_id"    => ENV["BQ_PROJECT_ID"]
-    })
+    bq = BigQueryer.new DAY
 
-    top_all_sql = <<-SQL
-    SELECT repo.url, COUNT(repo.name) as count FROM
-    TABLE_DATE_RANGE(githubarchive:day.events_,
-      TIMESTAMP("#{DAY}"),
-      TIMESTAMP("#{DAY}")
-    )
-    WHERE type="WatchEvent"
-    GROUP BY repo.id, repo.name, repo.url
-    HAVING count >= 10
-    ORDER BY count DESC
-    LIMIT 25
-    SQL
-
-    top_new_sql = <<-SQL
-    SELECT repo.url, COUNT(repo.name) as count FROM
-    TABLE_DATE_RANGE(githubarchive:day.events_,
-      TIMESTAMP("#{DAY}"),
-      TIMESTAMP("#{DAY}")
-    )
-    WHERE type="WatchEvent"
-    AND repo.url in (
-      SELECT repo.url FROM (
-        SELECT repo.url,
-          JSON_EXTRACT(payload, '$.ref_type') as ref_type,
-        FROM (TABLE_DATE_RANGE(githubarchive:day.events_,
-          TIMESTAMP("#{DAY}"),
-          TIMESTAMP("#{DAY}")
-        ))
-        WHERE type="CreateEvent"
-      )
-      WHERE ref_type='"repository"'
-    )
-    GROUP BY repo.id, repo.name, repo.url
-    HAVING count >= 5
-    ORDER BY count DESC
-    LIMIT 25
-    SQL
-
-    data = {}
-
-    data["top_new"] = bq.query(top_new_sql)["rows"].map { |row|
-      {
-        url: row["f"].first["v"],
-        count: row["f"].last["v"].to_i
-      }
-    }
-    .map { |row|
-      repo = JSON.load open("#{row[:url]}?access_token=#{ENV['GITHUB_TOKEN']}")
-      repo["new_stargazers_count"] = row[:count]
-      repo["description"] = CGI.escapeHTML(repo["description"] || "")
-      repo
+    data = {
+      top_new: bq.top_new,
+      top_all: bq.top_all
     }
 
-    data["top_all"] = bq.query(top_all_sql)["rows"].map { |row|
-      {
-        url: row["f"].first["v"],
-        count: row["f"].last["v"].to_i
-      }
-    }
-    .map { |row|
-      repo = JSON.load open("#{row[:url]}?access_token=#{ENV['GITHUB_TOKEN']}")
-      repo["new_stargazers_count"] = row[:count]
-      repo["description"] = CGI.escapeHTML(repo["description"] || "")
-      repo
-    }
-
-    File.open data_file, "w" do |file|
-      file.print JSON.dump data
-    end
+    File.write DATA_FILE, JSON.dump(data)
   end
 
   desc "Generates index.html file for DAY"
   task template: [:data] do
-    template = ERB.new IO.read "nightly.erb"
+    template = ERB.new File.read "nightly.erb"
 
-    data = Hashie::Mash.new JSON.parse File.read "#{ISSUE_DIR}/data.json"
+    data = Hashie::Mash.new JSON.parse File.read DATA_FILE
 
     top_new = data.top_new
     top_all = data.top_all
 
-    File.open "#{DIST_DIR}/#{DAY.path}/index.html", "w" do |file|
-      file.print template.result(binding)
-    end
+    File.write "#{ISSUE_DIR}/index.html", template.result(binding)
   end
 
   desc "Delivers DAY's email to Campaign Monitor"
