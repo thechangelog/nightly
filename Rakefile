@@ -90,7 +90,7 @@ namespace :issue do
       "editors@changelog.com", # reply to
       "http://nightly.thechangelog.com/#{DAY.path}", # html url
       nil, # text url
-      ["92703E980C88E895"], # list ids
+      [ENV["CAMPAIGN_MONITOR_LIST"]], # list ids
       [] # segment ids
     )
   end
