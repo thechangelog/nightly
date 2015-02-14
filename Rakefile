@@ -21,7 +21,7 @@ task :preview do
   system "cd #{DIST_DIR} && python -m SimpleHTTPServer"
 end
 
-task generate: [:sass, :issue_template, :index]
+task generate: [:sass, :images, :issue_template, :index]
 
 task :dist do
   FileUtils.mkdir_p DIST_DIR
@@ -34,6 +34,11 @@ end
 desc "Takes dat scss and makes it dat css"
 task sass: [:dist] do
   system "sass nightly.scss #{DIST_DIR}/nightly.css"
+end
+
+desc "copies the images directory to dist"
+task images: [:dist] do
+  FileUtils.cp_r "images", "dist", preserve: false
 end
 
 desc "Processes the site's index w/ current linked list"
