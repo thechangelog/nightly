@@ -1,5 +1,4 @@
 .env
 bq-key.p12
 dist
-*.cache
 .sass-cache

@@ -20,7 +20,7 @@
 
   <body>
 
-    <p style="display: none !important;"><%= top_watched.map(&:name).join ", " %> and more!</p>
+    <p style="display: none !important;"><%= top_all.map(&:name).join ", " %> and more!</p>
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#272727">
       <tbody>
@@ -129,7 +129,7 @@
                           <p>The 25 most starred repos on all of GitHub in the past 24 hours.</p>
 
                           <div class="repositories">
-                            <% top_watched.each_with_index do |repo, index| %>
+                            <% top_all.each_with_index do |repo, index| %>
                               <div class='repository <%= 'last-of-type' if index + 1 == top_new.length %>'>
 
                                 <table>

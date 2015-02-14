@@ -1,4 +1,5 @@
 require_relative "helpers"
+require "cgi"
 require "date"
 require "open-uri"
 require "json"
@@ -13,21 +14,21 @@ require "pry"
 
 DIST_DIR = "dist"
 DAY = Date.parse(ENV["DATE"]) rescue Date.today
-
-desc "purges caches and generated files"
-task :clean do
-  system "rm -rf #{DIST_DIR} *.cache"
-end
+ISSUE_DIR = "#{DIST_DIR}/#{DAY.path}"
 
 desc "launches local HTTP server"
 task :preview do
   system "cd #{DIST_DIR} && python -m SimpleHTTPServer"
 end
 
-task generate: [:sass, :issue, :index]
+task generate: [:sass, :issue_template, :index]
 
 task :dist do
   FileUtils.mkdir_p DIST_DIR
+end
+
+task issue_dir: [:dist] do
+  FileUtils.mkdir_p ISSUE_DIR
 end
 
 desc "Takes dat scss and makes it dat css"
@@ -39,15 +40,19 @@ desc "Processes the site's index w/ current linked list"
 task index: [:dist] do
   template = ERB.new IO.read "index.erb"
 
-  FileUtils.cd DIST_DIR
-
-  File.open "index.html", "w" do |file|
+  File.open "#{DIST_DIR}/index.html", "w" do |file|
     file.print template.result(binding)
   end
 end
 
-desc "Processes new issue w/ data from ENV['DATE'] or today"
-task issue: [:dotenv, :dist] do
+desc "Generates data.json file for ENV['DAY']. No-op if file exists"
+task issue_data: [:dotenv, :issue_dir] do
+  data_file = "#{ISSUE_DIR}/data.json"
+
+  if File.exist? data_file
+    next
+  end
+
   bq = BigQuery::Client.new({
     "client_id"     => ENV["BQ_CLIENT_ID"],
     "service_email" => ENV["BQ_SERVICE_EMAIL"],
@@ -55,21 +60,21 @@ task issue: [:dotenv, :dist] do
     "project_id"    => ENV["BQ_PROJECT_ID"]
   })
 
-  top_watched_sql = <<-SQL
-  SELECT repo.url, COUNT(repo.name) as cnt FROM
+  top_all_sql = <<-SQL
+  SELECT repo.url, COUNT(repo.name) as count FROM
   TABLE_DATE_RANGE(githubarchive:day.events_,
     TIMESTAMP("#{DAY}"),
     TIMESTAMP("#{DAY}")
   )
   WHERE type="WatchEvent"
   GROUP BY repo.id, repo.name, repo.url
-  HAVING cnt >= 10
-  ORDER BY cnt DESC
+  HAVING count >= 10
+  ORDER BY count DESC
   LIMIT 25
   SQL
 
   top_new_sql = <<-SQL
-  SELECT repo.url, COUNT(repo.name) as cnt FROM
+  SELECT repo.url, COUNT(repo.name) as count FROM
   TABLE_DATE_RANGE(githubarchive:day.events_,
     TIMESTAMP("#{DAY}"),
     TIMESTAMP("#{DAY}")
@@ -88,28 +93,54 @@ task issue: [:dotenv, :dist] do
     WHERE ref_type='"repository"'
   )
   GROUP BY repo.id, repo.name, repo.url
-  HAVING cnt >= 5
-  ORDER BY cnt DESC
+  HAVING count >= 5
+  ORDER BY count DESC
   LIMIT 25
   SQL
 
-  top_new = with_cache "top_new" do
-    urls = bq.query(top_new_sql)["rows"].map { |row| row["f"].first["v"] }
-    urls.map { |url| Hashie::Mash.new JSON.load(open(url)) }
-  end
+  data = {}
 
-  top_watched = with_cache "top_watched" do
-    urls = bq.query(top_watched_sql)["rows"].map { |row| row["f"].first["v"] }
-    urls.map { |url| Hashie::Mash.new JSON.load(open(url)) }
-  end
+  data["top_new"] = bq.query(top_new_sql)["rows"].map { |row|
+    {
+      url: row["f"].first["v"],
+      count: row["f"].last["v"].to_i
+    }
+  }
+  .map { |row|
+    repo = JSON.load open("#{row[:url]}?access_token=#{ENV['GITHUB_TOKEN']}")
+    repo["new_stargazers_count"] = row[:count]
+    repo["description"] = CGI.escapeHTML(repo["description"] || "")
+    repo
+  }
 
+  data["top_all"] = bq.query(top_all_sql)["rows"].map { |row|
+    {
+      url: row["f"].first["v"],
+      count: row["f"].last["v"].to_i
+    }
+  }
+  .map { |row|
+    repo = JSON.load open("#{row[:url]}?access_token=#{ENV['GITHUB_TOKEN']}")
+    repo["new_stargazers_count"] = row[:count]
+    repo["description"] = CGI.escapeHTML(repo["description"] || "")
+    repo
+  }
+
+  File.open data_file, "w" do |file|
+    file.print JSON.dump data
+  end
+end
+
+desc "Generates index.html file for ENV['DAY']"
+task issue_template: [:issue_data] do
   template = ERB.new IO.read "nightly.erb"
 
-  issue_path = "#{DIST_DIR}/#{DAY.path}"
+  data = Hashie::Mash.new JSON.parse File.read "#{ISSUE_DIR}/data.json"
 
-  FileUtils.mkdir_p issue_path
+  top_new = data.top_new
+  top_all = data.top_all
 
-  File.open "#{issue_path}/index.html", "w" do |file|
+  File.open "#{DIST_DIR}/#{DAY.path}/index.html", "w" do |file|
     file.print template.result(binding)
   end
 end
@@ -124,7 +155,7 @@ task email: [:dotenv] do
     "The Changelog Nightly", # from name
     "nightly@changelog.com", # from email
     "editors@changelog.com", # reply to
-    "http://nightly.changelog.com/#{DAY.path}", # html url
+    "http://nightly.thechangelog.com/#{DAY.path}", # html url
     nil, # text url
     ["92703E980C88E895"], # list ids
     [] # segment ids
