@@ -44,12 +44,31 @@ body {
 
 ///
 
+.top-bar {
+
+    // line-height: 30px;
+
+    a {
+        color: #A8A8A8;
+        text-decoration: none;
+    }
+
+}
+
+.header {
+    // text-align: center;
+}
+
 .header h1 {
     color: #fff;
     font-size: 18px;
     font-weight: normal;
     margin-bottom: 8px;
     text-transform: uppercase;
+}
+
+.header img {
+    margin: 15px 0;
 }
 
 .repositories {
@@ -60,20 +79,27 @@ body {
     border-bottom: 1px solid #373737;
     margin-bottom: 15px;
     padding-bottom: 15px;
-
 }
 
 .repository:last-of-type, .repository.last-of-type {
-    margin-bottom: 0 !important
+    border-bottom: none;
+    margin-bottom: 0 !important;
 }
 
-.content-block h2 {
+.section {
+    padding-bottom: 50px;
+}
+
+.section h2 {
     color: #fff;
     font-size: 18px;
+    margin-top: 0;
+    margin-right: 0;
     margin-bottom: 8px;
+    margin-left: 0;
 }
 
-.content-block h3 {
+.section h3 {
     color: #fff;
     font-size: 18px;
     font-weight: bold;
@@ -84,7 +110,7 @@ body {
     padding-bottom: 0;
 }
 
-.content-block h3 a {
+.section h3 a {
     color: #fff;
     text-decoration: none;
 }
@@ -97,6 +123,25 @@ p {
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
+
+    a {
+        color: #ffffff;
+    }
+
+}
+
+.footer {
+
+    padding: 30px 0;
+
+    p {
+        margin-bottom: 18px;
+    }
+
+    a {
+        color: #ffffff;
+    }
+
 }
 
 ///
