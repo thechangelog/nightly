@@ -26,7 +26,7 @@
       <tr>
         <td width="100%">
 
-          <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
+          <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
             <tr>
               <td width="540">
 
@@ -60,7 +60,7 @@
                   <tr>
                     <td class="header">
                       <a href="http://thechangelog.com/">
-                        <img class="logo" width="185" alt="Changelog Nightly" src="/images/logo.png" />
+                        <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo.png" />
                       </a>
                     </td>
                   </tr>
@@ -70,13 +70,23 @@
 
                       <h2>Top New Repositories</h2>
 
-                      <p>The 25 most starred repos on GitHub created in the past 24 hours.</p>
+                      <p>The 25 most starred repos on GitHub created in the past 24 hours</p>
 
                       <div class="repositories">
                         <% top_new.each_with_index do |repo, index| %>
                           <div class='repository <%= 'last-of-type' if index + 1 == top_new.length %>'>
 
                             <table>
+                              <tr class="stats">
+                                <td width="52" valign="middle">
+                                  &nbsp;
+                                </td>
+                                <td valign="middle">
+                                  <p>
+                                    <img width="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<img width="10" alt="Up" src="/images/up.png" />&nbsp;41&nbsp;&nbsp;&middot;&nbsp;&nbsp;<%= repo.language %>
+                                  </p>
+                                </td>
+                              </tr>
                               <tr>
                                 <td width="52" valign="top">
                                   <img class="avatar" src="<%= repo.owner.avatar_url %>" width="40" height="40">
@@ -86,7 +96,7 @@
                                     <a href='<%= repo.html_url %>'><%= repo.owner.login %>/<%= repo.name %></a>
                                   </h3>
                                   <p>
-                                    <%= repo.language %> &middot; <%= repo.description %>
+                                    <%= repo.description %>
                                   </p>
                                 </td>
                               </tr>
@@ -101,6 +111,10 @@
 
                 </table>
 
+                <table width="100%" cellpadding="2" cellspacing="0" border="0" bgcolor="#373737" class="seperator">
+                  <tr><td bgcolor="#373737" width="100%"></td></tr>
+                </table>
+
                 <table width="540" cellpadding="20" cellspacing="0" border="0">
 
                   <tr>
@@ -108,13 +122,23 @@
 
                       <h2>Top Starred Repositories</h2>
 
-                      <p>The 25 most starred repos on all of GitHub in the past 24 hours.</p>
+                      <p>The 25 most starred repos on all of GitHub in the past 24 hours</p>
 
                       <div class="repositories">
                         <% top_all.each_with_index do |repo, index| %>
                           <div class='repository <%= 'last-of-type' if index + 1 == top_all.length %>'>
 
                             <table>
+                              <tr class="stats">
+                                <td width="52" valign="middle">
+                                  &nbsp;
+                                </td>
+                                <td valign="middle">
+                                  <p>
+                                    <img width="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<img width="10" alt="Up" src="/images/up.png" />&nbsp;41&nbsp;&nbsp;&middot;&nbsp;&nbsp;<%= repo.language %>
+                                  </p>
+                                </td>
+                              </tr>
                               <tr>
                                 <td width="52" valign="top">
                                   <img class="avatar" src="<%= repo.owner.avatar_url %>" width="40" height="40">
@@ -124,7 +148,7 @@
                                     <a href='<%= repo.html_url %>'><%= repo.owner.login %>/<%= repo.name %></a>
                                   </h3>
                                   <p>
-                                    <%= repo.language %> &middot; <%= repo.description %>
+                                    <%= repo.description %>
                                   </p>
                                 </td>
                               </tr>
