@@ -80,8 +80,10 @@ namespace :issue do
 
   desc "Delivers DAY's email to Campaign Monitor"
   task deliver: [:dotenv] do
-    campaign = CreateSend::Campaign.create(
-      {api_key: ENV["CAMPAIGN_MONITOR_KEY"]}, # auth
+    auth = {api_key: ENV["CAMPAIGN_MONITOR_KEY"]}
+
+    campaign_id = CreateSend::Campaign.create(
+      auth,
       ENV["CAMPAIGN_MONITOR_ID"], # client id
       "Your Nightly Open Source Update – #{DAY}", # subject
       "Nightly – #{DAY}", # campaign name
@@ -94,6 +96,6 @@ namespace :issue do
       [] # segment ids
     )
 
-    campaign.send
+    CreateSend::Campaign.new(auth, campaign_id).send "nightly@changelog.com"
   end
 end
