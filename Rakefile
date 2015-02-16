@@ -1,15 +1,17 @@
-require_relative "helpers"
+require "rubygems"
+require "bundler/setup"
 require "date"
 require "open-uri"
 require "json"
 require "erb"
-require "rubygems"
-require "bundler/setup"
-require "big_query"
 require "hashie/mash"
 require "dotenv/tasks"
 require "createsend"
 require "pry"
+
+require_relative "lib/core_ext/date"
+require_relative "lib/bq_client"
+require_relative "lib/issue"
 
 DAY       = Date.parse(ENV["DATE"]) rescue Date.today
 DIST_DIR  = "dist"
@@ -56,7 +58,7 @@ namespace :issue do
       next
     end
 
-    bq = BigQueryer.new DAY
+    bq = BqClient.new DAY
 
     data = {
       top_new: bq.top_new,
