@@ -34,11 +34,15 @@ class BqClient
       }
     }
     .map { |row|
-      repo = JSON.load open("#{row[:url]}?access_token=#{ENV['GITHUB_TOKEN']}")
-      repo["new_stargazers_count"] = row[:count]
-      repo["description"] = CGI.escapeHTML(repo["description"] || "")
-      repo
-    }
+      begin
+        repo = JSON.load open("#{row[:url]}?access_token=#{ENV['GITHUB_TOKEN']}")
+        repo["new_stargazers_count"] = row[:count]
+        repo["description"] = CGI.escapeHTML(repo["description"] || "")
+        repo
+      rescue
+        nil
+      end
+    }.compact
   end
 
   def top_all_sql
