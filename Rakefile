@@ -96,6 +96,6 @@ namespace :issue do
       [] # segment ids
     )
 
-    CreateSend::Campaign.new(auth, campaign_id).send "nightly@changelog.com"
+    CreateSend::Campaign.new(auth, campaign_id).send "editors@changelog.com"
   end
 end
