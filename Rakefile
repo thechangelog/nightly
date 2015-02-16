@@ -13,9 +13,9 @@ require_relative "lib/core_ext/date"
 require_relative "lib/bq_client"
 require_relative "lib/issue"
 
-DAY       = Date.parse(ENV["DATE"]) rescue Date.today
+DATE      = Date.parse(ENV["DATE"]) rescue Date.today
 DIST_DIR  = "dist"
-ISSUE_DIR = "#{DIST_DIR}/#{DAY.path}"
+ISSUE_DIR = "#{DIST_DIR}/#{DATE.path}"
 DATA_FILE = "#{ISSUE_DIR}/data.json"
 
 desc "Launches local HTTP server on DIST_DIR"
@@ -23,7 +23,7 @@ task :preview do
   system "cd #{DIST_DIR} && python -m SimpleHTTPServer"
 end
 
-desc "Performs all operations for DAY except delivering the email"
+desc "Performs all operations for DATE except delivering the email"
 task generate: [:sass, :images, "issue:template", :index]
 
 task :dist do
@@ -52,13 +52,13 @@ namespace :issue do
     FileUtils.mkdir_p ISSUE_DIR
   end
 
-  desc "Generates DATA_FILE file for DAY. No-op if file exists"
+  desc "Generates DATA_FILE file for DATE. No-op if file exists"
   task data: [:dotenv, :dir] do
     if File.exist? DATA_FILE
       next
     end
 
-    bq = BqClient.new DAY
+    bq = BqClient.new DATE
 
     data = {
       top_new: bq.top_new,
@@ -68,7 +68,7 @@ namespace :issue do
     File.write DATA_FILE, JSON.dump(data)
   end
 
-  desc "Generates index.html file for DAY"
+  desc "Generates index.html file for DATE"
   task template: [:data] do
     template = ERB.new File.read "nightly.erb"
 
@@ -80,19 +80,19 @@ namespace :issue do
     File.write "#{ISSUE_DIR}/index.html", template.result(binding)
   end
 
-  desc "Delivers DAY's email to Campaign Monitor"
+  desc "Delivers DATE's email to Campaign Monitor"
   task deliver: [:dotenv] do
     auth = {api_key: ENV["CAMPAIGN_MONITOR_KEY"]}
 
     campaign_id = CreateSend::Campaign.create(
       auth,
       ENV["CAMPAIGN_MONITOR_ID"], # client id
-      "Your Nightly Open Source Update – #{DAY}", # subject
-      "Nightly – #{DAY}", # campaign name
+      "Your Nightly Open Source Update – #{DATE}", # subject
+      "Nightly – #{DATE}", # campaign name
       "The Changelog Nightly", # from name
       "nightly@changelog.com", # from email
       "editors@changelog.com", # reply to
-      "http://nightly.thechangelog.com/#{DAY.path}", # html url
+      "http://nightly.thechangelog.com/#{DATE.path}", # html url
       nil, # text url
       [ENV["CAMPAIGN_MONITOR_LIST"]], # list ids
       [] # segment ids
