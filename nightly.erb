@@ -70,7 +70,7 @@
 
                       <h2>Top New Repositories</h2>
 
-                      <p>The 25 most starred repos on GitHub created in the past 24 hours</p>
+                      <p>The most starred repos on GitHub created on <%= DATE.strftime "%B %d, %Y" %></p>
 
                       <div class="repositories">
                         <% top_new.each_with_index do |repo, index| %>
@@ -122,7 +122,7 @@
 
                       <h2>Top Starred Repositories</h2>
 
-                      <p>The 25 most starred repos on all of GitHub in the past 24 hours</p>
+                      <p>The most starred repos on all of GitHub on <%= DATE.strftime "%B %d, %Y" %></p>
 
                       <div class="repositories">
                         <% top_all.each_with_index do |repo, index| %>

@@ -56,7 +56,7 @@ class BqClient
     GROUP BY repo.id, repo.name, repo.url
     HAVING count >= 10
     ORDER BY count DESC
-    LIMIT 25
+    LIMIT 15
     SQL
   end
 
@@ -83,7 +83,7 @@ class BqClient
     GROUP BY repo.id, repo.name, repo.url
     HAVING count >= 5
     ORDER BY count DESC
-    LIMIT 25
+    LIMIT 15
     SQL
   end
 end
