@@ -8,7 +8,11 @@ Want something curated and less frequent? Check out [Weekly][weekly]!
 
 This project would not be possible without [Ilya Grigorik][igvita] and the work he put in to [GitHub Archive][gh-archive]. Thanks for all you do, Ilya!
 
-([Listen here][144] for an in-depth discussion of GitHub Archive and The Changelog Nightly)
+([An in-depth interview with Ilya all about GitHub Archive and Nightly][144])
+
+## Contributing
+
+[See here][contributing]
 
 ## Hacking
 
@@ -18,11 +22,12 @@ This project would not be possible without [Ilya Grigorik][igvita] and the work 
 
 ## License
 
-[MIT][license] stylee
+[MIT stylee][license]
 
 [nightly]: http://thechangelog.com/nightly
 [weekly]: http://thechangelog.com/weekly
 [igvita]: http://igvita.com
 [gh-archive]: https://www.githubarchive.org
 [144]: http://thechangelog.com/144
+[contributing]: https://github.com/thechangelog/nightly/blob/master/CONTRIBUTING.md
 [license]: https://github.com/thechangelog/nightly/blob/master/LICENSE
