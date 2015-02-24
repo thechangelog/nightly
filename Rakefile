@@ -87,9 +87,9 @@ namespace :issue do
     campaign_id = CreateSend::Campaign.create(
       auth,
       ENV["CAMPAIGN_MONITOR_ID"], # client id
-      "Your Nightly Open Source Update – #{DATE}", # subject
+      "The hottest repos on GitHub - #{DATE}", # subject
       "Nightly – #{DATE}", # campaign name
-      "The Changelog Nightly", # from name
+      "Changelog Nightly", # from name
       "nightly@changelog.com", # from email
       "editors@changelog.com", # reply to
       "http://nightly.thechangelog.com/#{DATE.path}", # html url

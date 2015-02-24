@@ -1,4 +1,4 @@
-# The Changelog Nightly
+# Changelog Nightly
 
 A free nightly email that unearths the hottest new repos before they blow up. [Subscribe here][nightly]!
 
