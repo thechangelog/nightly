@@ -2,7 +2,7 @@
 
 Changelog Nightly is a free email we ship every night at 10pm CT that unearths the hottest new repos on GitHub before they blow up.
 
-[![Changelog Weekly](images/button-subscribe.png)][nightly]
+[![Changelog Weekly](images/subscribe-changelog-nightly.png)][nightly]
 
 Here's a preview:
 
