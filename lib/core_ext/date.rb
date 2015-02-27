@@ -11,6 +11,14 @@ class Date
     strftime "%d"
   end
 
+  def day_month
+    strftime "%B %d"
+  end
+
+  def day_month_year
+    strftime "%B %d, %Y"
+  end
+
   def path
     "#{classy_year}/#{classy_month}/#{classy_day}"
   end

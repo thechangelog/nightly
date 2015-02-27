@@ -31,10 +31,10 @@
               <td width="540">
 
                 <p class="top-bar">
-                  <webversion>View the web version</webversion>
+                  <a href="<%= ISSUE_URL %>">View the web version</a>
                   &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-                  <span><a href="http://thechangelog.com/nightly/archive/">View the archive</a></span>
-                  &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+<!--                   <span><a href="http://thechangelog.com/nightly/archive/">View the archive</a></span>
+                  &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp; -->
                   <forwardtoafriend>Share with a friend</forwardtoafriend>
                 </p>
 
@@ -70,7 +70,7 @@
 
                       <h2>Top New Repositories</h2>
 
-                      <p>The most starred repos on GitHub created on <%= DATE.strftime "%B %d, %Y" %></p>
+                      <p>The most starred repos on GitHub created on <%= DATE.day_month_year %></p>
 
                       <div class="repositories">
                         <% top_new.each_with_index do |repo, index| %>
@@ -122,7 +122,7 @@
 
                       <h2>Top Starred Repositories</h2>
 
-                      <p>The most starred repos on all of GitHub on <%= DATE.strftime "%B %d, %Y" %></p>
+                      <p>The most starred repos on all of GitHub on <%= DATE.day_month_year %></p>
 
                       <div class="repositories">
                         <% top_all.each_with_index do |repo, index| %>

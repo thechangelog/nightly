@@ -16,6 +16,7 @@ require_relative "lib/issue"
 DATE      = Date.parse(ENV["DATE"]) rescue Date.today
 DIST_DIR  = "dist"
 ISSUE_DIR = "#{DIST_DIR}/#{DATE.path}"
+ISSUE_URL = "http://nightly.thechangelog.com/#{DATE.path}"
 DATA_FILE = "#{ISSUE_DIR}/data.json"
 
 desc "Launches local HTTP server on DIST_DIR"
@@ -87,12 +88,12 @@ namespace :issue do
     campaign_id = CreateSend::Campaign.create(
       auth,
       ENV["CAMPAIGN_MONITOR_ID"], # client id
-      "The hottest repos on GitHub - #{DATE}", # subject
-      "Nightly – #{DATE}", # campaign name
+      "The hottest repos on GitHub - #{DATE.day_month}", # subject
+      "Nightly – #{DATE.day_month}", # campaign name
       "Changelog Nightly", # from name
       "nightly@changelog.com", # from email
       "editors@changelog.com", # reply to
-      "http://nightly.thechangelog.com/#{DATE.path}", # html url
+      ISSUE_URL, # html url
       nil, # text url
       [ENV["CAMPAIGN_MONITOR_LIST"]], # list ids
       [] # segment ids
