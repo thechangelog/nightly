@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <title>Changelog Nightly &mdash; <%= DATE %></title>
+    <title>Changelog Nightly | <%= DATE %></title>
 
     <!-- Open Graph for social shares -->
     <meta property="og:title" content="Changelog Nightly &nbsp; <%= DATE %>" />
@@ -31,11 +31,11 @@
               <td width="540">
 
                 <p class="top-bar">
-                  <a href="<%= ISSUE_URL %>">View on Web</a>
+                  <a href="<%= ISSUE_URL %>" title="View this issue on the Web">View on Web</a>
                   &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-                  <a href="https://github.com/thechangelog/nightly">Fork on GitHub</a>
+                  <a href="https://github.com/thechangelog/nightly" title="Fork and contribute on GitHub">Fork on GitHub</a>
                   &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-                  <a href="http://thechangelog.com/weekly/">Changelog Weekly</a>
+                  <a href="http://thechangelog.com/weekly/" title="Subscribe to Changelog Weekly">Changelog Weekly</a>
                 </p>
 
               </td>
@@ -59,7 +59,7 @@
 
                   <tr>
                     <td class="header">
-                      <a href="http://thechangelog.com/">
+                      <a href="http://thechangelog.com/" title="The Changelog">
                         <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo.png" />
                       </a>
                     </td>
@@ -83,17 +83,22 @@
                                 </td>
                                 <td valign="middle">
                                   <p>
-                                    <img width="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<img width="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<%= repo.language %>
+                                    <img width="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<img width="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %>
+                                    <% if repo.language %>
+                                      &nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="https://github.com/trending?l=<%= repo.language %>" title="View other trending <%= repo.language %> repos on GitHub"><%= repo.language %></a>
+                                    <% end %>
                                   </p>
                                 </td>
                               </tr>
                               <tr>
                                 <td width="52" valign="top">
-                                  <img class="avatar" src="<%= repo.owner.avatar_url %>" width="40" height="40">
+                                  <a href="<%= repo.owner.html_url %>" title="View <%= repo.owner.login %> on GitHub">
+                                    <img class="avatar" src="<%= repo.owner.avatar_url %>" width="40" height="40">
+                                  </a>
                                 </td>
                                 <td valign="top">
                                   <h3>
-                                    <a href='<%= repo.html_url %>'><%= repo.owner.login %>/<%= repo.name %></a>
+                                    <a href='<%= repo.html_url %>' title="View <%= repo.name %> on GitHub"><%= repo.owner.login %>/<%= repo.name %></a>
                                   </h3>
                                   <p>
                                     <%= repo.description %>
@@ -135,17 +140,22 @@
                                 </td>
                                 <td valign="middle">
                                   <p>
-                                    <img width="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<img width="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<%= repo.language %>
+                                    <img width="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<img width="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %>
+                                      <% if repo.language %>
+                                        &nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="https://github.com/trending?l=<%= repo.language %>" title="View other trending <%= repo.language %> repos on GitHub"><%= repo.language %></a>
+                                      <% end %>
                                   </p>
                                 </td>
                               </tr>
                               <tr>
                                 <td width="52" valign="top">
-                                  <img class="avatar" src="<%= repo.owner.avatar_url %>" width="40" height="40">
+                                  <a href="<%= repo.owner.html_url %>" title="View <%= repo.owner.login %> on GitHub">
+                                    <img class="avatar" src="<%= repo.owner.avatar_url %>" width="40" height="40">
+                                  </a>
                                 </td>
                                 <td valign="top">
                                   <h3>
-                                    <a href='<%= repo.html_url %>'><%= repo.owner.login %>/<%= repo.name %></a>
+                                    <a href='<%= repo.html_url %>' title="View <%= repo.name %> on GitHub"><%= repo.owner.login %>/<%= repo.name %></a>
                                   </h3>
                                   <p>
                                     <%= repo.description %>
