@@ -1,18 +1,24 @@
 # Changelog Nightly
 
-A free nightly email that unearths the hottest new repos before they blow up. [Subscribe here][nightly]!
+Changelog Nightly is a free email we ship every night at 10pm CT that unearths the hottest new repos on GitHub before they blow up.
+
+[Subscribe here][nightly]!
+
+Here's a preview:
+
+![changelog-nightly](images/changelog-nightly-feb25.png)
 
 Want something curated and less frequent? Check out [Weekly][weekly]!
 
-## Props
+## Props and thanks
 
 This project would not be possible without [Ilya Grigorik][igvita] and the work he put in to [GitHub Archive][gh-archive]. Thanks for all you do, Ilya!
 
-([An in-depth interview with Ilya all about GitHub Archive and Nightly][144])
+[Listen to our in-depth interview with Ilya on The Changelog #144][144] where we cover all the details about GitHub Archive and Changelog Nightly.
 
 ## Contributing
 
-[See here][contributing]
+[See here.][contributing]
 
 ## Hacking
 
@@ -22,7 +28,7 @@ This project would not be possible without [Ilya Grigorik][igvita] and the work 
 
 ## License
 
-[MIT stylee][license]
+[MIT][license]
 
 [nightly]: http://thechangelog.com/nightly
 [weekly]: http://thechangelog.com/weekly
