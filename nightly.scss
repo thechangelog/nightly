@@ -71,6 +71,10 @@ body {
 
 .stats p {
     font-size: 13px;
+
+    a {
+        color: #a8a8a8 !important;
+    }
 }
 
 .section {
@@ -102,10 +106,6 @@ body {
     text-decoration: none;
 }
 
-.repositories p a {
-    color: #ffffff !important;
-}
-
 p {
     color: #a8a8a8;
     font-size: 14px;
@@ -116,13 +116,13 @@ p {
     padding-bottom: 0;
 
     a {
-        color: #fff;
+        color: #ffffff;
     }
 
 }
 
 .cross-promotion {
-    background-color: #e0c760;
+    background-color: #f5da69;
     text-align: center;
     color: #272727;
     padding: 12px;
@@ -152,58 +152,10 @@ p {
 
 }
 
-///
-
-code, pre {
-    margin: 0;
-    padding: 0
-}
-
-pre {
-    display: block;
-    margin-bottom: 10px
-}
-
-code {
-    display: inline-block
-}
-
-pre code {
-    display: block
-}
-
-code {
-    background-color: #2b2d2d;
-    border-radius: 3px;
-    color: #d7d7d7;
-    font-family: "DejaVu Sans Mono", Menlo, Monaco, Consolas, Courier, monospace;
-    font-size: 13px;
-    padding: 10px
-}
-
-p code {
-    background-color: #f8f8f8;
-    border: 1px solid #eaeaea;
-    border-radius: 3px;
-    color: inherit;
-    font-family: "DejaVu Sans Mono", Menlo, Monaco, Consolas, Courier, monospace;
-    font-size: 12px;
-    margin: 0 2px;
-    padding: 2px 5px
-}
-
 @media (max-width: 480px) {
     table {
         width: 100%
     }
-}
-
-.content-block-footer p {
-    font-size: 13px
-}
-
-.image-bleed img {
-    width: 600px
 }
 
 .divider, .divider-10, .divider-20, .divider-40 {
@@ -249,56 +201,4 @@ p code {
 
 .margin-bottom-10, .bq-below {
     margin-bottom: 10px !important
-}
-
-.content-block-dark h3 {
-    color: #e5e5e5
-}
-
-.content-block-dark p {
-    color: #e5e5e5;
-    margin-bottom: 14px
-}
-
-.content-block-dark a {
-    color: #fff
-}
-
-.content-block-white h3 {
-    border-bottom: 2px solid #e5e5e5
-}
-
-.content-block-white h3, .content-block-white h4 {
-    color: #2b2d2d
-}
-
-.content-block-white h3 a, .content-block-white h4 a {
-    color: #428bca
-}
-
-.content-block-white h5 {
-    color: #aaa
-}
-
-.content-block-white p {
-    color: #333
-}
-
-.content-block-white a:hover {
-    color: #2b2d2d;
-    text-decoration: underline
-}
-
-.content-block-white em, .content-block-white mark {
-    font-style: normal;
-    padding: 3px;
-    background-color: #fffeca
-}
-
-.content-block-footer {
-    color: #777
-}
-
-.content-block-footer a {
-    color: #2b2d2d
 }
