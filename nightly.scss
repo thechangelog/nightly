@@ -143,9 +143,26 @@ p {
 
 }
 
+.cross-promotion {
+    background-color: #e0c760;
+    text-align: center;
+    color: #272727;
+    padding: 12px;
+
+    p {
+        color: #272727;
+    }
+
+    a {
+        color: #272727;
+        font-weight: bold;
+    }
+}
+
 .footer {
 
-    padding: 30px 0;
+    padding: 10px 0 30px 0;
+    text-align: center;
 
     p {
         margin-bottom: 18px;
