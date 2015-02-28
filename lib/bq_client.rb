@@ -1,7 +1,6 @@
 require "json"
 require "big_query"
 
-
 class BqClient
   attr_reader :bq, :day
   def initialize day
@@ -37,7 +36,7 @@ class BqClient
       begin
         repo = JSON.load open("#{row[:url]}?access_token=#{ENV['GITHUB_TOKEN']}")
         repo["new_stargazers_count"] = row[:count]
-        repo["description"] = CGI.escapeHTML(repo["description"] || "")
+        repo["description"] = (repo["description"] || "").html_escape.linkify
         repo
       rescue
         nil
