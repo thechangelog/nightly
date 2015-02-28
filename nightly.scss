@@ -6,20 +6,6 @@ body {
     padding: 0
 }
 
-.brand {
-    width: 200px
-}
-
-@media (max-width: 480px) {
-    .brand {
-        display: block;
-        width: 180px;
-        margin: 0 auto;
-        position: relative;
-        left: -6px
-    }
-}
-
 .hide-on-desktop {
     display: none !important
 }
@@ -53,18 +39,6 @@ body {
         text-decoration: none;
     }
 
-}
-
-.header {
-    // text-align: center;
-}
-
-.header h1 {
-    color: #fff;
-    font-size: 18px;
-    font-weight: normal;
-    margin-bottom: 8px;
-    text-transform: uppercase;
 }
 
 .header img {
