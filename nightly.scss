@@ -102,6 +102,10 @@ body {
     text-decoration: none;
 }
 
+.repositories p a {
+    color: #ffffff !important;
+}
+
 p {
     color: #a8a8a8;
     font-size: 14px;
@@ -112,7 +116,7 @@ p {
     padding-bottom: 0;
 
     a {
-        color: #ffffff;
+        color: #fff;
     }
 
 }
