@@ -88,8 +88,8 @@ namespace :issue do
     campaign_id = CreateSend::Campaign.create(
       auth,
       ENV["CAMPAIGN_MONITOR_ID"], # client id
-      "The hottest repos on GitHub - #{DATE.day_month}", # subject
-      "Nightly – #{DATE.day_month}", # campaign name
+      "The Hottest Repos on GitHub - #{DATE.day_month_abbrev}", # subject
+      "Nightly – #{DATE.day_month_abbrev}", # campaign name
       "Changelog Nightly", # from name
       "nightly@changelog.com", # from email
       "editors@changelog.com", # reply to

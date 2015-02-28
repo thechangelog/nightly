@@ -11,8 +11,8 @@ class Date
     strftime "%d"
   end
 
-  def day_month
-    strftime "%B %d"
+  def day_month_abbrev
+    strftime "%b %d"
   end
 
   def day_month_year
