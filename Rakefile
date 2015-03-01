@@ -101,6 +101,6 @@ namespace :issue do
       [] # segment ids
     )
 
-    CreateSend::Campaign.new(auth, campaign_id).send "editors@changelog.com"
+    CreateSend::Campaign.new(auth, campaign_id).send "noreply@changelog.com" # send + confirmation email
   end
 end
