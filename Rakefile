@@ -82,7 +82,11 @@ namespace :issue do
     top_new = data.top_new
     top_all = data.top_all
 
+    web_version = true
     File.write "#{ISSUE_DIR}/index.html", template.result(binding)
+
+    web_version = false
+    File.write "#{ISSUE_DIR}/email.html", template.result(binding)
   end
 
   desc "Delivers DATE's email to Campaign Monitor"
@@ -97,7 +101,7 @@ namespace :issue do
       "Changelog Nightly", # from name
       "nightly@changelog.com", # from email
       "editors@changelog.com", # reply to
-      ISSUE_URL, # html url
+      "#{ISSUE_URL}/email.html", # html url
       nil, # text url
       [ENV["CAMPAIGN_MONITOR_LIST"]], # list ids
       [] # segment ids
