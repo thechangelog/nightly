@@ -25,7 +25,7 @@ task :preview do
 end
 
 desc "Performs all operations for DATE except delivering the email"
-task generate: [:sass, :images, "issue:template", :index]
+task generate: [:sass, :images, :issue, :index]
 
 task :dist do
   FileUtils.mkdir_p DIST_DIR
@@ -49,6 +49,9 @@ task index: [:dist] do
   File.write "#{DIST_DIR}/index.html", template.result(binding)
 end
 
+desc "Runs all tasks to generate DATE's issue"
+task issue: ["issue:data", "issue:html"]
+
 namespace :issue do
   task dir: [:dist] do
     FileUtils.mkdir_p ISSUE_DIR
@@ -71,7 +74,7 @@ namespace :issue do
   end
 
   desc "Generates index.html file for DATE"
-  task template: [:data] do
+  task html: [:data] do
     template = ERB.new File.read "views/issue.erb"
 
     data = Hashie::Mash.new JSON.parse File.read DATA_FILE
