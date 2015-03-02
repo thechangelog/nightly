@@ -4,18 +4,10 @@
   <title>Changelog Nightly</title>
 </head>
 <body>
-<% Issue.tree.each do |year, months| %>
-  <div>
-    <h1><%= year %></h1>
-
-    <% months.each do |month, days| %>
-      <h2><%= month %></h2>
-
-      <% days.each do |day| %>
-        <a href="/<%= year %>/<%= month %>/<%= day %>"><%= day %></a>
-      <% end %>
-    <% end %>
-  </div>
+<ul>
+<% Dir["**/*.html"].map { |html| html.gsub "dist", "" }.each do |path| %>
+  <li><a href="<%= path %>"><%= path %></a></li>
 <% end %>
+</ul>
 </body>
 </html>
