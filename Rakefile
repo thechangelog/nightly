@@ -45,7 +45,7 @@ end
 
 desc "Processes the site's index w/ current linked list"
 task index: [:dist] do
-  template = ERB.new File.read "index.erb"
+  template = ERB.new File.read "views/index.erb"
 
   File.write "#{DIST_DIR}/index.html", template.result(binding)
 end
@@ -73,7 +73,7 @@ namespace :issue do
 
   desc "Generates index.html file for DATE"
   task template: [:data] do
-    template = ERB.new File.read "nightly.erb"
+    template = ERB.new File.read "views/issue.erb"
 
     data = Hashie::Mash.new JSON.parse File.read DATA_FILE
 
