@@ -3,7 +3,6 @@ require "bundler/setup"
 require "date"
 require "open-uri"
 require "json"
-require "erb"
 require "hashie/mash"
 require "dotenv/tasks"
 require "createsend"
@@ -12,6 +11,7 @@ require "pry"
 require_relative "lib/core_ext/date"
 require_relative "lib/core_ext/string"
 require_relative "lib/bq_client"
+require_relative "lib/template"
 
 DATE      = Date.parse(ENV["DATE"]) rescue Date.today
 DIST_DIR  = "dist"
@@ -44,9 +44,7 @@ end
 
 desc "Processes the site's index w/ current linked list"
 task index: [:dist] do
-  template = ERB.new File.read "views/index.erb"
-
-  File.write "#{DIST_DIR}/index.html", template.result(binding)
+  File.write "#{DIST_DIR}/index.html", Template.new("index").render
 end
 
 desc "Runs all tasks to generate DATE's issue"
@@ -75,18 +73,21 @@ namespace :issue do
 
   desc "Generates index.html file for DATE"
   task html: [:data] do
-    template = ERB.new File.read "views/issue.erb"
+    template = Template.new "issue"
 
     data = Hashie::Mash.new JSON.parse File.read DATA_FILE
 
-    top_new = data.top_new
-    top_all = data.top_all
+    File.write "#{ISSUE_DIR}/index.html", template.render({
+      top_new: data.top_new,
+      top_all: data.top_all,
+      web_version: true
+    })
 
-    web_version = true
-    File.write "#{ISSUE_DIR}/index.html", template.result(binding)
-
-    web_version = false
-    File.write "#{ISSUE_DIR}/email.html", template.result(binding)
+    File.write "#{ISSUE_DIR}/email.html", template.render({
+      top_new: data.top_new,
+      top_all: data.top_all,
+      web_version: false
+    })
   end
 
   desc "Delivers DATE's email to Campaign Monitor"

@@ -87,36 +87,7 @@
                         <% top_new.each_with_index do |repo, index| %>
                           <div class='repository <%= 'last-of-type' if index + 1 == top_new.length %>'>
 
-                            <table>
-                              <tr class="stats">
-                                <td width="52" valign="middle">
-                                  &nbsp;
-                                </td>
-                                <td valign="middle">
-                                  <p>
-                                    <img width="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<img width="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %>
-                                    <% if repo.language %>
-                                      &nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="https://github.com/trending?l=<%= repo.language %>" title="View other trending <%= repo.language %> repos on GitHub"><%= repo.language %></a>
-                                    <% end %>
-                                  </p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td width="52" valign="top">
-                                  <a href="<%= repo.owner.html_url %>" title="View <%= repo.owner.login %> on GitHub">
-                                    <img class="avatar" src="<%= repo.owner.avatar_url %>" width="40" height="40">
-                                  </a>
-                                </td>
-                                <td valign="top">
-                                  <h3>
-                                    <a href='<%= repo.html_url %>' title="View <%= repo.name %> on GitHub"><%= repo.owner.login %>/<%= repo.name %></a>
-                                  </h3>
-                                  <p>
-                                    <%= repo.description %>
-                                  </p>
-                                </td>
-                              </tr>
-                            </table>
+                            <%= Template.partial "repo", repo: repo %>
 
                           </div>
                         <% end %>
@@ -144,36 +115,7 @@
                         <% top_all.each_with_index do |repo, index| %>
                           <div class='repository <%= 'last-of-type' if index + 1 == top_all.length %>'>
 
-                            <table>
-                              <tr class="stats">
-                                <td width="52" valign="middle">
-                                  &nbsp;
-                                </td>
-                                <td valign="middle">
-                                  <p>
-                                    <img width="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<img width="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %>
-                                      <% if repo.language %>
-                                        &nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="https://github.com/trending?l=<%= repo.language %>" title="View other trending <%= repo.language %> repos on GitHub"><%= repo.language %></a>
-                                      <% end %>
-                                  </p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td width="52" valign="top">
-                                  <a href="<%= repo.owner.html_url %>" title="View <%= repo.owner.login %> on GitHub">
-                                    <img class="avatar" src="<%= repo.owner.avatar_url %>" width="40" height="40">
-                                  </a>
-                                </td>
-                                <td valign="top">
-                                  <h3>
-                                    <a href='<%= repo.html_url %>' title="View <%= repo.name %> on GitHub"><%= repo.owner.login %>/<%= repo.name %></a>
-                                  </h3>
-                                  <p>
-                                    <%= repo.description %>
-                                  </p>
-                                </td>
-                              </tr>
-                            </table>
+                            <%= Template.partial "repo", repo: repo %>
 
                           </div>
                         <% end %>
