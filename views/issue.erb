@@ -15,7 +15,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" type="text/css" href="/nightly.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+
+    <% if web_version %>
+      <link rel="stylesheet" type="text/css" href="/night-theme.css">
+    <% else %>
+      <link rel="stylesheet" type="text/css" href="/[Theme,fallback=night]-theme.css">
+    <% end %>
 
     <% if web_version %>
       <script>
@@ -166,8 +172,10 @@
 
                 <p>You're receiving this because you subscribed at <a href="http://thechangelog.com/nightly/" cm_dontconvertlink>thechangelog.com/nightly</a>.</p>
 
-                <% unless web_version %>
-                <p><unsubscribe>Unsubscribe</unsubscribe> but we'll cry 1's and 0's.</p>
+                <% if !web_version %>
+                  <p><preferences>Switch your theme.</preferences></p>
+
+                  <p><unsubscribe>Unsubscribe</unsubscribe> but we'll cry 1's and 0's.</p>
                 <% end %>
 
                 <p><a href="http://thechangelog.com/nightly/">Subscribe here</a> if you're not a subscriber.</p>
