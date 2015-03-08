@@ -33,7 +33,10 @@ end
 
 desc "Takes dat scss and makes it dat css"
 task sass: [:dist] do
-  system "sass nightly.scss #{DIST_DIR}/nightly.css"
+  Dir["styles/*.scss"].each do |infile|
+    outfile = File.basename(infile).gsub ".scss", ".css"
+    system "sass --sourcemap=none #{infile} #{DIST_DIR}/#{outfile}"
+  end
 end
 
 desc "Copies the images directory to DIST_DIR"
