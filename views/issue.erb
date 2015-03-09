@@ -74,7 +74,11 @@
                   <tr>
                     <td class="header">
                       <a href="http://thechangelog.com/" title="The Changelog">
-                        <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo.png" />
+                        <% if web_version %>
+                          <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo-night.png" />
+                        <% else %>
+                          <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo-[Theme,fallback=night].png" />
+                        <% end %>
                       </a>
                     </td>
                   </tr>
