@@ -167,17 +167,17 @@
 
               <td class="footer">
 
-                <p>You're receiving this because you subscribed at <a href="http://thechangelog.com/nightly/" cm_dontconvertlink>thechangelog.com/nightly</a>.</p>
-
                 <% if !web_version %>
-                  <p><preferences>Switch your theme.</preferences></p>
+                  <p>You're receiving this because you subscribed at <a href="http://thechangelog.com/nightly/" cm_dontconvertlink>thechangelog.com/nightly</a>.</p>
 
                   <p><unsubscribe>Unsubscribe</unsubscribe> but we'll cry 1's and 0's.</p>
+
+                  <p><preferences>Manage your preferences</preferences>, or <a href="http://thechangelog.com/nightly/">subscribe here</a> if you're not a subscriber.</p>
                 <% end %>
 
-                <p><a href="http://thechangelog.com/nightly/">Subscribe here</a> if you're not a subscriber.</p>
-
-                <p class="last-of-type">&copy; Changelog Media, All rights reserved.</p>
+                <% if web_version %>
+                  <p class="last-of-type">&copy; Changelog Media, All rights reserved.</p>
+                <% end %>
 
               </td>
 
