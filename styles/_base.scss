@@ -57,8 +57,6 @@ body {
     }
 }
 
-// Colors
-
 .wrapper {
     background-color: $wrapper-background-color;
 }
@@ -74,6 +72,7 @@ body {
         margin-bottom: 0;
         padding-top: 0;
         padding-bottom: 0;
+        text-align: center;
     }
 
     a {
@@ -84,7 +83,7 @@ body {
 }
 
 .header img {
-    margin: 25px 0 15px 0;
+    margin: 10px 0 0 0;
 }
 
 .section {
@@ -105,24 +104,20 @@ body {
 }
 
 .repository {
-    // border-bottom: 1px solid $top-bar-background-color;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .repository:last-of-type, .repository.last-of-type {
-    // border-bottom: none !important;
     margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
 }
 
 .repository h3 {
     color: $section-h3-color;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: normal;
     line-height: 1;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     padding-top: 0;
     padding-bottom: 0;
 
@@ -156,11 +151,13 @@ body {
 }
 
 .avatar {
-    // margin-top: 5px;
+    margin-top: 2px;
 }
 
 .stats p {
     font-size: 12px;
+    line-height: 1;
+    margin-bottom: 4px;
 
     a {
         color: $stats-link-color !important;
