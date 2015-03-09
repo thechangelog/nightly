@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
@@ -14,8 +13,6 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" type="text/css" href="/main.css">
 
     <% if web_version %>
       <link rel="stylesheet" type="text/css" href="/night-theme.css">
@@ -39,7 +36,7 @@
 
     <p style="display: none !important;"><%= top_all.map(&:name).join ", " %> and more!</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="bg-373737 hide-on-mobile">
+    <table class="top-bar hide-on-mobile" width="100%" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td width="100%">
 
@@ -47,7 +44,7 @@
             <tr>
               <td width="540">
 
-                <p class="top-bar">
+                <p>
                   <a href="<%= ISSUE_URL %>" title="View this issue on the Web">View Web Version</a>
                   &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
                   <a href="https://github.com/thechangelog/nightly" title="Fork and contribute on GitHub">Fork on GitHub</a>
@@ -63,7 +60,7 @@
       </tr>
     </table>
 
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="bg-272727">
+    <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td width="100%">
 
@@ -104,8 +101,8 @@
 
                 </table>
 
-                <table width="100%" cellpadding="2" cellspacing="0" border="0" class="bg-373737 seperator">
-                  <tr><td class="bg-373737" width="100%"></td></tr>
+                <table width="100%" cellpadding="2" cellspacing="0" border="0" class="seperator">
+                  <tr><td width="100%"></td></tr>
                 </table>
 
                 <table width="540" cellpadding="20" cellspacing="0" border="0">
@@ -141,7 +138,7 @@
       </tr>
     </table>
 
-    <table width="100%" cellpadding="20" cellspacing="0" border="0" class="bg-272727">
+    <table class="wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
       <tr>
         <td width="100%">
 
@@ -161,7 +158,7 @@
       </tr>
     </table>
 
-    <table width="100%" cellpadding="20" cellspacing="0" border="0" class="bg-272727">
+    <table class="wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
       <tr>
         <td width="100%">
 
