@@ -7,20 +7,20 @@
       <p>
         <img width="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<img width="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %>
         <% if repo.language %>
-          &nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="https://github.com/trending?l=<%= repo.language %>" title="View other trending <%= repo.language %> repos on GitHub"><%= repo.language %></a>
+          &nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="https://github.com/trending?l=<%= repo.language %>&utm_source=changelog&utm_medium=email&utm_campaign=changelog-nightly" title="View other trending <%= repo.language %> repos on GitHub"><%= repo.language %></a>
         <% end %>
       </p>
     </td>
   </tr>
   <tr>
     <td width="32" valign="top">
-      <a href="<%= repo.owner.html_url %>" title="View <%= repo.owner.login %> on GitHub">
+      <a href="<%= repo.owner.html_url %>?utm_source=changelog&utm_medium=email&utm_campaign=changelog-nightly" title="View <%= repo.owner.login %> on GitHub">
         <img class="avatar" src="<%= repo.owner.avatar_url %>" width="20" height="20">
       </a>
     </td>
     <td valign="top">
       <h3>
-        <a href='<%= repo.html_url %>' title="View <%= repo.name %> on GitHub"><%= repo.owner.login %>/<%= repo.name %></a>
+        <a href='<%= repo.html_url %>?utm_source=changelog&utm_medium=email&utm_campaign=changelog-nightly' title="View <%= repo.name %> on GitHub"><%= repo.owner.login %>/<%= repo.name %></a>
       </h3>
       <p>
         <%= repo.description %>
