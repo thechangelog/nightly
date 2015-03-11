@@ -35,6 +35,7 @@ desc "Takes dat scss and makes it dat css"
 task sass: [:dist] do
   Dir["styles/*.scss"].each do |infile|
     outfile = File.basename(infile).gsub ".scss", ".css"
+    next if outfile.start_with? "_"
     system "sass --sourcemap=none #{infile} #{DIST_DIR}/#{outfile}"
   end
 end
