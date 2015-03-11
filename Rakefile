@@ -18,6 +18,7 @@ DIST_DIR  = "dist"
 ISSUE_DIR = "#{DIST_DIR}/#{DATE.path}"
 ISSUE_URL = "http://nightly.thechangelog.com/#{DATE.path}"
 DATA_FILE = "#{ISSUE_DIR}/data.json"
+THEMES    = %w(night day)
 
 desc "Launches local HTTP server on DIST_DIR"
 task :preview do
@@ -84,14 +85,18 @@ namespace :issue do
     File.write "#{ISSUE_DIR}/index.html", template.render({
       top_new: data.top_new,
       top_all: data.top_all,
-      web_version: true
+      web_version: true,
+      theme: "night"
     })
 
-    File.write "#{ISSUE_DIR}/email.html", template.render({
-      top_new: data.top_new,
-      top_all: data.top_all,
-      web_version: false
-    })
+    THEMES.each do |theme|
+      File.write "#{ISSUE_DIR}/email-#{theme}.html", template.render({
+        top_new: data.top_new,
+        top_all: data.top_all,
+        web_version: false,
+        theme: theme
+      })
+    end
   end
 
   desc "Delivers DATE's email to Campaign Monitor"

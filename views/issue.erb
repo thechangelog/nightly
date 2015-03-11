@@ -14,11 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <% if web_version %>
-      <link rel="stylesheet" type="text/css" href="/night-theme.css">
-    <% else %>
-      <link rel="stylesheet" type="text/css" href="/[Theme,fallback=night]-theme.css">
-    <% end %>
+    <link rel="stylesheet" type="text/css" href="/<%= theme %>-theme.css">
 
     <% if web_version %>
       <script>
@@ -74,11 +70,7 @@
                   <tr>
                     <td class="header">
                       <a href="http://thechangelog.com/" title="The Changelog">
-                        <% if web_version %>
-                          <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo-night.png" />
-                        <% else %>
-                          <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo-[Theme,fallback=night].png" />
-                        <% end %>
+                        <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo-<%= theme %>.png" />
                       </a>
                     </td>
                   </tr>
