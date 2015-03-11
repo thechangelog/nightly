@@ -119,7 +119,7 @@ namespace :issue do
         "editors@changelog.com", # reply to
         "#{ISSUE_URL}/email-#{theme_name}.html", # html url
         nil, # text url
-        [ENV["CAMPAIGN_MONITOR_LIST"]], # list ids
+        [], # list ids
         [theme_id] # segment ids
       )
 
