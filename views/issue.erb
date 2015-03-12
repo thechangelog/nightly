@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
@@ -15,7 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" type="text/css" href="/nightly.css">
+    <link rel="stylesheet" type="text/css" href="/<%= theme %>-theme.css">
 
     <% if web_version %>
       <script>
@@ -33,7 +32,7 @@
 
     <p style="display: none !important;"><%= top_all.map(&:name).join ", " %> and more!</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="bg_373737 hide-on-mobile">
+    <table class="top-bar hide-on-mobile" width="100%" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td width="100%">
 
@@ -41,7 +40,7 @@
             <tr>
               <td width="540">
 
-                <p class="top-bar">
+                <p>
                   <a href="<%= ISSUE_URL %>" title="View this issue on the Web">View Web Version</a>
                   &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
                   <a href="https://github.com/thechangelog/nightly" title="Fork and contribute on GitHub">Fork on GitHub</a>
@@ -57,7 +56,7 @@
       </tr>
     </table>
 
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="bg_272727">
+    <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td width="100%">
 
@@ -71,7 +70,7 @@
                   <tr>
                     <td class="header">
                       <a href="http://thechangelog.com/" title="The Changelog">
-                        <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo.png" />
+                        <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo-<%= theme %>.png" />
                       </a>
                     </td>
                   </tr>
@@ -99,7 +98,7 @@
                 </table>
 
                 <table width="100%" cellpadding="2" cellspacing="0" border="0" class="seperator">
-                  <tr><td width="100%" class="bg_373737"></td></tr>
+                  <tr><td width="100%"></td></tr>
                 </table>
 
                 <table width="540" cellpadding="20" cellspacing="0" border="0">
@@ -135,7 +134,7 @@
       </tr>
     </table>
 
-    <table width="100%" cellpadding="20" cellspacing="0" border="0" class="bg_272727">
+    <table class="wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
       <tr>
         <td width="100%">
 
@@ -155,7 +154,7 @@
       </tr>
     </table>
 
-    <table width="100%" cellpadding="20" cellspacing="0" border="0" class="bg_272727">
+    <table class="wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
       <tr>
         <td width="100%">
 
@@ -164,15 +163,17 @@
 
               <td class="footer">
 
-                <p>You're receiving this because you subscribed at <a href="http://thechangelog.com/nightly/" cm_dontconvertlink>thechangelog.com/nightly</a>.</p>
+                <% if !web_version %>
+                  <p>You're receiving this because you subscribed at <a href="http://thechangelog.com/nightly/" cm_dontconvertlink>thechangelog.com/nightly</a>.</p>
 
-                <% unless web_version %>
-                <p><unsubscribe>Unsubscribe</unsubscribe> but we'll cry 1's and 0's.</p>
+                  <p><unsubscribe>Unsubscribe</unsubscribe> but we'll cry 1's and 0's.</p>
+
+                  <p><preferences>Manage your preferences</preferences>, or <a href="http://thechangelog.com/nightly/">subscribe here</a> if you're not a subscriber.</p>
                 <% end %>
 
-                <p><a href="http://thechangelog.com/nightly/">Subscribe here</a> if you're not a subscriber.</p>
-
-                <p class="last-of-type">&copy; Changelog Media, All rights reserved.</p>
+                <% if web_version %>
+                  <p class="last-of-type">&copy; Changelog Media, All rights reserved.</p>
+                <% end %>
 
               </td>
 

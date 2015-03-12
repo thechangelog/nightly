@@ -18,6 +18,7 @@ DIST_DIR  = "dist"
 ISSUE_DIR = "#{DIST_DIR}/#{DATE.path}"
 ISSUE_URL = "http://nightly.thechangelog.com/#{DATE.path}"
 DATA_FILE = "#{ISSUE_DIR}/data.json"
+THEMES    = %w(night day)
 
 desc "Launches local HTTP server on DIST_DIR"
 task :preview do
@@ -33,7 +34,11 @@ end
 
 desc "Takes dat scss and makes it dat css"
 task sass: [:dist] do
-  system "sass nightly.scss #{DIST_DIR}/nightly.css"
+  Dir["styles/*.scss"].each do |infile|
+    outfile = File.basename(infile).gsub ".scss", ".css"
+    next if outfile.start_with? "_"
+    system "sass --sourcemap=none #{infile} #{DIST_DIR}/#{outfile}"
+  end
 end
 
 desc "Copies the images directory to DIST_DIR"
@@ -80,34 +85,45 @@ namespace :issue do
     File.write "#{ISSUE_DIR}/index.html", template.render({
       top_new: data.top_new,
       top_all: data.top_all,
-      web_version: true
+      web_version: true,
+      theme: "night"
     })
 
-    File.write "#{ISSUE_DIR}/email.html", template.render({
-      top_new: data.top_new,
-      top_all: data.top_all,
-      web_version: false
-    })
+    THEMES.each do |theme|
+      File.write "#{ISSUE_DIR}/email-#{theme}.html", template.render({
+        top_new: data.top_new,
+        top_all: data.top_all,
+        web_version: false,
+        theme: theme
+      })
+    end
   end
 
   desc "Delivers DATE's email to Campaign Monitor"
   task deliver: [:dotenv] do
     auth = {api_key: ENV["CAMPAIGN_MONITOR_KEY"]}
 
-    campaign_id = CreateSend::Campaign.create(
-      auth,
-      ENV["CAMPAIGN_MONITOR_ID"], # client id
-      "The Hottest Repos on GitHub - #{DATE.day_month_abbrev}", # subject
-      "Nightly – #{DATE.day_month_abbrev}", # campaign name
-      "Changelog Nightly", # from name
-      "nightly@changelog.com", # from email
-      "editors@changelog.com", # reply to
-      "#{ISSUE_URL}/email.html", # html url
-      nil, # text url
-      [ENV["CAMPAIGN_MONITOR_LIST"]], # list ids
-      [] # segment ids
-    )
+    CreateSend::List.new(auth, ENV["CAMPAIGN_MONITOR_LIST"]).segments.each do |segment|
+      theme_name = segment.Title.downcase
+      theme_id = segment.SegmentID
 
-    CreateSend::Campaign.new(auth, campaign_id).send "noreply@changelog.com" # send + confirmation email
+      next unless THEMES.include? theme_name
+
+      campaign_id = CreateSend::Campaign.create(
+        auth,
+        ENV["CAMPAIGN_MONITOR_ID"], # client id
+        "The Hottest Repos on GitHub - #{DATE.day_month_abbrev}", # subject
+        "Nightly – #{DATE.day_month_abbrev} (#{theme_name} theme)", # campaign name
+        "Changelog Nightly", # from name
+        "nightly@changelog.com", # from email
+        "editors@changelog.com", # reply to
+        "#{ISSUE_URL}/email-#{theme_name}.html", # html url
+        nil, # text url
+        [], # list ids
+        [theme_id] # segment ids
+      )
+
+      CreateSend::Campaign.new(auth, campaign_id).send "noreply@changelog.com" # send + confirmation email
+    end
   end
 end
