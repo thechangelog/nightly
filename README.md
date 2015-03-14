@@ -6,7 +6,7 @@ Changelog Nightly is a free email we ship every night at 10pm CT that unearths t
 
 Here's a preview:
 
-![changelog-nightly](images/changelog-nightly-feb25.png)
+![changelog-nightly](images/changelog-nightly.png)
 
 Want something curated and less frequent? Subscribe to [Changelog Weekly][weekly]!
 
