@@ -16,7 +16,7 @@ require_relative "lib/template"
 DATE      = Date.parse(ENV["DATE"]) rescue Date.today
 DIST_DIR  = "dist"
 ISSUE_DIR = "#{DIST_DIR}/#{DATE.path}"
-ISSUE_URL = "http://nightly.thechangelog.com/#{DATE.path}"
+ISSUE_URL = "http://nightly.changelog.com/#{DATE.path}"
 DATA_FILE = "#{ISSUE_DIR}/data.json"
 THEMES    = %w(night day)
 

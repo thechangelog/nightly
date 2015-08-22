@@ -30,10 +30,10 @@ This project would not be possible without [Ilya Grigorik][igvita] and the work 
 
 [MIT][license]
 
-[nightly]: http://thechangelog.com/nightly
-[weekly]: http://thechangelog.com/weekly
+[nightly]: https://changelog.com/nightly
+[weekly]: https://changelog.com/weekly
 [igvita]: http://igvita.com
 [gh-archive]: https://www.githubarchive.org
-[144]: http://thechangelog.com/144
+[144]: https://changelog.com/144
 [contributing]: https://github.com/thechangelog/nightly/blob/master/CONTRIBUTING.md
 [license]: https://github.com/thechangelog/nightly/blob/master/LICENSE
