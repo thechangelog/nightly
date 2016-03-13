@@ -113,7 +113,7 @@ namespace :issue do
         auth,
         ENV["CAMPAIGN_MONITOR_ID"], # client id
         "The Hottest Repos on GitHub - #{DATE.day_month_abbrev}", # subject
-        "Nightly – #{DATE.day_month_abbrev} (#{theme_name} theme)", # campaign name
+        "Nightly – #{DATE} (#{theme_name} theme)", # campaign name
         "Changelog Nightly", # from name
         "nightly@changelog.com", # from email
         "editors@changelog.com", # reply to
