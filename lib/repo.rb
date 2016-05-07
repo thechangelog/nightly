@@ -1,6 +1,19 @@
 require "hashie/mash"
+require "open-uri"
+require_relative "./core_ext/string"
 
 class Repo < Hashie::Mash
+  def self.from_github url, stars_count
+    repo = new JSON.load open("#{url}?access_token=#{ENV["GITHUB_TOKEN"]}")
+    repo.new_stargazers_count = stars_count
+    repo.description = (repo.description || "").html_escape
+    repo
+  end
+
+  def classy_description
+    description.linkify.emojify
+  end
+
   def language_param
     case language
     when "c#" then "csharp"

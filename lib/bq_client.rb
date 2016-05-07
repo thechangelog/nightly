@@ -34,12 +34,10 @@ class BqClient
     }
     .map { |row|
       begin
-        repo = JSON.load open("#{row[:url]}?access_token=#{ENV['GITHUB_TOKEN']}")
-        repo["new_stargazers_count"] = row[:count]
-        repo["description"] = (repo["description"] || "").html_escape.linkify.emojify
+        repo = Repo.from_github row[:url], row[:count]
         repo
       rescue
-        nil
+        next
       end
     }.compact
   end
