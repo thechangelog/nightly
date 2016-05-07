@@ -3,6 +3,8 @@ require "open-uri"
 require_relative "./core_ext/string"
 
 class Repo < Hashie::Mash
+  HALL_OF_FAME = %w(FreeCodeCamp)
+
   def self.from_github url, stars_count
     repo = new JSON.load open("#{url}?access_token=#{ENV["GITHUB_TOKEN"]}")
     repo.new_stargazers_count = stars_count
@@ -12,6 +14,10 @@ class Repo < Hashie::Mash
 
   def classy_description
     description.linkify.emojify
+  end
+
+  def hall_of_famer?
+    HALL_OF_FAME.include? name
   end
 
   def language_param

@@ -15,6 +15,16 @@ RSpec.describe Repo do
       expect(repo.classy_description).to eq "<img alt='shipit' src='/images/emoji/shipit.png' style='vertical-align:middle' width='20' height='20' /> to <a href='http://example.com'>http://example.com</a>"
     end
   end
+
+  describe "#hall_of_famer?" do
+    it "is true when repo is in hall of fame list, false otherwise" do
+      repo.name = "FreeCodeCamp"
+      expect(repo).to be_hall_of_famer
+      repo.name = "Changelog Nightly"
+      expect(repo).to_not be_hall_of_famer
+    end
+  end
+
   describe "#language_param" do
     it "returns the repo's language" do
       repo.language = "ruby"
