@@ -25,4 +25,8 @@ class Repo < Hashie::Mash
   def language_trending_url
     "https://github.com/trending?l=#{language_param}"
   end
+
+  def no_description?
+    (description || "").strip.empty?
+  end
 end

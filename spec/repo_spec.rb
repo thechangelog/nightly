@@ -26,4 +26,18 @@ RSpec.describe Repo do
       expect(repo.language_param).to eq "csharp"
     end
   end
+
+  describe "#no_description?" do
+    it "is true when description is nil, empty, or blank" do
+      [nil, "", "   "].each do |bad|
+        repo.description = bad
+        expect(repo.no_description?).to be true
+      end
+    end
+
+    it "is false when descripton has contents" do
+      repo.description = "ohai"
+      expect(repo.no_description?).to be false
+    end
+  end
 end

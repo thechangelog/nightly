@@ -35,6 +35,7 @@ class BqClient
     .map { |row|
       begin
         repo = Repo.from_github row[:url], row[:count]
+        next if repo.no_description?
         repo
       rescue
         next
