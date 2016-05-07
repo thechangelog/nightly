@@ -9,3 +9,7 @@ gem "dotenv"
 gem "sass"
 gem "createsend"
 gem "gemoji"
+
+group :test do
+  gem "rspec"
+end
