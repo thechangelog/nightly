@@ -80,7 +80,7 @@ class BqClient
       WHERE ref_type='"repository"'
     )
     GROUP BY repo.id, repo.name, repo.url
-    HAVING count >= 5
+    HAVING count >= 8
     ORDER BY count DESC
     LIMIT 15
     SQL
