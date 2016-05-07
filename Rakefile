@@ -3,7 +3,6 @@ require "bundler/setup"
 require "date"
 require "open-uri"
 require "json"
-require "hashie/mash"
 require "dotenv/tasks"
 require "createsend"
 require "pry"
@@ -12,6 +11,7 @@ require_relative "lib/core_ext/date"
 require_relative "lib/core_ext/string"
 require_relative "lib/bq_client"
 require_relative "lib/template"
+require_relative "lib/repo"
 
 DATE      = Date.parse(ENV["DATE"]) rescue Date.today
 DIST_DIR  = "dist"
@@ -80,7 +80,7 @@ namespace :issue do
   task html: [:data] do
     template = Template.new "issue"
 
-    data = Hashie::Mash.new JSON.parse File.read DATA_FILE
+    data = Repo.new JSON.parse File.read DATA_FILE
 
     File.write "#{ISSUE_DIR}/index.html", template.render({
       top_new: data.top_new,
