@@ -27,19 +27,15 @@
       </script>
     <% end %>
   </head>
-
   <body>
-
     <p style="display: none !important;"><%= top_all.map(&:name).join ", " %> and more!</p>
 
     <table class="top-bar hide-on-mobile" width="100%" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td width="100%">
-
           <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
             <tr>
               <td width="540">
-
                 <p>
                   <a href="<%= ISSUE_URL %>" title="View this issue on the Web">View Web Version</a>
                   &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
@@ -47,118 +43,101 @@
                   &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
                   <a href="https://changelog.com/weekly" title="Subscribe to Changelog Weekly">Changelog Weekly</a>
                 </p>
-
               </td>
             </tr>
           </table>
-
         </td>
       </tr>
     </table>
 
-    <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <table id="logo" class="wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
       <tr>
         <td width="100%">
-
-          <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
-
+          <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
             <tr>
-              <td width="540">
-
-                <table width="540" cellpadding="20" cellspacing="0" border="0">
-
-                  <tr>
-                    <td class="header">
-                      <a href="https://changelog.com/" title="The Changelog">
-                        <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo-<%= theme %>.png" />
-                      </a>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td class="section">
-
-                      <h2>Top New Repositories</h2>
-
-                      <p>The most starred repos on GitHub created on <%= DATE.day_month_year %></p>
-
-                      <div class="repositories">
-                        <% top_new.each_with_index do |repo, index| %>
-                          <div class='repository <%= 'last-of-type' if index + 1 == top_new.length %>'>
-
-                            <%= Template.partial "repo", repo: repo %>
-
-                          </div>
-                        <% end %>
-                      </div>
-
-                    </td>
-                  </tr>
-
-                </table>
-
-                <table width="540" cellpadding="20" cellspacing="0" border="0">
-
-                  <tr>
-                    <td class="section">
-
-                      <h2>Top Starred Repositories</h2>
-
-                      <p>The most starred repos on all of GitHub on <%= DATE.day_month_year %></p>
-
-                      <div class="repositories">
-                        <% top_all.each_with_index do |repo, index| %>
-                          <div class='repository <%= 'last-of-type' if index + 1 == top_all.length %>'>
-
-                            <%= Template.partial "repo", repo: repo %>
-
-                          </div>
-                        <% end %>
-                      </div>
-
-                    </td>
-                  </tr>
-
-                </table>
-
+              <td class="header" width="540">
+                <a href="https://changelog.com/" title="The Changelog">
+                  <img class="logo" width="145" alt="Changelog Nightly" src="/images/logo-<%= theme %>.png" />
+                </a>
               </td>
             </tr>
-
           </table>
-
         </td>
       </tr>
     </table>
 
-    <table class="wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
+    <table id="top-new" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td width="100%">
+          <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
+            <tr>
+              <td class="section" width="540">
+                <h2>Top New Repositories</h2>
 
+                <p>The most starred repos on GitHub created on <%= DATE.day_month_year %></p>
+
+                <div class="repositories">
+                  <% top_new.each_with_index do |repo, index| %>
+                    <div class='repository <%= 'last-of-type' if index + 1 == top_new.length %>'>
+
+                      <%= Template.partial "repo", repo: repo %>
+
+                    </div>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table id="top-all" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="100%">
+          <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
+            <tr>
+              <td class="section" width="540">
+                <h2>Top Starred Repositories</h2>
+
+                <p>The most starred repos on all of GitHub on <%= DATE.day_month_year %></p>
+
+                <div class="repositories">
+                  <% top_all.each_with_index do |repo, index| %>
+                    <div class='repository <%= 'last-of-type' if index + 1 == top_all.length %>'>
+
+                      <%= Template.partial "repo", repo: repo %>
+
+                    </div>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table id="weekly" class="wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
+      <tr>
+        <td width="100%">
           <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
             <tr>
-
-              <td class="cross-promotion">
-
+              <td class="cross-promotion" width="540">
                 <p><a href="https://changelog.com/weekly">Subscribe to Changelog Weekly</a> &ndash; our curated and less frequent email.</p>
-
               </td>
-
             </tr>
           </table>
-
         </td>
       </tr>
     </table>
 
-    <table class="wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
+    <table id="footer" class="wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
       <tr>
         <td width="100%">
-
           <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
             <tr>
-
               <td class="footer">
-
                 <% if !web_version %>
                   <p>You're receiving this because you subscribed at <a href="https://changelog.com/nightly/" cm_dontconvertlink>changelog.com/nightly</a>.</p>
 
@@ -172,13 +151,10 @@
                 <% end %>
 
               </td>
-
             </tr>
           </table>
-
         </td>
       </tr>
     </table>
-
   </body>
 </html>
