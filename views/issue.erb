@@ -66,19 +66,19 @@
       </tr>
     </table>
 
-    <table id="top-new" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <table id="top-all" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td width="100%">
           <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
             <tr>
               <td class="section" width="540">
-                <h2>Top New Repositories</h2>
+                <h2>Top Starred Repositories</h2>
 
-                <p>The most starred repos on GitHub created on <%= DATE.day_month_year %></p>
+                <p>The most starred repos on all of GitHub on <%= DATE.day_month_year %></p>
 
                 <div class="repositories">
-                  <% top_new.each_with_index do |repo, index| %>
-                    <div class='repository <%= 'last-of-type' if index + 1 == top_new.length %>'>
+                  <% top_all.each_with_index do |repo, index| %>
+                    <div class="repository <%= "last-of-type" if index + 1 == top_all.length %>">
 
                       <%= Template.partial "repo", repo: repo %>
 
@@ -92,19 +92,19 @@
       </tr>
     </table>
 
-    <table id="top-all" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <table id="top-new" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td width="100%">
           <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
             <tr>
               <td class="section" width="540">
-                <h2>Top Starred Repositories</h2>
+                <h2>Top New Repositories</h2>
 
-                <p>The most starred repos on all of GitHub on <%= DATE.day_month_year %></p>
+                <p>The most starred repos on GitHub created on <%= DATE.day_month_year %></p>
 
                 <div class="repositories">
-                  <% top_all.each_with_index do |repo, index| %>
-                    <div class='repository <%= 'last-of-type' if index + 1 == top_all.length %>'>
+                  <% top_new.each_with_index do |repo, index| %>
+                    <div class="repository <%= "last-of-type" if index + 1 == top_new.length %>">
 
                       <%= Template.partial "repo", repo: repo %>
 
