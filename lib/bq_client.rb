@@ -47,7 +47,7 @@ class BqClient
   def top_all_sql
     <<-SQL
     SELECT repo.url, COUNT(repo.name) as count FROM
-    TABLE_DATE_RANGE(githubarchive:day.events_,
+    TABLE_DATE_RANGE([githubarchive:day.],
       TIMESTAMP("#{day}"),
       TIMESTAMP("#{day}")
     )
@@ -62,7 +62,7 @@ class BqClient
   def top_new_sql
     <<-SQL
     SELECT repo.url, COUNT(repo.name) as count FROM
-    TABLE_DATE_RANGE(githubarchive:day.events_,
+    TABLE_DATE_RANGE([githubarchive:day.],
       TIMESTAMP("#{day}"),
       TIMESTAMP("#{day}")
     )
@@ -71,7 +71,7 @@ class BqClient
       SELECT repo.url FROM (
         SELECT repo.url,
           JSON_EXTRACT(payload, '$.ref_type') as ref_type,
-        FROM (TABLE_DATE_RANGE(githubarchive:day.events_,
+        FROM (TABLE_DATE_RANGE([githubarchive:day.],
           TIMESTAMP("#{day}"),
           TIMESTAMP("#{day}")
         ))
