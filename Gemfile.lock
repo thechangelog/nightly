@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/github/gemoji.git
+  revision: 50865e8895c54037bf06c4c1691aa925d030a59d
+  specs:
+    gemoji (2.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -24,7 +30,6 @@ GEM
     extlib (0.9.16)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    gemoji (2.1.0)
     google-api-client (0.8.2)
       activesupport (>= 3.2)
       addressable (~> 2.3)
@@ -87,7 +92,7 @@ DEPENDENCIES
   bigquery
   createsend
   dotenv
-  gemoji
+  gemoji!
   hashie
   pry
   rake

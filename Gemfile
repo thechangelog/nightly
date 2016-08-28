@@ -8,7 +8,7 @@ gem "hashie"
 gem "dotenv"
 gem "sass"
 gem "createsend"
-gem "gemoji"
+gem "gemoji", github: "github/gemoji"
 
 group :test do
   gem "rspec"
