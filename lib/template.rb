@@ -9,13 +9,13 @@ class Template
     @view_path || "views"
   end
 
-  def self.partial name, locals={}
-    new("_#{name}").render locals
+  def self.partial path, locals={}
+    new(path).render locals
   end
 
   attr_reader :erb
-  def initialize name
-    @erb = ERB.new File.read "#{Template.view_path}/#{name}.erb"
+  def initialize path
+    @erb = ERB.new File.read "#{Template.view_path}/#{path}.erb"
   end
 
   def assign_locals locals

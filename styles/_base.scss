@@ -183,6 +183,11 @@ body {
         color: $cross-promotion-link-color;
         font-weight: bold;
     }
+
+    img {
+        padding-right: 5px;
+        vertical-align: top !important;
+    }
 }
 
 .footer {
