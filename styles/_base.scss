@@ -1,10 +1,10 @@
 // Top-bar colors
-$top-bar-background-color: #373737 !default;
+$top-bar-background-color: #000 !default;
 $top-bar-text-color: #a8a8a8 !default;
 $top-bar-link-color: #a8a8a8 !default;
 
 // Wrapper colors
-$wrapper-background-color: #272727 !default;
+$wrapper-background-color: #101820 !default;
 
 // Section colors
 $section-h2-color: #fff !default;
@@ -17,7 +17,7 @@ $stats-link-color: #a8a8a8 !default;
 $seperator-background-color: #373737 !default;
 
 // Cross promotion colors
-$cross-promotion-background-color: #ffde51 !default;
+$cross-promotion-background-color: #5ebc8f !default;
 $cross-promotion-text-color: #272727 !default;
 $cross-promotion-link-color: #272727 !default;
 
@@ -25,186 +25,431 @@ $cross-promotion-link-color: #272727 !default;
 $footer-text-color: #a8a8a8 !default;
 $footer-link-color: #fff !default;
 
+// Brand colors
+$changelog-primary-color: #60C092;
+
+// Language Colors via https://gist.githubusercontent.com/kingkong123/6396663/raw/a115a77f5195333e489299d98ab78f2234cc0925/github_colors.scss
+$default-color: #CCCCCC;
+
+$abap-color: #e8274b;
+$actionscript-color: #882b0f;
+$ada-color: #02f88c;
+$agda-color: #315665;
+$ags-script-color: #b9d9ff;
+$alloy-color: #64c800;
+$ampl-color: #e6efbb;
+$antlr-color: #9dc3ff;
+$api-blueprint-color: #2acca8;
+$apl-color: #5a8164;
+$arc-color: #aa2afe;
+$arduino-color: #bd79d1;
+$asp-color: #6a40fd;
+$aspectj-color: #a957b0;
+$assembly-color: #6e4c13;
+$ats-color: #1ac620;
+$autohotkey-color: #6594b9;
+$autoit-color: #1c3552;
+$blitzmax-color: #cd6400;
+$boo-color: #d4bec1;
+$brainfuck-color: #2f2530;
+$c-color: #555555;
+$c-sharp-color: #178600;
+$chapel-color: #8dc63f;
+$cirru-color: #ccccff;
+$clarion-color: #db901e;
+$clean-color: #3f85af;
+$click-color: #e4e6f3;
+$clojure-color: #db5855;
+$coffeescript-color: #244776;
+$coldfusion-cfc-color: #ed2cd6;
+$coldfusion-color: #ed2cd6;
+$common-lisp-color: #3fb68b;
+$component-pascal-color: #b0ce4e;
+$cpp-color: #f34b7d;
+$crystal-color: #776791;
+$css-color: #563d7c;
+$d-color: #ba595e;
+$dart-color: #00b4ab;
+$diff-color: #88dddd;
+$dm-color: #447265;
+$dogescript-color: #cca760;
+$dylan-color: #6c616e;
+$e-color: #ccce35;
+$eagle-color: #814c05;
+$ec-color: #913960;
+$ecl-color: #8a1267;
+$edn-color: #db5855;
+$eiffel-color: #946d57;
+$elixir-color: #6e4a7e;
+$elm-color: #60b5cc;
+$emacs-lisp-color: #c065db;
+$emberscript-color: #fff4f3;
+$erlang-color: #b83998;
+$f-sharp-color: #b845fc;
+$factor-color: #636746;
+$fancy-color: #7b9db4;
+$fantom-color: #dbded5;
+$flux-color: #88ccff;
+$forth-color: #341708;
+$fortran-color: #4d41b1;
+$freemarker-color: #0050b2;
+$frege-color: #00cafe;
+$game-maker-language-color: #8fb200;
+$glyph-color: #e4cc98;
+$gnuplot-color: #f0a9f0;
+$go-color: #375eab;
+$golo-color: #88562a;
+$gosu-color: #82937f;
+$grammatical-framework-color: #79aa7a;
+$groovy-color: #e69f56;
+$handlebars-color: #01a9d6;
+$harbour-color: #0e60e3;
+$haskell-color: #29b544;
+$haxe-color: #df7900;
+$html-color: #e44b23;
+$hy-color: #7790b2;
+$idl-color: #a3522f;
+$io-color: #a9188d;
+$ioke-color: #078193;
+$isabelle-color: #fefe00;
+$j-color: #9eedff;
+$java-color: #b07219;
+$javascript-color: #f1e05a;
+$jflex-color: #dbca00;
+$jsoniq-color: #40d47e;
+$julia-color: #a270ba;
+$jupyter-notebook-color: #DA5B0B;
+$kotlin-color: #f18e33;
+$krl-color: #28431f;
+$lasso-color: #999999;
+$latte-color: #a8ff97;
+$lex-color: #dbca00;
+$lfe-color: #004200;
+$livescript-color: #499886;
+$lolcode-color: #cc9900;
+$lookml-color: #652b81;
+$lsl-color: #3d9970;
+$lua-color: #000080;
+$makefile-color: #427819;
+$mask-color: #f97732;
+$matlab-color: #bb92ac;
+$max-color: #c4a79c;
+$maxscript-color: #00a6a6;
+$mercury-color: #ff2b2b;
+$metal-color: #8f14e9;
+$mirah-color: #c7a938;
+$mtml-color: #b7e1f4;
+$ncl-color: #28431f;
+$nemerle-color: #3d3c6e;
+$nesc-color: #94b0c7;
+$netlinx-color: #0aa0ff;
+$netlinx-erb-color: #747faa;
+$netlogo-color: #ff6375;
+$newlisp-color: #87AED7;
+$nimrod-color: #37775b;
+$nit-color: #009917;
+$nix-color: #7e7eff;
+$nu-color: #c9df40;
+$objective-c-color: #438eff;
+$objective-c-color: #6866fb;
+$objective-j-color: #ff0c5a;
+$ocaml-color: #3be133;
+$omgrofl-color: #cabbff;
+$ooc-color: #b0b77e;
+$opal-color: #f7ede0;
+$oxygene-color: #cdd0e3;
+$oz-color: #fab738;
+$pan-color: #cc0000;
+$papyrus-color: #6600cc;
+$parrot-color: #f3ca0a;
+$pascal-color: #b0ce4e;
+$pawn-color: #dbb284;
+$perl-color: #0298c3;
+$perl6-color: #0000fb;
+$php-color: #4f5d95;
+$piglatin-color: #fcd7de;
+$pike-color: #005390;
+$plsql-color: #dad8d8;
+$pogoscript-color: #d80074;
+$processing-color: #0096d8;
+$prolog-color: #74283c;
+$propeller-spin-color: #7fa2a7;
+$puppet-color: #302b6d;
+$pure-data-color: #91de79;
+$purebasic-color: #5a6986;
+$purescript-color: #1d222d;
+$python-color: #3572a5;
+$qml-color: #44a51c;
+$r-color: #198ce7;
+$racket-color: #22228f;
+$ragel-in-ruby-host-color: #9d5200;
+$raml-color: #77d9fb;
+$rebol-color: #358a5b;
+$ren-py-color: #ff7f7f;
+$rouge-color: #cc0088;
+$ruby-color: #701516;
+$rust-color: #dea584;
+$saltstack-color: #646464;
+$sas-color: #b34936;
+$scala-color: #dc322f;
+$scheme-color: #1e4aec;
+$self-color: #0579aa;
+$shell-color: #89e051;
+$shen-color: #120f14;
+$slash-color: #007eff;
+$slim-color: #ff8f77;
+$smalltalk-color: #596706;
+$sourcepawn-color: #5c7611;
+$sqf-color: #3f3f3f;
+$squirrel-color: #800000;
+$stan-color: #b2011d;
+$standard-ml-color: #dc566d;
+$supercollider-color: #46390b;
+$swift-color: #ffac45;
+$systemverilog-color: #dae1c2;
+$tcl-color: #e4cc98;
+$tex-color: #3d6117;
+$turing-color: #45f715;
+$typescript-color: #2b7489;
+$unified-parallel-c-color: #4e3617;
+$unity3d-asset-color: #ab69a1;
+$unrealscript-color: #a54c4d;
+$vala-color: #fbe5cd;
+$verilog-color: #b2b7f8;
+$vhdl-color: #adb2cb;
+$viml-color: #199f4b;
+$visual-basic-color: #945db7;
+$volt-color: #1f1f1f;
+$vue-color: #2c3e50;
+$web-ontology-language-color: #9cc9dd;
+$wisp-color: #7582d1;
+$x10-color: #4b6bef;
+$xbase-color: #403a40;
+$xc-color: #99da07;
+$xquery-color: #5232e7;
+$zephir-color: #118f9e;
+
+$color_names: default,abap,actionscript,ada,agda,ags-script,alloy,ampl,antlr,api-blueprint,apl,arc,arduino,asp,aspectj,assembly,ats,autohotkey,autoit,blitzmax,boo,brainfuck,c,c-sharp,chapel,cirru,clarion,clean,click,clojure,coffeescript,coldfusion-cfc,coldfusion,common-lisp,component-pascal,cpp,crystal,css,d,dart,diff,dm,dogescript,dylan,e,eagle,ec,ecl,edn,eiffel,elixir,elm,emacs-lisp,emberscript,erlang,f-sharp,factor,fancy,fantom,flux,forth,fortran,freemarker,frege,game-maker-language,glyph,gnuplot,go,golo,gosu,grammatical-framework,groovy,handlebars,harbour,haskell,haxe,html,hy,idl,io,ioke,isabelle,j,java,javascript,jflex,jsoniq,julia,jupyter-notebook,kotlin,krl,lasso,latte,lex,lfe,livescript,lolcode,lookml,lsl,lua,makefile,mask,matlab,max,maxscript,mercury,metal,mirah,mtml,ncl,nemerle,nesc,netlinx,netlinx-erb,netlogo,newlisp,nimrod,nit,nix,nu,objective-c,objective-c,objective-j,ocaml,omgrofl,ooc,opal,oxygene,oz,pan,papyrus,parrot,pascal,pawn,perl,perl6,php,piglatin,pike,plsql,pogoscript,processing,prolog,propeller-spin,puppet,pure-data,purebasic,purescript,python,qml,r,racket,ragel-in-ruby-host,raml,rebol,ren-py,rouge,ruby,rust,saltstack,sas,scala,scheme,self,shell,shen,slash,slim,smalltalk,sourcepawn,sqf,squirrel,stan,standard-ml,supercollider,swift,systemverilog,tcl,tex,turing,typescript,unified-parallel-c,unity3d-asset,unrealscript,vala,verilog,vhdl,viml,visual-basic,volt,vue,web-ontology-language,wisp,x10,xbase,xc,xquery,zephir;
+
+$github_colors: $default-color,$abap-color,$actionscript-color,$ada-color,$agda-color,$ags-script-color,$alloy-color,$ampl-color,$antlr-color,$api-blueprint-color,$apl-color,$arc-color,$arduino-color,$asp-color,$aspectj-color,$assembly-color,$ats-color,$autohotkey-color,$autoit-color,$blitzmax-color,boo-color,brainfuck-color,$c-color,$c-sharp-color,$chapel-color,$cirru-color,$clarion-color,$clean-color,$click-color,$clojure-color,$coffeescript-color,$coldfusion-cfc-color,$coldfusion-color,$common-lisp-color,$component-pascal-color,$cpp-color,$crystal-color,$css-color,$d-color,$dart-color,$diff-color,$dm-color,$dogescript-color,$dylan-color,$e-color,$eagle-color,$ec-color,$ecl-color,$edn-color,$eiffel-color,$elixir-color,$elm-color,$emacs-lisp-color,$emberscript-color,$erlang-color,$f-sharp-color,$factor-color,$fancy-color,$fantom-color,$flux-color,$forth-color,$fortran-color,$freemarker-color,$frege-color,$game-maker-language-color,$glyph-color,$gnuplot-color,$go-color,$golo-color,$gosu-color,$grammatical-framework-color,$groovy-color,$handlebars-color,$harbour-color,$haskell-color,$haxe-color,$html-color,$hy-color,$idl-color,$io-color,$ioke-color,$isabelle-color,$j-color,$java-color,$javascript-color,$jflex-color,$jsoniq-color,$julia-color,$jupyter-notebook-color,$kotlin-color,$krl-color,$lasso-color,$latte-color,$lex-color,$lfe-color,$livescript-color,$lolcode-color,$lookml-color,$lsl-color,$lua-color,$makefile-color,$mask-color,$matlab-color,$max-color,$maxscript-color,$mercury-color,$metal-color,$mirah-color,$mtml-color,$ncl-color,$nemerle-color,$nesc-color,$netlinx-color,$netlinx-erb-color,$netlogo-color,$newlisp-color,$nimrod-color,$nit-color,$nix-color,$nu-color,$objective-c-color,$objective-c-color,$objective-j-color,$ocaml-color,$omgrofl-color,$ooc-color,$opal-color,$oxygene-color,$oz-color,$pan-color,$papyrus-color,$parrot-color,$pascal-color,$pawn-color,$perl-color,$perl6-color,$php-color,$piglatin-color,$pike-color,$plsql-color,$pogoscript-color,$processing-color,$prolog-color,$propeller-spin-color,$puppet-color,$pure-data-color,$purebasic-color,$purescript-color,$python-color,$qml-color,$r-color,$racket-color,$ragel-in-ruby-host-color,$raml-color,$rebol-color,$ren-py-color,$rouge-color,$ruby-color,$rust-color,$saltstack-color,$sas-color,$scala-color,$scheme-color,$self-color,$shell-color,$shen-color,$slash-color,$slim-color,$smalltalk-color,$sourcepawn-color,$sqf-color,$squirrel-color,$stan-color,$standard-ml-color,$supercollider-color,$swift-color,$systemverilog-color,$tcl-color,$tex-color,$turing-color,$typescript-color,$unified-parallel-c-color,$unity3d-asset-color,$unrealscript-color,$vala-color,$verilog-color,$vhdl-color,$viml-color,$visual-basic-color,$volt-color,$vue-color,$web-ontology-language-color,$wisp-color,$x10-color,$xbase-color,$xc-color,$xquery-color,$zephir-color;
+
+@for $i from 1 through length($color_names) {
+  .#{nth($color_names, $i)} {
+    &:before {
+      background: #{nth($github_colors, $i)};
+      border-radius: 10px;
+      content: "";
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      margin-right: 4px;
+    }
+    // border-bottom-color: #{nth($github_colors, $i)} !important;
+    // color: #{nth($github_colors, $i)} !important;
+  }
+}
+
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    width: 100%;
-    margin: 0;
-    padding: 0
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 100%;
+  margin: 0;
+  padding: 0
 }
 
 .hide-on-desktop {
-    display: none !important
+  display: none !important
 }
 
 .show-on-desktop {
-    display: block !important
+  display: block !important
 }
 
 @media (max-width: 480px) {
-    .hide-on-mobile {
-        display: none !important
-    }
+  .hide-on-mobile {
+    display: none !important
+  }
 
-    .show-on-mobile {
-        display: block !important
-    }
+  .show-on-mobile {
+    display: block !important
+  }
 
-    .last-of-type-on-mobile {
-        margin-bottom: 0 !important
-    }
-    table {
-        width: 100%
-    }
+  .last-of-type-on-mobile {
+    margin-bottom: 0 !important
+  }
+  table {
+    width: 100%
+  }
 }
 
 .wrapper {
-    background-color: $wrapper-background-color;
+  background-color: $wrapper-background-color;
 }
 
 .top-bar {
-    background-color: $top-bar-background-color;
-    color: $top-bar-text-color;
+  background-color: $top-bar-background-color;
+  color: $top-bar-text-color;
 
-    p {
-        font-size: 12px;
-        line-height: 28px;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-        text-align: center;
-    }
+  p {
+    font-size: 12px;
+    line-height: 28px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+  }
 
-    a {
-        color: $top-bar-link-color;
-        text-decoration: none;
-    }
+  a {
+    color: $top-bar-link-color;
+    text-decoration: none;
+  }
 
 }
 
 .header img {
-    margin: 10px 0 0 0;
+  margin: 10px 0 0 0;
+}
+
+.header-title {
+  text-align: right;
+}
+
+.header-title a {
+  color: $changelog-primary-color;
+  font-size: 12px;
+  letter-spacing: 0.075em;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  top: 3px;
 }
 
 .section {
-    padding-bottom: 25px;
+  padding-bottom: 25px;
 }
 
 .section h2 {
-    color: $section-h2-color;
-    font-size: 16px;
-    margin-top: 0;
-    margin-right: 0;
-    margin-bottom: 8px;
-    margin-left: 0;
+  color: $section-h2-color;
+  font-size: 16px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 8px;
+  margin-left: 0;
 }
 
 .repositories {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .repository {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .repository:last-of-type, .repository.last-of-type {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .repository h3 {
-    color: $section-h3-color;
-    font-size: 15px;
-    font-weight: normal;
-    line-height: 1;
-    margin-top: 0;
-    margin-bottom: 4px;
-    padding-top: 0;
-    padding-bottom: 0;
+  color: $section-h3-color;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1;
+  margin-top: 0;
+  margin-bottom: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
 
-    a {
-        color: $section-h3-color;
-        text-decoration: none;
-    }
+  a {
+    color: $section-h3-color;
+    text-decoration: none;
+  }
 }
 
 .section p, .repository p {
-    color: $section-p-color;
+  color: $section-p-color;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  a {
+    color: $section-link-color;
+  }
+}
+
+.seperator {
+  background-color: $seperator-background-color;
+  margin: 5px 0 15px 0;
+
+  td {
+    background-color: $seperator-background-color;
+  }
+}
+
+.avatar {
+  margin-top: 2px;
+}
+
+.stats p {
+  font-size: 12px;
+  line-height: 1;
+  margin-bottom: 6px;
+
+  img {
+    margin-right: 2px;
+    position: relative;
+    top: 2px;
+  }
+
+  a.repository-language {
+    color: $stats-link-color;
+    text-decoration: none;
+  }
+}
+
+.cross-promotion {
+  background-color: $cross-promotion-background-color;
+  text-align: center;
+  padding: 12px;
+
+  p {
+    color: $cross-promotion-text-color;
     font-size: 13px;
     line-height: 1.5;
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
+  }
 
-    a {
-        color: $section-link-color;
-    }
-}
+  a {
+    color: $cross-promotion-link-color;
+    font-weight: bold;
+  }
 
-.seperator {
-    background-color: $seperator-background-color;
-    margin: 5px 0 15px 0;
-
-    td {
-        background-color: $seperator-background-color;
-    }
-}
-
-.avatar {
-    margin-top: 2px;
-}
-
-.stats p {
-    font-size: 12px;
-    line-height: 1;
-    margin-bottom: 4px;
-
-    a {
-        color: $stats-link-color !important;
-    }
-}
-
-.cross-promotion {
-    background-color: $cross-promotion-background-color;
-    text-align: center;
-    padding: 12px;
-
-    p {
-        color: $cross-promotion-text-color;
-        font-size: 13px;
-        line-height: 1.5;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-
-    a {
-        color: $cross-promotion-link-color;
-        font-weight: bold;
-    }
-
-    img {
-        padding-right: 5px;
-        vertical-align: top !important;
-    }
+  img {
+    padding-right: 5px;
+    vertical-align: top !important;
+  }
 }
 
 .footer {
-    color: $footer-text-color;
-    padding: 10px 0 30px 0;
-    text-align: center;
+  color: $footer-text-color;
+  padding: 10px 0 30px 0;
+  text-align: center;
 
-    p {
-        font-size: 13px;
-        line-height: 1.5;
-        margin-top: 0;
-        margin-bottom: 18px;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
+  p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 0;
+    margin-bottom: 18px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 
-    a {
-        color: $footer-link-color;
-    }
+  a {
+    color: $footer-link-color;
+  }
 }

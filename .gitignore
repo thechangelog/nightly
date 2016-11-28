@@ -2,3 +2,4 @@
 bq-key.p12
 dist
 .sass-cache
+.ruby-version
