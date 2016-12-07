@@ -5,9 +5,9 @@
     </td>
     <td valign="middle">
       <p>
-        <img height="15" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&nbsp;&nbsp;<img height="15" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %>
+        <img height="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&nbsp;&nbsp;<img height="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %>
         <% if repo.language %>
-          &nbsp;&nbsp;&nbsp;<a class="repository-language <%= repo.language.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') %>"href="<%= repo.language_trending_url %>" title="View other trending <%= repo.language %> repos on GitHub"><%= repo.language %></a>
+          &nbsp;&nbsp;&nbsp;<a class="repository-language <%= repo.language.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') %>"href="<%= repo.language_trending_url %>" title="View other trending <%= repo.language %> repos on GitHub"><span class="dot"></span><%= repo.language %></a>
         <% end %>
       </p>
     </td>

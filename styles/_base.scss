@@ -234,18 +234,14 @@ $color_names: default,abap,actionscript,ada,agda,ags-script,alloy,ampl,antlr,api
 $github_colors: $default-color,$abap-color,$actionscript-color,$ada-color,$agda-color,$ags-script-color,$alloy-color,$ampl-color,$antlr-color,$api-blueprint-color,$apl-color,$arc-color,$arduino-color,$asp-color,$aspectj-color,$assembly-color,$ats-color,$autohotkey-color,$autoit-color,$blitzmax-color,boo-color,brainfuck-color,$c-color,$c-sharp-color,$chapel-color,$cirru-color,$clarion-color,$clean-color,$click-color,$clojure-color,$coffeescript-color,$coldfusion-cfc-color,$coldfusion-color,$common-lisp-color,$component-pascal-color,$cpp-color,$crystal-color,$css-color,$d-color,$dart-color,$diff-color,$dm-color,$dogescript-color,$dylan-color,$e-color,$eagle-color,$ec-color,$ecl-color,$edn-color,$eiffel-color,$elixir-color,$elm-color,$emacs-lisp-color,$emberscript-color,$erlang-color,$f-sharp-color,$factor-color,$fancy-color,$fantom-color,$flux-color,$forth-color,$fortran-color,$freemarker-color,$frege-color,$game-maker-language-color,$glyph-color,$gnuplot-color,$go-color,$golo-color,$gosu-color,$grammatical-framework-color,$groovy-color,$handlebars-color,$harbour-color,$haskell-color,$haxe-color,$html-color,$hy-color,$idl-color,$io-color,$ioke-color,$isabelle-color,$j-color,$java-color,$javascript-color,$jflex-color,$jsoniq-color,$julia-color,$jupyter-notebook-color,$kotlin-color,$krl-color,$lasso-color,$latte-color,$lex-color,$lfe-color,$livescript-color,$lolcode-color,$lookml-color,$lsl-color,$lua-color,$makefile-color,$mask-color,$matlab-color,$max-color,$maxscript-color,$mercury-color,$metal-color,$mirah-color,$mtml-color,$ncl-color,$nemerle-color,$nesc-color,$netlinx-color,$netlinx-erb-color,$netlogo-color,$newlisp-color,$nimrod-color,$nit-color,$nix-color,$nu-color,$objective-c-color,$objective-c-color,$objective-j-color,$ocaml-color,$omgrofl-color,$ooc-color,$opal-color,$oxygene-color,$oz-color,$pan-color,$papyrus-color,$parrot-color,$pascal-color,$pawn-color,$perl-color,$perl6-color,$php-color,$piglatin-color,$pike-color,$plsql-color,$pogoscript-color,$processing-color,$prolog-color,$propeller-spin-color,$puppet-color,$pure-data-color,$purebasic-color,$purescript-color,$python-color,$qml-color,$r-color,$racket-color,$ragel-in-ruby-host-color,$raml-color,$rebol-color,$ren-py-color,$rouge-color,$ruby-color,$rust-color,$saltstack-color,$sas-color,$scala-color,$scheme-color,$self-color,$shell-color,$shen-color,$slash-color,$slim-color,$smalltalk-color,$sourcepawn-color,$sqf-color,$squirrel-color,$stan-color,$standard-ml-color,$supercollider-color,$swift-color,$systemverilog-color,$tcl-color,$tex-color,$turing-color,$typescript-color,$unified-parallel-c-color,$unity3d-asset-color,$unrealscript-color,$vala-color,$verilog-color,$vhdl-color,$viml-color,$visual-basic-color,$volt-color,$vue-color,$web-ontology-language-color,$wisp-color,$x10-color,$xbase-color,$xc-color,$xquery-color,$zephir-color;
 
 @for $i from 1 through length($color_names) {
-  .#{nth($color_names, $i)} {
-    &:before {
-      background: #{nth($github_colors, $i)};
-      border-radius: 10px;
-      content: "";
-      width: 10px;
-      height: 10px;
-      display: inline-block;
-      margin-right: 4px;
-    }
-    // border-bottom-color: #{nth($github_colors, $i)} !important;
-    // color: #{nth($github_colors, $i)} !important;
+  $size: 10px;
+  .#{nth($color_names, $i)} .dot {
+    background: #{nth($github_colors, $i)};
+    border-radius: $size;
+    width: $size;
+    height: $size;
+    display: inline-block;
+    margin-right: 7px;
   }
 }
 
@@ -320,7 +316,7 @@ body {
 
 .header-title a {
   color: $changelog-primary-color;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.075em;
   position: relative;
   text-decoration: none;
@@ -403,8 +399,6 @@ body {
 
   img {
     margin-right: 2px;
-    position: relative;
-    top: 2px;
   }
 
   a.repository-language {
