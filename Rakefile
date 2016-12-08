@@ -53,6 +53,17 @@ end
 desc "Runs all tasks to generate DATE's issue"
 task issue: ["issue:data", "issue:html"]
 
+desc "Runs all design-related tasks across all issues in DIST_DIR"
+task redesign: [:sass, :images] do
+  Dir["#{DIST_DIR}/**/*/"].each do |path|
+    if match = path.match(/(\d{4})\/(\d{2})\/(\d{2})/)
+      year, month, day = match.captures
+      puts "Redesigning #{path}..."
+      system "DATE=#{year}-#{month}-#{day} rake issue:html"
+    end
+  end
+end
+
 namespace :issue do
   task dir: [:dist] do
     FileUtils.mkdir_p ISSUE_DIR
