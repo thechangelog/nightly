@@ -61,23 +61,23 @@ class BqClient
 
   def top_new_sql
     <<-SQL
-    SELECT repo.url, COUNT(repo.name) as count FROM
+    SELECT repo.url, COUNT(repo.name) AS count FROM
     TABLE_DATE_RANGE([githubarchive:day.],
       TIMESTAMP("#{day}"),
       TIMESTAMP("#{day}")
     )
     WHERE type="WatchEvent"
-    AND repo.url in (
+    AND repo.url IN (
       SELECT repo.url FROM (
         SELECT repo.url,
-          JSON_EXTRACT(payload, '$.ref_type') as ref_type,
+          JSON_EXTRACT(payload, '$.ref_type') AS ref_type,
         FROM (TABLE_DATE_RANGE([githubarchive:day.],
           TIMESTAMP("#{day}"),
           TIMESTAMP("#{day}")
         ))
-        WHERE type="CreateEvent"
+        WHERE type IN ("CreateEvent", "PublicEvent")
       )
-      WHERE ref_type='"repository"'
+      WHERE ref_type='"repository"' OR ref_type IS NULL # PublicEvent has no ref_type
     )
     GROUP BY repo.id, repo.name, repo.url
     HAVING count >= 8
