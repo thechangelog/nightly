@@ -22,8 +22,14 @@ module DB
     false
   end
 
-  def self.count
-    @gh[:listings].count
+  def self.count *args
+    date, repo = args
+
+    if repo
+      @gh[:listings].where(github_id: repo.id).where("date <= ?", date).count
+    else
+      @gh[:listings].count
+    end
   end
 end
 

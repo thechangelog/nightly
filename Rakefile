@@ -8,9 +8,10 @@ require "pry"
 
 require_relative "lib/core_ext/date"
 require_relative "lib/bq_client"
-require_relative "lib/template"
-require_relative "lib/repo"
 require_relative "lib/db"
+require_relative "lib/issue"
+require_relative "lib/repo"
+require_relative "lib/template"
 
 DATE      = Date.parse(ENV["DATE"]) rescue Date.today
 DIST_DIR  = "dist"
@@ -100,19 +101,18 @@ namespace :issue do
   task html: [:data] do
     template = Template.new "issue"
 
-    data = Repo.new JSON.parse File.read DATA_FILE
+    json = JSON.load File.read DATA_FILE
+    issue = Issue.new DATE, json
 
     File.write "#{ISSUE_DIR}/index.html", template.render({
-      top_new: data.top_new,
-      top_all: data.top_all,
+      issue: issue,
       web_version: true,
       theme: "night"
     })
 
     THEMES.each do |theme|
       File.write "#{ISSUE_DIR}/email-#{theme}.html", template.render({
-        top_new: data.top_new,
-        top_all: data.top_all,
+        issue: issue,
         web_version: false,
         theme: theme
       })
