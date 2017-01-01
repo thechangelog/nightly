@@ -89,6 +89,10 @@ namespace :issue do
       top_all: bq.top_all
     }
 
+    data[:top_all].each do |repo|
+      DB.insert DATE, repo
+    end
+
     File.write DATA_FILE, JSON.dump(data)
   end
 
