@@ -12,6 +12,10 @@ class Repo < Hashie::Mash
     repo
   end
 
+  def self.from_json hash
+    new hash
+  end
+
   def classy_description
     description.linkify.emojify
   end

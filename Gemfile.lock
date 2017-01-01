@@ -90,12 +90,14 @@ GEM
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
     sass (3.4.23)
+    sequel (4.41.0)
     signet (0.7.3)
       addressable (~> 2.3)
       faraday (~> 0.9)
       jwt (~> 1.5)
       multi_json (~> 1.10)
     slop (3.6.0)
+    sqlite3 (1.3.12)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -113,6 +115,8 @@ DEPENDENCIES
   rake
   rspec
   sass
+  sequel
+  sqlite3
 
 RUBY VERSION
    ruby 2.3.3p222

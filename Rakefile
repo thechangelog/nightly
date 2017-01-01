@@ -10,6 +10,7 @@ require_relative "lib/core_ext/date"
 require_relative "lib/bq_client"
 require_relative "lib/template"
 require_relative "lib/repo"
+require_relative "lib/db"
 
 DATE      = Date.parse(ENV["DATE"]) rescue Date.today
 DIST_DIR  = "dist"
@@ -17,6 +18,15 @@ ISSUE_DIR = "#{DIST_DIR}/#{DATE.path}"
 ISSUE_URL = "http://nightly.changelog.com/#{DATE.path}"
 DATA_FILE = "#{ISSUE_DIR}/data.json"
 THEMES    = %w(night day)
+
+def each_issue &block
+  Dir["#{DIST_DIR}/**/*/"].each do |path|
+    if match = path.match(/(\d{4})\/(\d{2})\/(\d{2})/)
+      y, m, d = match.captures.map(&:to_i)
+      block.call path, Date.new(y, m, d)
+    end
+  end
+end
 
 desc "Launches local HTTP server on DIST_DIR"
 task :preview do
@@ -55,12 +65,9 @@ task issue: ["issue:data", "issue:html"]
 
 desc "Runs all design-related tasks across all issues in DIST_DIR"
 task redesign: [:sass, :images] do
-  Dir["#{DIST_DIR}/**/*/"].each do |path|
-    if match = path.match(/(\d{4})\/(\d{2})\/(\d{2})/)
-      year, month, day = match.captures
-      puts "Redesigning #{path}..."
-      system "DATE=#{year}-#{month}-#{day} rake issue:html"
-    end
+  each_issue do |path, date|
+    puts "Redesigning #{path}..."
+    system "DATE=#{date} rake issue:html"
   end
 end
 
@@ -134,5 +141,22 @@ namespace :issue do
 
       CreateSend::Campaign.new(auth, campaign_id).send "noreply@changelog.com" # send + confirmation email
     end
+  end
+end
+
+namespace :db do
+  desc "Seed the database with historic data files"
+  task seed: [:dotenv] do
+    puts "Seeding the db..."
+
+    each_issue do |path, date|
+      data = JSON.load File.read File.expand_path("#{path}/data.json")
+      data["top_all"].each do |json|
+        repo = Repo.from_json json
+        DB.insert date, repo
+      end
+    end
+
+    puts "There are now #{DB.count} listings in the db."
   end
 end
