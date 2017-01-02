@@ -5,10 +5,17 @@
     </td>
     <td valign="middle">
       <p>
-        <img height="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %>&nbsp;&nbsp;&nbsp;&nbsp;<img height="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %>
-        <% if repo.language %>
-          &nbsp;&nbsp;&nbsp;<a class="repository-language <%= repo.language.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') %>"href="<%= repo.language_trending_url %>" title="View other trending <%= repo.language %> repos on GitHub"><span class="dot"></span><%= repo.language %></a>
-        <% end %>
+        <span title="Total Stars"><img height="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %></span>
+        &nbsp;&nbsp;
+        <span title="New Stars"><img height="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %></span>
+      <% if repo.occurrences > 1 %>
+        &nbsp;&nbsp;
+        <span title="Times Listed"><img height="10" alt="Eyes" src="/images/eye.png" />&nbsp;<%= repo.occurrences %></span>
+      <% end %>
+      <% if repo.language %>
+        &nbsp;&nbsp;
+        <span title="Language"><a class="repository-language <%= repo.language.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') %>"href="<%= repo.language_trending_url %>" title="View other trending <%= repo.language %> repos on GitHub"><span class="dot"></span><%= repo.language %></a></span>
+      <% end %>
       </p>
     </td>
   </tr>
