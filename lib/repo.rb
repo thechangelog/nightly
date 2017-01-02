@@ -16,7 +16,7 @@ class Repo < Hashie::Mash
     new hash
   end
 
-  def initialize hash
+  def initialize hash={}
     super hash
     self.occurrences = 1
   end
