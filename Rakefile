@@ -12,6 +12,7 @@ require_relative "lib/db"
 require_relative "lib/issue"
 require_relative "lib/repo"
 require_relative "lib/template"
+require_relative "lib/buffer"
 
 DATE      = Date.parse(ENV["DATE"]) rescue Date.today
 DIST_DIR  = "dist"
@@ -95,6 +96,19 @@ namespace :issue do
     end
 
     File.write DATA_FILE, JSON.dump(data)
+  end
+
+  desc "Buffers issue's tweets for DATE"
+  task buffer: [:data] do
+    json = JSON.load File.read DATA_FILE
+    issue = Issue.new DATE, json
+    gotime = Buffer.new ENV["BUFFER_GO_TIME"], %w(Go)
+
+    [gotime].each do |buffer|
+      buffer.injest issue.top_new
+      buffer.injest issue.top_all_firsts
+      buffer.queue
+    end
   end
 
   desc "Generates index.html file for DATE"

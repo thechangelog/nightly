@@ -27,6 +27,8 @@ GEM
       httparty (~> 0.10)
       json (~> 1.0)
     diff-lcs (1.2.5)
+    domain_name (0.5.20160615)
+      unf (>= 0.0.5, < 1.0.0)
     dotenv (2.1.1)
     extlib (0.9.16)
     faraday (0.10.1)
@@ -51,6 +53,8 @@ GEM
       os (~> 0.9)
       signet (~> 0.7)
     hashie (3.4.6)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
@@ -64,10 +68,12 @@ GEM
       multi_json (~> 1.10)
     memoist (0.15.0)
     method_source (0.8.2)
+    mime-types (2.99.3)
     minitest (5.10.1)
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    netrc (0.11.0)
     os (0.9.6)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -75,6 +81,10 @@ GEM
       slop (~> 3.4)
     public_suffix (2.0.4)
     rake (12.0.0)
+    rest-client (2.0.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     retriable (1.4.1)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
@@ -101,6 +111,9 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.2)
 
 PLATFORMS
   ruby
@@ -113,6 +126,7 @@ DEPENDENCIES
   hashie
   pry
   rake
+  rest-client
   rspec
   sass
   sequel

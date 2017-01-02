@@ -25,4 +25,13 @@ class String
       end
     }.join " "
   end
+
+  def twitterized
+    s = self
+      .gsub(/:([\w+-]+):/, "")
+      .gsub(/https?:\/\/.*?\s/, "")
+      .squeeze(" ")
+
+    s.length > 115 ? s[0..111] + "..." : s
+  end
 end

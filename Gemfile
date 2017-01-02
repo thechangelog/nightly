@@ -11,6 +11,7 @@ gem "createsend"
 gem "gemoji", github: "github/gemoji"
 gem "sequel"
 gem "sqlite3"
+gem "rest-client"
 
 group :test do
   gem "rspec"

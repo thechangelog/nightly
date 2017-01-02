@@ -21,4 +21,26 @@ RSpec.describe "String extensions" do
       expect(string.linkify).to eq "Check out <a href='https://github.com/thechangelog'>https://github.com/thechangelog</a> and also <a href='http://test.com'>http://test.com</a>"
     end
   end
+
+  describe "#twitterized" do
+    it "truncates to 115 characters" do
+      string = "This is actually one hundred and thirty characters. would you believe that? It is crazy how padded this is to be too long you guys"
+      expect(string.twitterized.length). to eq 115
+    end
+
+    it "leaves shorter ones alone" do
+      string = "this is short"
+      expect(string.twitterized).to eq "this is short"
+    end
+
+    it "purges :emoji: references" do
+      string = "this is :cool: :stuff: bro"
+      expect(string.twitterized).to eq "this is bro"
+    end
+
+    it "purges urls" do
+      string = "check out my homepage https://changelog.com it is rad"
+      expect(string.twitterized).to eq "check out my homepage it is rad"
+    end
+  end
 end
