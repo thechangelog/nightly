@@ -4,7 +4,7 @@ class Issue
   attr_reader :date, :promotions, :top_new, :top_all
   def initialize date, json
     @date = date
-    @promotions = %w(rfc gotime spotlight).sample(2)
+    @promotions = %w(podcast feedback rfc gotime spotlight master).sample 2
     process_top_new json
     process_top_all json
   end
