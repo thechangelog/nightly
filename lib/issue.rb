@@ -1,4 +1,5 @@
 require_relative "./db"
+require_relative "./repo"
 
 class Issue
   attr_reader :date, :promotions, :top_new, :top_all
@@ -18,11 +19,11 @@ class Issue
   end
 
   def top_all_firsts
-    top_all.select { |repo| repo.occurrences <= 1 }
+    top_all.select { |repo| (0..1).include? repo.occurrences }
   end
 
   def top_all_repeats
-    top_all.select { |repo| repo.occurrences > 1 }
+    top_all.select { |repo| (2..100).include? repo.occurrences }
   end
 
   private

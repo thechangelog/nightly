@@ -16,15 +16,6 @@ RSpec.describe Repo do
     end
   end
 
-  describe "#hall_of_famer?" do
-    it "is true when repo is in hall of fame list, false otherwise" do
-      repo.name = "FreeCodeCamp"
-      expect(repo).to be_hall_of_famer
-      repo.name = "Changelog Nightly"
-      expect(repo).to_not be_hall_of_famer
-    end
-  end
-
   describe "#language_param" do
     it "returns the repo's language" do
       repo.language = "ruby"
