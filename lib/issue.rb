@@ -18,6 +18,11 @@ class Issue
     promotions.last
   end
 
+  def teaser
+    repos = top_all_firsts.any? ? top_all_firsts : top_new
+    repos.map(&:name).join(", ") + " and more!"
+  end
+
   def top_all_firsts
     top_all.select { |repo| (0..1).include? repo.occurrences }
   end

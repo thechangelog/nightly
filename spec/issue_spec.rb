@@ -12,6 +12,19 @@ RSpec.describe Issue do
     end
   end
 
+  describe "#teaser" do
+    it "uses top_all_firsts if there are any" do
+      allow(issue).to receive(:top_all_firsts).and_return [double(name: "Repo 1"), double(name: "Repo 2")]
+      expect(issue.teaser).to eq "Repo 1, Repo 2 and more!"
+    end
+
+    it "falls back to top_new when there are no top_all_firsts" do
+      allow(issue).to receive(:top_all_firsts).and_return []
+      allow(issue).to receive(:top_new).and_return [double(name: "Repo 1")]
+      expect(issue.teaser).to eq "Repo 1 and more!"
+    end
+  end
+
   describe "#top_all_repeats" do
     it "returns repos which have between 2 and 100 occurrences" do
       nope1 = double occurrences: 1
