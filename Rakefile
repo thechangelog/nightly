@@ -103,8 +103,9 @@ namespace :issue do
     json = JSON.load File.read DATA_FILE
     issue = Issue.new DATE, json
     gotime = Buffer.new ENV["BUFFER_GO_TIME"], %w(Go)
+    jsparty = Buffer.new ENV["BUFFER_JS_PARTY"], %w(CSS JavaScript JSX PureScript TypeScript Vue)
 
-    [gotime].each do |buffer|
+    [gotime, jsparty].each do |buffer|
       buffer.injest issue.top_new
       buffer.injest issue.top_all_firsts
       buffer.queue
