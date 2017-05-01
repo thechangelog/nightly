@@ -23,16 +23,16 @@ class Repo < Hashie::Mash
     description.linkify.emojify
   end
 
-  def language_param
+  def language_class
     case language
     when "c#" then "csharp"
     else
-      language
+      language.downcase.strip.gsub(" ", "-").gsub(/[^\w-]/, "")
     end
   end
 
   def language_trending_url
-    "https://github.com/trending?l=#{language_param}"
+    "https://github.com/trending/#{language_class}"
   end
 
   def no_description?

@@ -16,15 +16,20 @@ RSpec.describe Repo do
     end
   end
 
-  describe "#language_param" do
-    it "returns the repo's language" do
-      repo.language = "ruby"
-      expect(repo.language_param).to eq "ruby"
+  describe "#language_class" do
+    it "downcases" do
+      repo.language = "JavaScript"
+      expect(repo.language_class).to eq "javascript"
+    end
+
+    it "converts spaces to hypens" do
+      repo.language = "Objective C"
+      expect(repo.language_class).to eq "objective-c"
     end
 
     it "handles the C# special case" do
       repo.language = "c#"
-      expect(repo.language_param).to eq "csharp"
+      expect(repo.language_class).to eq "csharp"
     end
   end
 
