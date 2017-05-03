@@ -1,7 +1,9 @@
 <table>
   <tr class="stats">
-    <td width="32" valign="middle">
-      &nbsp;
+    <td width="32" valign="top">
+      <a href="<%= repo.owner.html_url %>" title="View <%= repo.owner.login %> on GitHub">
+        <img class="avatar" src="<%= repo.owner.avatar_url %>" width="20" height="20">
+      </a>
     </td>
     <td valign="middle">
       <p>
@@ -19,11 +21,8 @@
       </p>
     </td>
   </tr>
-  <tr>
+  <tr class="about">
     <td width="32" valign="top">
-      <a href="<%= repo.owner.html_url %>" title="View <%= repo.owner.login %> on GitHub">
-        <img class="avatar" src="<%= repo.owner.avatar_url %>" width="20" height="20">
-      </a>
     </td>
     <td valign="top">
       <h3>
