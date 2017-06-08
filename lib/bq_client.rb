@@ -36,6 +36,7 @@ class BqClient
       begin
         repo = Repo.from_github row[:url], row[:count]
         next if repo.no_description?
+        next if repo.obscene?
         repo
       rescue
         next

@@ -1,4 +1,7 @@
+require "pry"
 require "hashie/mash"
+require "yaml"
+require "obscenity"
 require "open-uri"
 require_relative "./core_ext/string"
 
@@ -37,5 +40,13 @@ class Repo < Hashie::Mash
 
   def no_description?
     (description || "").strip.empty?
+  end
+
+  def obscene?
+    [description, name, owner.login].any? { |text|
+      Obscenity::Base.blacklist.any? { |black|
+        !!(text =~ /#{black}/i) # not using .profane? because its regex
+        }                       # doesn't catch partial word matches
+      }
   end
 end

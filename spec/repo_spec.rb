@@ -46,4 +46,31 @@ RSpec.describe Repo do
       expect(repo.no_description?).to be false
     end
   end
+
+  describe "#obscene?" do
+    before do
+      repo.owner = double login: ""
+    end
+
+    it "is true when descriptoin has an obscenity in it" do
+      repo.description = "This is great, AssFace"
+      expect(repo).to be_obscene
+    end
+
+    it "is true when the owner login has an obscenity in it" do
+      repo.owner = double login: "NiggerFoundation"
+      expect(repo).to be_obscene
+    end
+
+    it "is true when the name as an obscenity in it" do
+      repo.name = "Apparently poopstain is an obscenity..."
+      expect(repo).to be_obscene
+    end
+
+    it "is false when none of those things have obscenities in them" do
+      repo.name = "proximityhash"
+      repo.description = "Geohashes in proximity"
+      expect(repo).to_not be_obscene
+    end
+  end
 end
