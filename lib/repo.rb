@@ -49,4 +49,8 @@ class Repo < Hashie::Mash
         }                       # doesn't catch partial word matches
       }
   end
+
+  def too_many_new_stars?
+    new_stargazers_count > stargazers_count
+  end
 end

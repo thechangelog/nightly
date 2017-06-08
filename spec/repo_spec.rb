@@ -73,4 +73,24 @@ RSpec.describe Repo do
       expect(repo).to_not be_obscene
     end
   end
+
+  describe "too_many_new_stars?" do
+    it "is true when repo has more new stars than total stars" do
+      repo.new_stargazers_count = 15
+      repo.stargazers_count = 12
+      expect(repo).to be_too_many_new_stars
+    end
+
+    it "is false when repo has same new stars and total stars" do
+      repo.new_stargazers_count = 1500
+      repo.stargazers_count = 1500
+      expect(repo).to_not be_too_many_new_stars
+    end
+
+    it "is false when repo has more total stars than new stars" do
+      repo.new_stargazers_count = 1500
+      repo.stargazers_count = 1501
+      expect(repo).to_not be_too_many_new_stars
+    end
+  end
 end
