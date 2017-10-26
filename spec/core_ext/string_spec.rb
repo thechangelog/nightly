@@ -42,5 +42,10 @@ RSpec.describe "String extensions" do
       string = "check out my homepage https://changelog.com it is rad"
       expect(string.twitterized).to eq "check out my homepage it is rad"
     end
+
+    it "unescapes html entities" do
+      string = "&quot;Takin&#39; care of business, workin&#39; overtime&quot;"
+      expect(string.twitterized).to eq %{"Takin' care of business, workin' overtime"}
+    end
   end
 end

@@ -16,6 +16,10 @@ class String
     CGI.escapeHTML self
   end
 
+  def html_unescape
+    CGI.unescapeHTML self
+  end
+
   def linkify
     self.split.map { |word|
       if word.match /\Ahttps?:\/\//
@@ -31,6 +35,7 @@ class String
       .gsub(/:([\w+-]+):/, "")
       .gsub(/https?:\/\/.*?\s/, "")
       .squeeze(" ")
+      .html_unescape
 
     s.length > 115 ? s[0..111] + "..." : s
   end
