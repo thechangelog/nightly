@@ -102,7 +102,7 @@ namespace :issue do
   task buffer: [:data] do
     json = JSON.load File.read DATA_FILE
     issue = Issue.new DATE, json
-    gotime = Buffer.new ENV["BUFFER_GO_TIME"], %w(Go)
+    gotime = Buffer.new ENV["BUFFER_GO_TIME"], %w(Go), "#golang"
     jsparty = Buffer.new ENV["BUFFER_JS_PARTY"], %w(CSS JavaScript JSX PureScript TypeScript Vue)
 
     [gotime, jsparty].each do |buffer|
