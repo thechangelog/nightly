@@ -6,7 +6,7 @@ RSpec.describe Buffer do
   let(:repo2) { double language: "Go" }
   let(:repo3) { double language: "CSS" }
 
-  describe "#inject" do
+  describe "#injest" do
     it "takes a single repo" do
       buffer.injest repo2
       expect(buffer.repos).to eq [repo2]
