@@ -30,13 +30,22 @@ class String
     }.join " "
   end
 
-  def twitterized
+  def truncate length
+    return self if self.length <= length
+    self[0..(length - 4)] + "..."
+  end
+
+  def twitterized tags=""
     s = self
       .gsub(/:([\w+-]+):/, "")
       .gsub(/https?:\/\/.*?\s/, "")
       .squeeze(" ")
       .html_unescape
 
-    s.length > 115 ? s[0..111] + "..." : s
+    if !tags.empty? && !tags.start_with?(" ")
+      tags = tags.prepend " "
+    end
+
+    s.truncate(115 - tags.length) + tags
   end
 end

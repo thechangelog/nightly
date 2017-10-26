@@ -6,6 +6,11 @@ RSpec.describe Buffer do
   let(:repo2) { double language: "Go" }
   let(:repo3) { double language: "CSS" }
 
+  it "takes an optional tags string" do
+    tagged = Buffer.new "8675309", ["Go"], "#golang #ohmy"
+    expect(tagged.tags).to eq "#golang #ohmy"
+  end
+
   describe "#injest" do
     it "takes a single repo" do
       buffer.injest repo2

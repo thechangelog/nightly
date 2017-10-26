@@ -6,11 +6,12 @@ class Buffer
     "https://api.bufferapp.com/1/#{action}.json?access_token=#{ENV["BUFFER_TOKEN"]}"
   end
 
-  attr_reader :profile, :languages, :repos
-  def initialize profile, languages
+  attr_reader :profile, :languages, :tags, :repos
+  def initialize profile, languages, tags=""
     @profile = profile
     @languages = Array languages
     @repos = []
+    @tags = tags
   end
 
   def injest some
@@ -25,7 +26,7 @@ class Buffer
     repos.each do |repo|
       begin
         RestClient.post Buffer.endpoint("updates/create"), {
-          "text" => repo.description.twitterized,
+          "text" => repo.description.twitterized(tags),
           "media[link]" => repo.html_url,
           "profile_ids[]" => profile
         }
