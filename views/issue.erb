@@ -69,105 +69,111 @@
       </tr>
     </table>
 
-    <table id="top-all-firsts" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
-      <tr>
-        <td width="100%">
-          <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
-            <tr>
-              <td class="section" width="540">
-                <h2>Top Starred Repositories &ndash; First Timers</h2>
+    <% if issue.top_all_firsts.any? %>
+      <table id="top-all-firsts" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="100%">
+            <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
+              <tr>
+                <td class="section" width="540">
+                  <h2>Top Starred Repositories &ndash; First Timers</h2>
 
-                <p>These repos were not previously featured in Changelog Nightly</p>
+                  <p>These repos were not previously featured in Changelog Nightly</p>
 
-                <div class="repositories">
-                <% issue.top_all_firsts.each_with_index do |repo, index| %>
-                  <div class="repository <%= "last-of-type" if index + 1 == issue.top_all_firsts.length %>">
-                    <%= Template.partial "_repo", repo: repo %>
+                  <div class="repositories">
+                  <% issue.top_all_firsts.each_with_index do |repo, index| %>
+                    <div class="repository <%= "last-of-type" if index + 1 == issue.top_all_firsts.length %>">
+                      <%= Template.partial "_repo", repo: repo %>
+                    </div>
+                  <% end %>
                   </div>
-                <% end %>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
 
-    <table class="promotion wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
-      <tr>
-        <td width="100%">
-          <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
-            <tr>
-              <td class="cross-promotion" width="540">
-                <p><%= Template.partial("promotions/_#{issue.promotion_one}").emojify %></p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+      <table class="promotion wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
+        <tr>
+          <td width="100%">
+            <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td class="cross-promotion" width="540">
+                  <p><%= Template.partial("promotions/_#{issue.promotion_one}").emojify %></p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    <% end %>
 
-    <table id="top-new" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
-      <tr>
-        <td width="100%">
-          <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
-            <tr>
-              <td class="section" width="540">
-                <h2>Top New Repositories</h2>
+    <% if issue.top_new.any? %>
+      <table id="top-new" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="100%">
+            <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
+              <tr>
+                <td class="section" width="540">
+                  <h2>Top New Repositories</h2>
 
-                <p>These repos were open sourced on <%= DATE.day_month_year %></p>
+                  <p>These repos were open sourced on <%= DATE.day_month_year %></p>
 
-                <div class="repositories">
-                <% issue.top_new.each_with_index do |repo, index| %>
-                  <div class="repository <%= "last-of-type" if index + 1 == issue.top_new.length %>">
-                    <%= Template.partial "_repo", repo: repo %>
+                  <div class="repositories">
+                  <% issue.top_new.each_with_index do |repo, index| %>
+                    <div class="repository <%= "last-of-type" if index + 1 == issue.top_new.length %>">
+                      <%= Template.partial "_repo", repo: repo %>
+                    </div>
+                  <% end %>
                   </div>
-                <% end %>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
 
-    <table class="promotion wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
-      <tr>
-        <td width="100%">
-          <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
-            <tr>
-              <td class="cross-promotion" width="540">
-                <p><%= Template.partial("promotions/_#{issue.promotion_two}").emojify %></p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+      <table class="promotion wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
+        <tr>
+          <td width="100%">
+            <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td class="cross-promotion" width="540">
+                  <p><%= Template.partial("promotions/_#{issue.promotion_two}").emojify %></p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    <% end %>
 
-    <table id="top-all-repeats" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
-      <tr>
-        <td width="100%">
-          <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
-            <tr>
-              <td class="section" width="540">
-                <h2>Top Starred Repositories &ndash; Repeat Performers</h2>
+    <% if issue.top_all_repeats.any? %>
+      <table id="top-all-repeats" class="wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="100%">
+            <table width="540" cellpadding="20" cellspacing="0" border="0" align="center">
+              <tr>
+                <td class="section" width="540">
+                  <h2>Top Starred Repositories &ndash; Repeat Performers</h2>
 
-                <p>These repos were previously featured in Changelog Nightly</p>
+                  <p>These repos were previously featured in Changelog Nightly</p>
 
-                <div class="repositories">
-                <% issue.top_all_repeats.each_with_index do |repo, index| %>
-                  <div class="repository <%= "last-of-type" if index + 1 == issue.top_all_repeats.length %>">
-                    <%= Template.partial "_repo", repo: repo %>
+                  <div class="repositories">
+                  <% issue.top_all_repeats.each_with_index do |repo, index| %>
+                    <div class="repository <%= "last-of-type" if index + 1 == issue.top_all_repeats.length %>">
+                      <%= Template.partial "_repo", repo: repo %>
+                    </div>
+                  <% end %>
                   </div>
-                <% end %>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    <% end %>
 
     <table id="weekly" class="wrapper" width="100%" cellpadding="20" cellspacing="0" border="0">
       <tr>
