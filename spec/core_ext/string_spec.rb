@@ -23,15 +23,13 @@ RSpec.describe "String extensions" do
   end
 
   describe "#twitterized" do
-    it "truncates to 115 characters when no tags given" do
-      string = "This is actually one hundred and thirty characters. would you believe that? It is crazy how padded this is to be too long you guys"
-      expect(string.twitterized.length).to eq 115
+    it "truncates to 250 characters when no tags given" do
+      expect(("X" * 250).twitterized.length).to eq 250
     end
 
-    it "truncates to 115 - tags length when tags given" do
-      string = "This is actually one hundred and thirty characters. would you believe that? It is crazy how padded this is to be too long you guys"
-      twitterized = string.twitterized "#test #ing"
-      expect(twitterized.length).to eq 115
+    it "truncates to 250 - tags length when tags given" do
+      twitterized = ("X" * 250).twitterized "#test #ing"
+      expect(twitterized.length).to eq 250
       expect(twitterized).to end_with("... #test #ing")
     end
 

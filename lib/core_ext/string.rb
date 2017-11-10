@@ -46,6 +46,6 @@ class String
       tags = tags.prepend " "
     end
 
-    s.truncate(115 - tags.length) + tags
+    s.truncate(250 - tags.length) + tags
   end
 end
