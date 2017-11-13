@@ -19,7 +19,7 @@ class Issue
   end
 
   def teaser
-    repos = top_all_firsts.any? ? top_all_firsts : top_new
+    repos = (top_all_firsts + top_new + top_all_repeats).first 5
     repos.map(&:name).join(", ") + " and more!"
   end
 
