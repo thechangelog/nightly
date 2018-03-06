@@ -44,13 +44,17 @@ class Repo < Hashie::Mash
 
   def obscene?
     [description, name, owner.login].any? { |text|
-      Obscenity::Base.blacklist.any? { |black|
-        !!(text =~ /#{black}/i) # not using .profane? because its regex
-        }                       # doesn't catch partial word matches
-      }
+      blacklist.any? { |black| !!(text =~ /#{black}/i) }
+    }
   end
 
   def too_many_new_stars?
     new_stargazers_count > stargazers_count
+  end
+
+  private
+
+  def blacklist
+    Obscenity::Base.blacklist + %w(gay porn)
   end
 end

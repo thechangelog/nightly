@@ -52,7 +52,7 @@ RSpec.describe Repo do
       repo.owner = double login: ""
     end
 
-    it "is true when descriptoin has an obscenity in it" do
+    it "is true when description has an obscenity in it" do
       repo.description = "This is great, AssFace"
       expect(repo).to be_obscene
     end
@@ -64,6 +64,11 @@ RSpec.describe Repo do
 
     it "is true when the name as an obscenity in it" do
       repo.name = "Apparently poopstain is an obscenity..."
+      expect(repo).to be_obscene
+    end
+
+    it "is true when owner has one of our added obscenities in it" do
+      repo.owner = double login: "techGay/91porn"
       expect(repo).to be_obscene
     end
 
