@@ -54,7 +54,7 @@ end
 desc "Copies the images directory to DIST_DIR"
 task images: [:dist] do
   FileUtils.cp_r "images", "dist", preserve: false
-  FileUtils.cp_r Emoji.images_path, "dist/images"
+  system "gemoji extract dist/images/emoji"
 end
 
 desc "Processes the site's index w/ current linked list"
