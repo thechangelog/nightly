@@ -32,7 +32,8 @@ end
 
 desc "Launches local HTTP server on DIST_DIR"
 task :preview do
-  system "cd #{DIST_DIR} && python -m SimpleHTTPServer"
+  system("cd #{DIST_DIR} && python -m SimpleHTTPServer") ||
+  system("cd #{DIST_DIR} && python3 -m http.server")
 end
 
 desc "Performs all operations for DATE except delivering the email"
