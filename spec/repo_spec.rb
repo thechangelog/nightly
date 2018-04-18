@@ -75,7 +75,7 @@ RSpec.describe Repo do
     it "is false when none of those things have obscenities in them" do
       repo.name = "proximityhash"
       repo.description = "Geohashes in proximity"
-      expect(repo).to_not be_obscene
+      expect(repo).not_to be_obscene
     end
   end
 
@@ -89,13 +89,13 @@ RSpec.describe Repo do
     it "is false when repo has same new stars and total stars" do
       repo.new_stargazers_count = 1500
       repo.stargazers_count = 1500
-      expect(repo).to_not be_too_many_new_stars
+      expect(repo).not_to be_too_many_new_stars
     end
 
     it "is false when repo has more total stars than new stars" do
       repo.new_stargazers_count = 1500
       repo.stargazers_count = 1501
-      expect(repo).to_not be_too_many_new_stars
+      expect(repo).not_to be_too_many_new_stars
     end
   end
 end
