@@ -18,6 +18,7 @@ class Buffer
     Array(some).each do |repo|
       next if repos.include?(repo)
       next if !languages.include?(repo.language)
+      next if !repo.english?
       repos.push repo
     end
   end
