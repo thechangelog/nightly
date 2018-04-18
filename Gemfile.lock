@@ -115,6 +115,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    whatlanguage (1.0.6)
 
 PLATFORMS
   ruby
@@ -133,6 +134,7 @@ DEPENDENCIES
   sass
   sequel
   sqlite3
+  whatlanguage
 
 RUBY VERSION
    ruby 2.3.3p222

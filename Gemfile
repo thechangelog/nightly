@@ -13,6 +13,7 @@ gem "sequel"
 gem "sqlite3"
 gem "rest-client"
 gem "obscenity"
+gem "whatlanguage"
 
 group :test do
   gem "rspec"

@@ -16,6 +16,25 @@ RSpec.describe Repo do
     end
   end
 
+  describe "#english?" do
+    it "is true when description is in English" do
+      repo.description = "Quake III Arena GPL Source Release"
+      expect(repo).to be_english
+      repo.description = "Go library to trace Linux syscalls using the FTRACE kernel framework."
+      expect(repo).to be_english
+    end
+
+    it "is false when description is Swedish" do
+      repo.description = "Jargon.ist - Bilgisayar bilimleri jargonu sözlüğü"
+      expect(repo).not_to be_english
+    end
+
+    it "is false when description is Chinese" do
+      repo.description = "技术面试需要掌握的基础知识整理，欢迎编辑~"
+      expect(repo).not_to be_english
+    end
+  end
+
   describe "#language_class" do
     it "downcases" do
       repo.language = "JavaScript"

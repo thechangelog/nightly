@@ -2,6 +2,7 @@ require "pry"
 require "hashie/mash"
 require "yaml"
 require "obscenity"
+require "whatlanguage"
 require "open-uri"
 require_relative "./core_ext/string"
 
@@ -24,6 +25,10 @@ class Repo < Hashie::Mash
 
   def classy_description
     description.linkify.emojify
+  end
+
+  def english?
+    WhatLanguage.new(:all).language(description) == :english
   end
 
   def language_class
