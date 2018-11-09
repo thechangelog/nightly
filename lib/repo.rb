@@ -27,6 +27,10 @@ class Repo < Hashie::Mash
     description.linkify.emojify
   end
 
+  def description
+    self[:description] || ""
+  end
+
   def english?
     WhatLanguage.new(:all).language(description) == :english
   end
@@ -44,7 +48,11 @@ class Repo < Hashie::Mash
   end
 
   def no_description?
-    (description || "").strip.empty?
+    description.strip.empty?
+  end
+
+  def description_too_long?
+    description.length > 280
   end
 
   def obscene?

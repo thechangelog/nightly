@@ -66,6 +66,18 @@ RSpec.describe Repo do
     end
   end
 
+  describe "#description_too_long?" do
+    it "is true when longer than a tweet" do
+      repo.description = "0" * 281
+      expect(repo.description_too_long?).to be true
+    end
+
+    it "is false when tweet-sized" do
+      repo.description = "0" * 280
+      expect(repo.description_too_long?).to be false
+    end
+  end
+
   describe "#obscene?" do
     before do
       repo.owner = double login: ""
