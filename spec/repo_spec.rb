@@ -3,6 +3,17 @@ require_relative "../lib/repo"
 RSpec.describe Repo do
   let(:repo) { Repo.new }
 
+  describe "blacklisted?" do
+    it "is true when repo id is in the blacklist" do
+      repo.id = repo.send(:blacklist_github_ids).sample
+      expect(repo).to be_blacklisted
+    end
+
+    it "is false when repo id is not in the blacklist" do
+      expect(repo).not_to be_blacklisted
+    end
+  end
+
   describe "#classy_description" do
     it "does nothing if the description is already classy" do
       original = "<img src='/images/emoji/unicode/26a1.png'/> Lodash inspired JSDoc 3 template / theme"
@@ -13,6 +24,18 @@ RSpec.describe Repo do
     it "adds emojis and links where appropriate" do
       repo.description = ":shipit: to http://example.com"
       expect(repo.classy_description).to eq "<img alt='shipit' src='/images/emoji/shipit.png' style='vertical-align:middle' width='20' height='20' /> to <a href='http://example.com'>http://example.com</a>"
+    end
+  end
+
+  describe "#description_too_long?" do
+    it "is true when longer than a tweet" do
+      repo.description = "0" * 281
+      expect(repo.description_too_long?).to be true
+    end
+
+    it "is false when tweet-sized" do
+      repo.description = "0" * 280
+      expect(repo.description_too_long?).to be false
     end
   end
 
@@ -63,18 +86,6 @@ RSpec.describe Repo do
     it "is false when descripton has contents" do
       repo.description = "ohai"
       expect(repo.no_description?).to be false
-    end
-  end
-
-  describe "#description_too_long?" do
-    it "is true when longer than a tweet" do
-      repo.description = "0" * 281
-      expect(repo.description_too_long?).to be true
-    end
-
-    it "is false when tweet-sized" do
-      repo.description = "0" * 280
-      expect(repo.description_too_long?).to be false
     end
   end
 

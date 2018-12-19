@@ -23,6 +23,10 @@ class Repo < Hashie::Mash
     self.occurrences = 1
   end
 
+  def blacklisted?
+    blacklist_github_ids.include? id
+  end
+
   def classy_description
     description.linkify.emojify
   end
@@ -57,7 +61,7 @@ class Repo < Hashie::Mash
 
   def obscene?
     [description, name, owner.login].any? { |text|
-      blacklist.any? { |black| !!(text =~ /#{black}/i) }
+      blacklist_words.any? { |black| !!(text =~ /#{black}/i) }
     }
   end
 
@@ -67,7 +71,11 @@ class Repo < Hashie::Mash
 
   private
 
-  def blacklist
+  def blacklist_github_ids
+    %w(156648725)
+  end
+
+  def blacklist_words
     Obscenity::Base.blacklist + %w(gay porn)
   end
 end
