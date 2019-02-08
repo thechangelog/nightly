@@ -7,6 +7,7 @@ require "createsend"
 require "pry"
 
 require_relative "lib/core_ext/date"
+require_relative "lib/core_ext/integer"
 require_relative "lib/bq_client"
 require_relative "lib/db"
 require_relative "lib/issue"

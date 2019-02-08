@@ -7,12 +7,12 @@
     </td>
     <td valign="middle">
       <p>
-        <span title="Total Stars"><img height="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count %></span>
+        <span title="Total Stars"><img height="10" alt="Star" src="/images/star.png" />&nbsp;<%= repo.stargazers_count.comma_separated %></span>
         &nbsp;&nbsp;
-        <span title="New Stars"><img height="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count %></span>
+        <span title="New Stars"><img height="10" alt="Up" src="/images/up.png" />&nbsp;<%= repo.new_stargazers_count.comma_separated %></span>
       <% if repo.occurrences > 1 %>
         &nbsp;&nbsp;
-        <span title="Times Listed"><img height="10" alt="Eyes" src="/images/eye.png" />&nbsp;<%= repo.occurrences %></span>
+        <span title="Times Listed"><img height="10" alt="Eyes" src="/images/eye.png" />&nbsp;<%= repo.occurrences.comma_separated %></span>
       <% end %>
       <% if repo.language %>
         &nbsp;&nbsp;
