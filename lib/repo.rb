@@ -24,7 +24,8 @@ class Repo < Hashie::Mash
   end
 
   def blacklisted?
-    blacklist_github_ids.include? id
+    blacklist_github_repo_ids.include?(id) ||
+    blacklist_github_user_ids.include?(owner.id)
   end
 
   def classy_description
@@ -71,8 +72,12 @@ class Repo < Hashie::Mash
 
   private
 
-  def blacklist_github_ids
+  def blacklist_github_repo_ids
     %w(156648725)
+  end
+
+  def blacklist_github_user_ids
+    %w(34570255)
   end
 
   def blacklist_words
