@@ -77,7 +77,7 @@ class Repo < Hashie::Mash
   end
 
   def blacklist_github_user_ids
-    %w(34570255)
+    %w(34570255 48942249)
   end
 
   def blacklist_words
