@@ -73,11 +73,11 @@ class Repo < Hashie::Mash
   private
 
   def blacklist_github_repo_ids
-    %w(156648725)
+    [156648725]
   end
 
   def blacklist_github_user_ids
-    %w(34570255 48942249)
+    [34570255, 48942249]
   end
 
   def blacklist_words
