@@ -165,7 +165,7 @@ namespace :issue do
         "nightly@changelog.com", # from email
         "editors@changelog.com", # reply to
         "#{ISSUE_URL}/email-#{theme_name}.html", # html url
-        nil, # text url
+        "#{ISSUE_URL}/email.text", # text url
         [], # list ids
         [theme_id] # segment ids
       )
