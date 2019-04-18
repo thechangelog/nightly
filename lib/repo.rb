@@ -52,6 +52,10 @@ class Repo < Hashie::Mash
     "https://github.com/trending/#{language_class}"
   end
 
+  def no_language?
+    (language || "").strip.empty?
+  end
+
   def no_description?
     description.strip.empty?
   end

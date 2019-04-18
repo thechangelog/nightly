@@ -1,0 +1,44 @@
+# Changelog Nightly (<%= DATE %>)
+
+- View on Web: <%= ISSUE_URL %>
+- Fork on GitHub: https://github.com/thechangelog/nightly
+- Changelog Weekly: https://changelog.com/weekly
+
+
+---
+
+<% if issue.top_all_firsts.any? %>
+## Top Starred Repositories - First Timers
+
+(These repos were not previously featured in Changelog Nightly)
+<% issue.top_all_firsts.each do |repo| %>
+<%= Template.partial "text/_repo", repo: repo %>
+<% end %><% end %>
+<%= Template.partial "text/promotions/_#{issue.promotion_one}" %>
+
+---
+
+<% if issue.top_new.any? %>
+## Top New Repositories
+
+(These repos were open sourced on <%= DATE.day_month_year %>)
+<% issue.top_new.each do |repo| %>
+<%= Template.partial "text/_repo", repo: repo %>
+<% end %><% end %>
+<%= Template.partial "text/promotions/_#{issue.promotion_two}" %>
+
+---
+
+<% if issue.top_all_repeats.any? %>
+## Top Starred Repositories - Repeat Performers
+
+(These repos were previously featured in Changelog Nightly)
+<% issue.top_all_repeats.each do |repo| %>
+<%= Template.partial "text/_repo", repo: repo %>
+<% end %><% end %>
+---
+
+
+- You're receiving this because you subscribed at https://changelog.com/nightly
+- Subscribe to Changelog Weekly (https://changelog.com/weekly) - our curated and less frequent email
+- Copyright Changelog Media, All rights reserved

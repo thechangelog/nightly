@@ -1,7 +1,7 @@
 require_relative "../lib/template"
 
 describe Template do
-  let(:template) { Template.new "index" }
+  let(:template) { Template.new "html/index" }
   let(:locals) { {test: 1, another: "test"} }
 
   describe "#assign_locals" do

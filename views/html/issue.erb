@@ -83,7 +83,7 @@
                   <div class="repositories">
                   <% issue.top_all_firsts.each_with_index do |repo, index| %>
                     <div class="repository <%= "last-of-type" if index + 1 == issue.top_all_firsts.length %>">
-                      <%= Template.partial "_repo", repo: repo %>
+                      <%= Template.partial "html/_repo", repo: repo %>
                     </div>
                   <% end %>
                   </div>
@@ -100,7 +100,7 @@
             <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
               <tr>
                 <td class="cross-promotion" width="540">
-                  <p><%= Template.partial("promotions/_#{issue.promotion_one}").emojify %></p>
+                  <p><%= Template.partial("html/promotions/_#{issue.promotion_one}").emojify %></p>
                 </td>
               </tr>
             </table>
@@ -123,7 +123,7 @@
                   <div class="repositories">
                   <% issue.top_new.each_with_index do |repo, index| %>
                     <div class="repository <%= "last-of-type" if index + 1 == issue.top_new.length %>">
-                      <%= Template.partial "_repo", repo: repo %>
+                      <%= Template.partial "html/_repo", repo: repo %>
                     </div>
                   <% end %>
                   </div>
@@ -140,7 +140,7 @@
             <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
               <tr>
                 <td class="cross-promotion" width="540">
-                  <p><%= Template.partial("promotions/_#{issue.promotion_two}").emojify %></p>
+                  <p><%= Template.partial("html/promotions/_#{issue.promotion_two}").emojify %></p>
                 </td>
               </tr>
             </table>
@@ -163,7 +163,7 @@
                   <div class="repositories">
                   <% issue.top_all_repeats.each_with_index do |repo, index| %>
                     <div class="repository <%= "last-of-type" if index + 1 == issue.top_all_repeats.length %>">
-                      <%= Template.partial "_repo", repo: repo %>
+                      <%= Template.partial "html/_repo", repo: repo %>
                     </div>
                   <% end %>
                   </div>
@@ -181,7 +181,7 @@
           <table width="540" cellpadding="0" cellspacing="0" border="0" align="center">
             <tr>
               <td class="cross-promotion" width="540">
-                <p><%= Template.partial("promotions/_weekly").emojify %></p>
+                <p><%= Template.partial("html/promotions/_weekly").emojify %></p>
               </td>
             </tr>
           </table>

@@ -1,0 +1,5 @@
+### <%= repo.name %><%= " (#{repo.language})" unless repo.no_language? %>
+
+    - <%= repo.html_url %>
+    - <%= repo.stargazers_count.comma_separated %> stars, up by <%= repo.new_stargazers_count.comma_separated %><% if repo.occurrences > 1 %>, listed <%= repo.occurrences.comma_separated %> times<% end %>
+    - <%= repo.classy_description %>

@@ -61,11 +61,11 @@ end
 
 desc "Processes the site's index w/ current linked list"
 task index: [:dist] do
-  File.write "#{DIST_DIR}/index.html", Template.new("index").render
+  File.write "#{DIST_DIR}/index.html", Template.new("html/index").render
 end
 
 desc "Runs all tasks to generate DATE's issue"
-task issue: ["issue:data", "issue:html"]
+task issue: ["issue:data", "issue:html", "issue:text"]
 
 desc "Runs all design-related tasks across all issues in DIST_DIR"
 task redesign: [:sass, :images] do
@@ -116,7 +116,7 @@ namespace :issue do
 
   desc "Generates index.html file for DATE"
   task html: [:data] do
-    template = Template.new "issue"
+    template = Template.new "html/issue"
 
     json = JSON.load File.read DATA_FILE
     issue = Issue.new DATE, json
@@ -134,6 +134,16 @@ namespace :issue do
         theme: theme
       })
     end
+  end
+
+  desc "Generates email.text file for DATE"
+  task text: [:data] do
+    template = Template.new "text/issue"
+
+    json = JSON.load File.read DATA_FILE
+    issue = Issue.new DATE, json
+
+    File.write "#{ISSUE_DIR}/email.text", template.render({issue: issue})
   end
 
   desc "Delivers DATE's email to Campaign Monitor"
