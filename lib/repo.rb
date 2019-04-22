@@ -32,6 +32,10 @@ class Repo < Hashie::Mash
     description.linkify.emojify
   end
 
+  def text_description
+    description.html_unescape
+  end
+
   def description
     self[:description] || ""
   end
