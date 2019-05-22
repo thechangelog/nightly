@@ -30,6 +30,11 @@ class String
     }.join " "
   end
 
+  def translate_url
+    text = URI.encode self
+    "https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=#{text}"
+  end
+
   def truncate length
     return self if self.length <= length
     self[0..(length - 4)] + "..."

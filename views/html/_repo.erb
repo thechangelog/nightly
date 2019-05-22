@@ -29,7 +29,7 @@
         <a href="<%= repo.html_url %>" title="View <%= repo.name %> on GitHub"><%= repo.owner.login %>/<%= repo.name %></a>
       </h3>
       <p>
-        <%= repo.classy_description %>
+        <%= repo.classy_description %> <% if !repo.english? %><a href="<%= repo.description.translate_url %>">[translate]</a><% end %>
       </p>
     </td>
   </tr>

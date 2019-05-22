@@ -22,6 +22,12 @@ RSpec.describe "String extensions" do
     end
   end
 
+  describe "#translate_url" do
+    it "CGI escapes text and returns correct URL" do
+      expect("h i".translate_url).to eq "https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=h%20i"
+    end
+  end
+
   describe "#twitterized" do
     it "truncates to 250 characters when no tags given" do
       expect(("X" * 250).twitterized.length).to eq 250
