@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/github/gemoji
-  revision: b04991b001e137c06cc56cebcabf0e458b5eea44
+  revision: 22b920f8bd6c2e453832955fe9e13971b95772c5
   specs:
-    gemoji (3.0.0)
+    gemoji (3.0.1)
 
 GEM
   remote: https://rubygems.org/

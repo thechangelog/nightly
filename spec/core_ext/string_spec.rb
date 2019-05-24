@@ -4,7 +4,7 @@ RSpec.describe "String extensions" do
   describe "#emojify" do
     it "takes :emoji: and turns them in to img tags pointing at emoji images" do
       string = "I :heart: this let's :shipit:!"
-      expect(string.emojify).to eq "I <img alt='heart' src='/images/emoji/unicode/2764.png' style='vertical-align:middle' width='20' height='20' /> this let's <img alt='shipit' src='/images/emoji/shipit.png' style='vertical-align:middle' width='20' height='20' />!"
+      expect(string.emojify).to eq "I ❤️ this let's <img alt='shipit' src='/images/emoji/shipit.png' style='vertical-align:middle' width='20' height='20' />!"
     end
   end
 

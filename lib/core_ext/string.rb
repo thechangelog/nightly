@@ -1,11 +1,21 @@
 require "cgi"
 require "emoji"
 
+# Derive all custom emoji from images on disk
+Dir["images/emoji/*.png"].each do |image|
+  name = image.split("/").last.gsub ".png", ""
+  Emoji.create name
+end
+
 class String
   def emojify
     self.gsub(/:([\w+-]+):/) do |match|
       if emoji = Emoji.find_by_alias($1)
-        "<img alt='#{$1}' src='/images/emoji/#{emoji.image_filename}' style='vertical-align:middle' width='20' height='20' />"
+        if emoji.custom?
+          "<img alt='#{$1}' src='/images/emoji/#{emoji.image_filename}' style='vertical-align:middle' width='20' height='20' />"
+        else
+          emoji.raw
+        end
       else
         match
       end
