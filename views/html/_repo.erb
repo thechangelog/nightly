@@ -18,6 +18,8 @@
         &nbsp;&nbsp;
         <span title="Language"><a class="repository-language <%= repo.language_class %>" href="<%= repo.language_trending_url %>" title="View other trending <%= repo.language %> repos on GitHub"><span class="dot"></span><%= repo.language %></a></span>
       <% end %>
+      &nbsp;&nbsp;
+      <a href="<%= repo.description.translate_url %>" title="Translate"><img height="10" alt="Translate" src="/images/translate.png" /></a>
       </p>
     </td>
   </tr>
@@ -29,7 +31,7 @@
         <a href="<%= repo.html_url %>" title="View <%= repo.name %> on GitHub"><%= repo.owner.login %>/<%= repo.name %></a>
       </h3>
       <p>
-        <%= repo.classy_description %> <% if !repo.english? %><a href="<%= repo.description.translate_url %>">[translate]</a><% end %>
+        <%= repo.classy_description %>
       </p>
     </td>
   </tr>
