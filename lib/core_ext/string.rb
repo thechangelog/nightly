@@ -42,7 +42,7 @@ class String
 
   def translate_url
     text = URI.encode self
-    "https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=#{text}"
+    "https://translate.google.com/#view=home&op=translate&sl=auto&tl=auto&text=#{text}"
   end
 
   def truncate length
