@@ -40,6 +40,10 @@ end
 desc "Performs all operations for DATE except delivering the email"
 task generate: [:sass, :images, :issue, :index]
 
+task console: [:dotenv] do
+  binding.pry
+end
+
 task :dist do
   FileUtils.mkdir_p DIST_DIR
 end
