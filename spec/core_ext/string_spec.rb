@@ -24,7 +24,7 @@ RSpec.describe "String extensions" do
 
   describe "#translate_url" do
     it "CGI escapes text and returns correct URL" do
-      expect("h i".translate_url).to eq "https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=h%20i"
+      expect("h i".translate_url).to eq "https://translate.google.com/#view=home&op=translate&sl=auto&tl=auto&text=h%20i"
     end
   end
 
