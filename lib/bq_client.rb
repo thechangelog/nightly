@@ -35,7 +35,7 @@ class BqClient
     .map { |row|
       begin
         repo = Repo.from_github row[:url], row[:count]
-        next if repo.blacklisted?
+        next if repo.blocked?
         next if repo.no_description?
         next if repo.description_too_long?
         next if repo.obscene?

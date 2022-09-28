@@ -3,19 +3,19 @@ require_relative "../lib/repo"
 RSpec.describe Repo do
   let(:repo) { Repo.new owner: {} }
 
-  describe "blacklisted?" do
-    it "is true when repo id is in the blacklist" do
-      repo.id = repo.send(:blacklist_github_repo_ids).sample
-      expect(repo).to be_blacklisted
+  describe "blocked?" do
+    it "is true when repo id is blocked" do
+      repo.id = repo.send(:blocked_github_repo_ids).sample
+      expect(repo).to be_blocked
     end
 
-    it "is true when repo owner id is in the blacklist" do
-      repo.owner.id = repo.send(:blacklist_github_user_ids).sample
-      expect(repo).to be_blacklisted
+    it "is true when repo owner id is in the blocked" do
+      repo.owner.id = repo.send(:blocked_github_user_ids).sample
+      expect(repo).to be_blocked
     end
 
-    it "is false when repo id is not in the blacklist" do
-      expect(repo).not_to be_blacklisted
+    it "is false when repo id is not in the blocked" do
+      expect(repo).not_to be_blocked
     end
   end
 
