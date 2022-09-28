@@ -85,7 +85,7 @@ class Repo < Hashie::Mash
   end
 
   def blocked_github_user_ids
-    [34570255, 48942249]
+    [34570255, 48942249, 114510212]
   end
 
   def blocked_words
