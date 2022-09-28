@@ -56,7 +56,7 @@ class BqClient
     )
     WHERE type="WatchEvent"
     GROUP BY repo.id, repo.name, repo.url
-    HAVING count >= 10
+    HAVING count >= 50
     ORDER BY count DESC
     LIMIT 15
     SQL
@@ -83,7 +83,7 @@ class BqClient
       WHERE ref_type='"repository"' OR ref_type IS NULL # PublicEvent has no ref_type
     )
     GROUP BY repo.id, repo.name, repo.url
-    HAVING count >= 8
+    HAVING count >= 25
     ORDER BY count DESC
     LIMIT 15
     SQL
