@@ -68,9 +68,14 @@ class Repo < Hashie::Mash
     description.length > 280
   end
 
+  # unlike `obscene?`, this only checks repo name to limit false positives
+  def malware?
+    malware_words.any? { |malware| !!(name =~ /#{malware}/i) }
+  end
+
   def obscene?
     [description, name, owner.login].any? { |text|
-      blocked_words.any? { |black| !!(text =~ /#{black}/i) }
+      blocked_words.any? { |blocked| !!(text =~ /#{blocked}/i) }
     }
   end
 
@@ -90,5 +95,9 @@ class Repo < Hashie::Mash
 
   def blocked_words
     Obscenity::Base.blacklist + %w(gay porn)
+  end
+
+  def malware_words
+    %w(cheat hack spoof spoofer aimbot)
   end
 end

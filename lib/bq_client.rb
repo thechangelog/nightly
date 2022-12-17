@@ -39,6 +39,7 @@ class BqClient
         next if repo.no_description?
         next if repo.description_too_long?
         next if repo.obscene?
+        next if repo.malware?
         next if repo.too_many_new_stars?
         repo
       rescue
