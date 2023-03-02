@@ -80,18 +80,6 @@ RSpec.describe Repo do
     end
   end
 
-  describe "#malware?" do
-    it "is true when repo name matches a malware word" do
-      repo.name = "Rawaha404/PUBG-HACK-SPOOFER-DOWNLOAD-2022-UNDETECTED"
-      expect(repo).to be_malware
-    end
-
-    it "is false when repo description matches a malware word" do
-      repo.description = "this is such a hack sorry"
-      expect(repo).to_not be_malware
-    end
-  end
-
   describe "#no_description?" do
     it "is true when description is nil, empty, or blank" do
       [nil, "", "   "].each do |bad|

@@ -40,6 +40,10 @@ class String
     }.join " "
   end
 
+  def malware?
+    %w(cheat hack spoof spoofer aimbot).any? { |i| !!(self =~ /#{i}/i) }
+  end
+
   def translate_url
     text = URI.encode self
     "https://translate.google.com/#view=home&op=translate&sl=auto&tl=auto&text=#{text}"

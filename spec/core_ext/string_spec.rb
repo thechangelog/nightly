@@ -22,6 +22,18 @@ RSpec.describe "String extensions" do
     end
   end
 
+  describe "#malware?" do
+    it "is true when string matches a malware word" do
+      string = "Rawaha404/PUBG-HACK-SPOOFER-DOWNLOAD-2022-UNDETECTED"
+      expect(string).to be_malware
+    end
+
+    it "is false when doesn't match a malware word" do
+      string = "this is not malware sorry"
+      expect(string).to_not be_malware
+    end
+  end
+
   describe "#translate_url" do
     it "CGI escapes text and returns correct URL" do
       expect("h i".translate_url).to eq "https://translate.google.com/#view=home&op=translate&sl=auto&tl=auto&text=h%20i"

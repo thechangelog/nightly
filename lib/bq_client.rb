@@ -34,12 +34,13 @@ class BqClient
     }
     .map { |row|
       begin
+        # Do this check before hitting the GH API to avoid rate limits
+        next if row[:url].malware?
         repo = Repo.from_github row[:url], row[:count]
         next if repo.blocked?
         next if repo.no_description?
         next if repo.description_too_long?
         next if repo.obscene?
-        next if repo.malware?
         next if repo.too_many_new_stars?
         repo
       rescue
