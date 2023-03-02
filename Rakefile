@@ -92,8 +92,8 @@ namespace :issue do
     bq = BqClient.new DATE
 
     data = {
-      top_new: bq.top_new,
-      top_all: bq.top_all
+      top_new: bq.top_new.first(15),
+      top_all: bq.top_all.first(15)
     }
 
     data[:top_all].each do |repo|
