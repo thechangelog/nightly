@@ -27,6 +27,8 @@ module DB
 
     if repo
       @gh[:listings].where(github_id: repo.id).where("date <= ?", date).count
+    elsif date
+      @gh[:listings].where("date = ?", date).count
     else
       @gh[:listings].count
     end

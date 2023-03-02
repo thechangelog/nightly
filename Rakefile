@@ -151,6 +151,8 @@ namespace :issue do
 
   desc "Delivers DATE's email to Campaign Monitor"
   task deliver: [:dotenv] do
+    next if DB.count(DATE).zero?
+
     auth = {api_key: ENV["CAMPAIGN_MONITOR_KEY"]}
 
     CreateSend::List.new(auth, ENV["CAMPAIGN_MONITOR_LIST"]).segments.each do |segment|
