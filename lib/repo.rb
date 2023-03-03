@@ -8,7 +8,7 @@ require_relative "./core_ext/string"
 
 class Repo < Hashie::Mash
   def self.from_github url, stars_count
-    repo = new JSON.load open(url, "Authorization" => ENV["GITHUB_TOKEN"])
+    repo = new JSON.load open(url, "Authorization" => %{token #{ENV["GITHUB_TOKEN"]}})
     repo.new_stargazers_count = stars_count
     repo.description = (repo.description || "").html_escape
     repo

@@ -26,10 +26,8 @@ class BqClient
   def response_to_repo_list query_result, limit
     query_result["rows"]
       .map(&:extract_fields_from_row)
-      # run this check before hitting the GH API to avoid rate limits
-      .reject { |row| row[:url].malware? }
-      # set a max repo limit before hitting the GH API to avoid rate limits
-      .first(limit)
+      .reject { |row| row[:url].malware? } # run before GH API (rate limits)
+      .first(limit) # run before GH API (rate limits)
       .map { |row|
         begin
           repo = Repo.from_github row[:url], row[:count]
