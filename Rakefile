@@ -151,7 +151,8 @@ namespace :issue do
 
   desc "Delivers DATE's email to Campaign Monitor"
   task deliver: [:dotenv] do
-    next if DB.count(DATE).zero?
+    json = JSON.load File.read DATA_FILE
+    next unless json["top_new"].any? || json["top_all"].any?
 
     auth = {api_key: ENV["CAMPAIGN_MONITOR_KEY"]}
 
