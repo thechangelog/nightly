@@ -21,6 +21,7 @@ ISSUE_DIR = "#{DIST_DIR}/#{DATE.path}"
 ISSUE_URL = "http://nightly.changelog.com/#{DATE.path}"
 DATA_FILE = "#{ISSUE_DIR}/data.json"
 THEMES    = %w(night day)
+MAX_REPOS = 15
 
 def each_issue &block
   Dir["#{DIST_DIR}/**/*/"].each do |path|
@@ -92,8 +93,8 @@ namespace :issue do
     bq = BqClient.new DATE
 
     data = {
-      top_new: bq.top_new.first(15),
-      top_all: bq.top_all.first(15)
+      top_new: bq.top_new.first(MAX_REPOS),
+      top_all: bq.top_all.first(MAX_REPOS)
     }
 
     data[:top_all].each do |repo|
