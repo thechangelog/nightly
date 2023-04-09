@@ -32,6 +32,7 @@ class BqClient
         begin
           repo = Repo.from_github row[:url], row[:count]
           next if repo.blocked?
+          next if repo.malware? # run it again now that we have more info
           next if repo.no_description?
           next if repo.description_too_long?
           next if repo.obscene?

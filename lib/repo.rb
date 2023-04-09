@@ -74,6 +74,10 @@ class Repo < Hashie::Mash
     }
   end
 
+  def malware?
+    [description, name].any?(&:malware?)
+  end
+
   def too_many_new_stars?
     new_stargazers_count > stargazers_count
   end
