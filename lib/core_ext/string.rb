@@ -41,7 +41,7 @@ class String
   end
 
   def malware?
-    %w(cheat hack spoof spoofer aimbot godlike g0dlike roblox r0blox r0bl0x).any? { |i| !!(self =~ /#{i}/i) }
+    %w(cheat hack spoof spoofer aimbot godlike g0dlike roblox r0blox r0bl0x crack cracked).any? { |i| !!(self =~ /#{i}/i) }
   end
 
   def translate_url
