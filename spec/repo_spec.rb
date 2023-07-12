@@ -80,6 +80,26 @@ RSpec.describe Repo do
     end
   end
 
+  describe "#malware?" do
+    it "is true when name and description are identical" do
+      repo.name = "MyProject91262"
+      repo.description = "MyProject91262"
+      expect(repo).to be_malware
+    end
+
+    it "is true when name and description are near matches" do
+      repo.name = "MyProject91262"
+      repo.description = "MyPorject91262"
+      expect(repo).to be_malware
+    end
+
+    it "is false when name and description are not near matches" do
+      repo.name = "MyProject91262"
+      repo.description = "Your Project is the cool one"
+      expect(repo).not_to be_malware
+    end
+  end
+
   describe "#no_description?" do
     it "is true when description is nil, empty, or blank" do
       [nil, "", "   "].each do |bad|

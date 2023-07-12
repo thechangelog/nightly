@@ -75,7 +75,8 @@ class Repo < Hashie::Mash
   end
 
   def malware?
-    [description, name].any?(&:malware?)
+    [description, name].any?(&:malware?) ||
+      description.downcase.near_match?(name.downcase)
   end
 
   def too_many_new_stars?
