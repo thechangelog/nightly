@@ -46,16 +46,11 @@ class String
     unl0ck3r h4ck m0ney 0day exploit expl0it).any? { |i| !!(self =~ /#{i}/i) }
   end
 
-  def near_match? other, percent=80
-    min_length = [self.length, other.length].min
-
-    match_count = 0
-
-    min_length.times do |i|
-      match_count += 1 if self[i] == other[i]
-    end
-
-    (match_count.to_f / min_length) * 100 >= percent
+  def near_match? other, threshold=0.8
+    intersection = (self.chars & other.chars).uniq.length
+    union = (self.chars | other.chars).uniq.length
+    similarity = intersection.to_f / union
+    similarity > threshold
   end
 
   def translate_url

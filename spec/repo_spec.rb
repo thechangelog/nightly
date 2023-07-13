@@ -88,9 +88,14 @@ RSpec.describe Repo do
     end
 
     it "is true when name and description are near matches" do
-      repo.name = "MyProject91262"
-      repo.description = "MyPorject91262"
-      expect(repo).to be_malware
+      [
+        ["MyProject91262", "MyPorject91262"],
+        ["-Projectus2", "Projectus2"]
+      ].each do |tuple|
+        repo.name = tuple[0]
+        repo.description = tuple[1]
+        expect(repo).to be_malware
+      end
     end
 
     it "is false when name and description are not near matches" do
