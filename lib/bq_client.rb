@@ -89,7 +89,7 @@ class BqClient
       WHERE ref_type='"repository"' OR ref_type IS NULL # PublicEvent has no ref_type
     )
     GROUP BY repo.id, repo.name, repo.url
-    HAVING count >= 25
+    HAVING count >= 10
     ORDER BY count DESC
     LIMIT 1000
     SQL
