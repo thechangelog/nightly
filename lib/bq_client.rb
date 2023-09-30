@@ -6,10 +6,10 @@ class BqClient
   def initialize day
     @day = day
     @bq = BigQuery::Client.new({
-      "client_id"     => ENV["BQ_CLIENT_ID"],
-      "service_email" => ENV["BQ_SERVICE_EMAIL"],
-      "key"           => ENV["BQ_KEY"],
-      "project_id"    => ENV["BQ_PROJECT_ID"]
+      "client_id"     => ENV.fetch("BQ_CLIENT_ID"),
+      "service_email" => ENV.fetch("BQ_SERVICE_EMAIL"),
+      "key"           => ENV.fetch("BQ_KEY", "bq-key.p12"),
+      "project_id"    => ENV.fetch("BQ_PROJECT_ID", "changelog-nightly")
     })
   end
 

@@ -1,0 +1,2 @@
+# generate/deliver Nightly at 9:59pm CDT (2:59am UTC)
+59 2 * * * rake generate issue:deliver

@@ -5,6 +5,7 @@ require "json"
 require "dotenv/tasks"
 require "createsend"
 require "pry"
+require "uri"
 
 require_relative "lib/core_ext/date"
 require_relative "lib/core_ext/integer"
@@ -15,11 +16,11 @@ require_relative "lib/repo"
 require_relative "lib/template"
 require_relative "lib/buffer"
 
-DATE      = Date.parse(ENV["DATE"]) rescue Date.today
+DATE      = Date.parse(ENV.fetch("DATE")) rescue Date.today
 DIST_DIR  = "dist"
-ISSUE_DIR = "#{DIST_DIR}/#{DATE.path}"
-ISSUE_URL = "http://nightly.changelog.com/#{DATE.path}"
-DATA_FILE = "#{ISSUE_DIR}/data.json"
+ISSUE_DIR = File.join(DIST_DIR, DATE.path)
+ISSUE_URL = URI.join(ENV.fetch("URL", "https://nightly.changelog.com/"), DATE.path)
+DATA_FILE = File.join(ISSUE_DIR, "data.json")
 THEMES    = %w(night day)
 MAX_REPOS = 15
 
@@ -108,8 +109,8 @@ namespace :issue do
   task buffer: [:data] do
     json = JSON.load File.read DATA_FILE
     issue = Issue.new DATE, json
-    gotime = Buffer.new ENV["BUFFER_GO_TIME"], %w(Go), "#golang"
-    jsparty = Buffer.new ENV["BUFFER_JS_PARTY"], %w(CSS JavaScript JSX PureScript TypeScript Vue)
+    gotime = Buffer.new ENV.fetch("BUFFER_GO_TIME"), %w(Go), "#golang"
+    jsparty = Buffer.new ENV.fetch("BUFFER_JS_PARTY"), %w(CSS JavaScript JSX PureScript TypeScript Vue)
 
     [gotime, jsparty].each do |buffer|
       buffer.injest issue.top_new
@@ -155,9 +156,9 @@ namespace :issue do
     json = JSON.load File.read DATA_FILE
     next unless json["top_new"].any? || json["top_all"].any?
 
-    auth = {api_key: ENV["CAMPAIGN_MONITOR_KEY"]}
+    auth = {api_key: ENV.fetch("CAMPAIGN_MONITOR_KEY")}
 
-    CreateSend::List.new(auth, ENV["CAMPAIGN_MONITOR_LIST"]).segments.each do |segment|
+    CreateSend::List.new(auth, ENV.fetch("CAMPAIGN_MONITOR_LIST")).segments.each do |segment|
       theme_name = segment.Title.downcase
       theme_id = segment.SegmentID
 
@@ -165,7 +166,7 @@ namespace :issue do
 
       campaign_id = CreateSend::Campaign.create(
         auth,
-        ENV["CAMPAIGN_MONITOR_ID"], # client id
+        ENV.fetch("CAMPAIGN_MONITOR_ID"), # client id
         "The Hottest Repos on GitHub - #{DATE.day_month_abbrev}", # subject
         "Nightly – #{DATE} (#{theme_name} theme)", # campaign name
         "Changelog Nightly", # from name

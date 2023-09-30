@@ -2,7 +2,7 @@ require "sequel"
 require "sqlite3"
 
 module DB
-  @gh = Sequel.sqlite "github.db"
+  @gh = Sequel.sqlite(File.join(ENV.fetch("DB_DIR", "."), "github.db"))
 
   def self.create
     unless @gh.table_exists? :listings

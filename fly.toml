@@ -1,0 +1,22 @@
+# https://fly.io/docs/reference/configuration/
+app = "changelog-nightly-2023-10-10"
+primary_region = "ord"
+
+[env]
+		# used by supercronic - https://changelog-media.sentry.io/settings/projects/changelog-com/keys/
+		SENTRY_DSN = "https://2b1aed8f16f5404cb2bc79b855f2f92d@o546963.ingest.sentry.io/5668962"
+		DB_DIR = "/app/dist"
+
+[mounts]
+	source = "changelog_nightly_2023_10_10"
+	destination = "/app/dist"
+
+[http_service]
+	internal_port = 80
+	force_https = true
+
+[[http_service.checks]]
+	method = "GET"
+	path = "/health"
+	interval = "5s"
+	timeout = "4s"
