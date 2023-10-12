@@ -66,7 +66,8 @@ func (p *Pipeline) Build() *Pipeline {
 		From(fmt.Sprintf("ruby:%s-alpine", p.tools.Ruby())).
 		WithExec([]string{"ruby", "--version"}).
 		WithExec([]string{"apk", "update"}).
-		WithExec([]string{"apk", "add", "git", "build-base", "sqlite-dev", "bash"})
+		WithExec([]string{"apk", "add", "git", "build-base", "sqlite-dev", "bash", "tzdata"}).
+		WithEnvVariable("TZ", "US/Central")
 
 	if p.nocache {
 		p.workspace = p.workspace.WithEnvVariable("DAGGER_CACHE_BUSTED_AT", time.Now().String())
