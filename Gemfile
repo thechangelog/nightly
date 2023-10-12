@@ -14,6 +14,7 @@ gem "sqlite3"
 gem "rest-client"
 gem "obscenity"
 gem "whatlanguage"
+gem "foreman"
 
 group :test do
   gem "rspec"

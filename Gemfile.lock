@@ -33,6 +33,7 @@ GEM
     extlib (0.9.16)
     faraday (0.10.1)
       multipart-post (>= 1.2, < 3)
+    foreman (0.87.2)
     google-api-client (0.8.6)
       activesupport (>= 3.2)
       addressable (~> 2.3)
@@ -124,6 +125,7 @@ DEPENDENCIES
   bigquery
   createsend
   dotenv
+  foreman
   gemoji!
   hashie
   obscenity
@@ -140,4 +142,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.13.6
+   1.14.6
