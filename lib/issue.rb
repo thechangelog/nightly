@@ -5,7 +5,7 @@ class Issue
   attr_reader :date, :promotions, :top_new, :top_all
   def initialize date, json
     @date = date
-    @promotions = ["plusplus", ["gotime", "jsparty", "practicalai"].sample].flatten
+    @promotions = ["beats", ["plusplus", "submit", "podcast"].sample].flatten
     process_top_new json
     process_top_all json
   end
