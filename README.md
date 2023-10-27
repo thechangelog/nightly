@@ -8,7 +8,7 @@ Here's a preview:
 
 [![Changelog Nightly Preview](images/changelog-nightly.jpg)][nightly]
 
-Want something opinionated and less frequent? Subscribe to [Changelog Weekly][weekly]!
+Want something opinionated and less frequent? Subscribe to [Changelog News][news]!
 
 ## Props and thanks
 
@@ -31,7 +31,7 @@ This project would not be possible without [Ilya Grigorik][igvita] and the work 
 [MIT][license]
 
 [nightly]: https://changelog.com/nightly
-[weekly]: https://changelog.com/weekly
+[news]: https://changelog.com/news
 [igvita]: http://igvita.com
 [gh-archive]: https://www.githubarchive.org
 [144]: https://changelog.com/144
