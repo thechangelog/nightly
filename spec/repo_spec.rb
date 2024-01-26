@@ -32,6 +32,25 @@ RSpec.describe Repo do
     end
   end
 
+  describe "#description_too_short?" do
+    it "is true when description is nil, empty, or blank" do
+      [nil, "", "   "].each do |bad|
+        repo.description = bad
+        expect(repo.description_too_short?).to be true
+      end
+    end
+
+    it "is true when descripton has short contents" do
+      repo.description = "ohai"
+      expect(repo.description_too_short?).to be true
+    end
+
+    it "is false when descripton has long contents" do
+      repo.description = "ohai this is a real one"
+      expect(repo.description_too_short?).to be false
+    end
+  end
+
   describe "#description_too_long?" do
     it "is true when longer than a tweet" do
       repo.description = "0" * 281
@@ -102,20 +121,6 @@ RSpec.describe Repo do
       repo.name = "MyProject91262"
       repo.description = "Your Project is the cool one"
       expect(repo).not_to be_malware
-    end
-  end
-
-  describe "#no_description?" do
-    it "is true when description is nil, empty, or blank" do
-      [nil, "", "   "].each do |bad|
-        repo.description = bad
-        expect(repo.no_description?).to be true
-      end
-    end
-
-    it "is false when descripton has contents" do
-      repo.description = "ohai"
-      expect(repo.no_description?).to be false
     end
   end
 

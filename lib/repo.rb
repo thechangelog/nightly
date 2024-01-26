@@ -60,8 +60,8 @@ class Repo < Hashie::Mash
     (language || "").strip.empty?
   end
 
-  def no_description?
-    description.strip.empty?
+  def description_too_short?
+    description.length < 5
   end
 
   def description_too_long?
