@@ -61,7 +61,7 @@ class Repo < Hashie::Mash
   end
 
   def description_too_short?
-    description.length < 5
+    (description.length < 5) || (description.split(" ").length < 3)
   end
 
   def description_too_long?

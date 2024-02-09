@@ -45,6 +45,11 @@ RSpec.describe Repo do
       expect(repo.description_too_short?).to be true
     end
 
+    it "is true when description is less than 3 words" do
+        repo.description = "too shot"
+        expect(repo.description_too_short?).to be true
+    end
+
     it "is false when descripton has long contents" do
       repo.description = "ohai this is a real one"
       expect(repo.description_too_short?).to be false
