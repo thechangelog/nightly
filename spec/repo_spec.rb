@@ -40,7 +40,7 @@ RSpec.describe Repo do
       end
     end
 
-    it "is true when descripton has short contents" do
+    it "is true when description has short contents" do
       repo.description = "ohai"
       expect(repo.description_too_short?).to be true
     end
