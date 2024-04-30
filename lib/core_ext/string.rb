@@ -43,7 +43,7 @@ class String
   def malware?
     %w(cheat ch3at 0ptions sk1n hack spoof sp00f spoofer sp00f3r aimbot godlike
     g0dlike d4rk s1d3 roblox r0blox r0bl0x crack cracked scr1pt ap3x unl0cker
-    unl0ck3r h4ck m0ney 0day exploit expl0it).any? { |i| !!(self =~ /#{i}/i) }
+    unl0ck3r h4ck m0ney 0day exploit expl0it skinchanger skin-changer swapper).any? { |i| !!(self =~ /#{i}/i) }
   end
 
   def near_match? other, threshold=0.8
