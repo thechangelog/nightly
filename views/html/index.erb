@@ -7,15 +7,32 @@
 <ul>
 <%
   paths = Dir["**/*.html"].map { |html| html.gsub "dist", "" }
-  grouped = paths.group_by { |path| path.split('/').values_at(1, 2) }
-  grouped.sort_by { |key, _| key.join }.reverse.each do |year_month, paths|
+  # Group by year and month
+  by_year_month = paths.group_by { |path| path.split('/').values_at(1, 2) }
+  by_year_month.sort_by { |key, _| key.join }.reverse.each do |year_month, month_paths|
     year, month = year_month
 %>
   <li>
     <strong><%= "#{year}-#{month}" %></strong>
     <ul>
-    <% paths.sort_by { |path| path.split('/')[3] }.reverse.each do |path| %>
-      <li><a href="<%= path %>"><%= path %></a></li>
+    <%
+      # Group by date (year/month/day)
+      by_date = month_paths.group_by { |path| path.split('/').values_at(1, 2, 3) }
+      by_date.sort_by { |key, _| key.join }.reverse.each do |date_parts, date_paths|
+        year, month, day = date_parts
+        date_str = "#{year}-#{month}-#{day}"
+
+        # Find each type of file
+        web_path = date_paths.find { |p| p.include?('index.html') }
+        day_path = date_paths.find { |p| p.include?('email-day.html') }
+        night_path = date_paths.find { |p| p.include?('email-night.html') }
+    %>
+      <li>
+        <%= date_str %>:
+        <% if web_path %><a href="<%= web_path %>">web</a><% end %>
+        <% if day_path %><a href="<%= day_path %>">day</a><% end %>
+        <% if night_path %><a href="<%= night_path %>">night</a><% end %>
+      </li>
     <% end %>
     </ul>
   </li>
