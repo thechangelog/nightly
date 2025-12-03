@@ -24,7 +24,7 @@ class BqClient
   private
 
   def response_to_repo_list query_result, limit
-    query_result["rows"]
+    (query_result["rows"] || [])
       .map { |row| extract_fields_from_row row }
       .reject { |row| row[:url].malware? } # run before GH API (rate limits)
       .first(limit) # run before GH API (rate limits)
