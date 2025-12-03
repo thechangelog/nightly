@@ -5,8 +5,20 @@
 </head>
 <body>
 <ul>
-<% Dir["**/*.html"].map { |html| html.gsub "dist", "" }.each do |path| %>
-  <li><a href="<%= path %>"><%= path %></a></li>
+<%
+  paths = Dir["**/*.html"].map { |html| html.gsub "dist", "" }
+  grouped = paths.group_by { |path| path.split('/').values_at(1, 2) }
+  grouped.sort_by { |key, _| key.join }.reverse.each do |year_month, paths|
+    year, month = year_month
+%>
+  <li>
+    <strong><%= "#{year}-#{month}" %></strong>
+    <ul>
+    <% paths.sort_by { |path| path.split('/')[3] }.reverse.each do |path| %>
+      <li><a href="<%= path %>"><%= path %></a></li>
+    <% end %>
+    </ul>
+  </li>
 <% end %>
 </ul>
 </body>
