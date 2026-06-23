@@ -9,7 +9,8 @@ class BqClient
       "client_id"     => ENV.fetch("BQ_CLIENT_ID"),
       "service_email" => ENV.fetch("BQ_SERVICE_EMAIL"),
       "key"           => ENV.fetch("BQ_KEY", "bq-key.p12"),
-      "project_id"    => ENV.fetch("BQ_PROJECT_ID", "changelog-nightly")
+      "project_id"    => ENV.fetch("BQ_PROJECT_ID", "changelog-nightly"),
+      "dataset"       => "githubarchive"
     })
   end
 
@@ -24,7 +25,10 @@ class BqClient
   private
 
   def response_to_repo_list query_result, limit
-    (query_result["rows"] || [])
+    rows = query_result["rows"] || []
+    $stderr.puts "[Nightly] Query returned #{rows.length} rows"
+
+    rows
       .map { |row| extract_fields_from_row row }
       .reject { |row| row[:url].malware? } # run before GH API (rate limits)
       .first(limit) # run before GH API (rate limits)
@@ -38,29 +42,42 @@ class BqClient
           next if repo.obscene?
           next if repo.too_many_new_stars?
           repo
-        rescue
+        rescue => e
+          $stderr.puts "[Nightly] Error processing #{row[:url]}: #{e.message}"
           next
         end
       }.compact
   end
 
-  # each `row` hash has this format:
-  # {"f"=>[{"v"=>"https://...snip..."}, {"v"=>"45"}]}
+  # Standard SQL row format: array of values
+  # Legacy SQL row format: {"f"=>[{"v"=>value}, ...]}
   def extract_fields_from_row row
-    {
-      url: row["f"].first["v"],
-      count: row["f"].last["v"].to_i
-    }
+    if row.is_a?(Hash) && row["f"]
+      # Legacy SQL format
+      {
+        url: row["f"].first["v"],
+        count: row["f"].last["v"].to_i
+      }
+    elsif row.is_a?(Array)
+      # Standard SQL format
+      {
+        url: row[0],
+        count: row[1].to_i
+      }
+    else
+      raise "Unknown row format: #{row.inspect}"
+    end
   end
 
+  # Migrated from legacy TABLE_DATE_RANGE to standard SQL.
+  # The gharchive project publishes daily tables as gharchive.YYYYMMDD.
+  # See: https://www.gharchive.org/
   def top_all_sql
+    date_str = day.strftime("%Y%m%d")
     <<-SQL
     SELECT repo.url, COUNT(repo.name) as count FROM
-    TABLE_DATE_RANGE([githubarchive:day.],
-      TIMESTAMP("#{day}"),
-      TIMESTAMP("#{day}")
-    )
-    WHERE type="WatchEvent"
+    `githubarchive.day.#{date_str}`
+    WHERE type = 'WatchEvent'
     GROUP BY repo.id, repo.name, repo.url
     HAVING count >= 50
     ORDER BY count DESC
@@ -69,24 +86,19 @@ class BqClient
   end
 
   def top_new_sql
+    date_str = day.strftime("%Y%m%d")
     <<-SQL
     SELECT repo.url, COUNT(repo.name) AS count FROM
-    TABLE_DATE_RANGE([githubarchive:day.],
-      TIMESTAMP("#{day}"),
-      TIMESTAMP("#{day}")
-    )
-    WHERE type="WatchEvent"
+    `githubarchive.day.#{date_str}`
+    WHERE type = 'WatchEvent'
     AND repo.url IN (
       SELECT repo.url FROM (
         SELECT repo.url,
-          JSON_EXTRACT(payload, '$.ref_type') AS ref_type,
-        FROM (TABLE_DATE_RANGE([githubarchive:day.],
-          TIMESTAMP("#{day}"),
-          TIMESTAMP("#{day}")
-        ))
-        WHERE type IN ("CreateEvent", "PublicEvent")
+          JSON_EXTRACT_SCALAR(payload, '$.ref_type') AS ref_type
+        FROM `githubarchive.day.#{date_str}`
+        WHERE type IN ('CreateEvent', 'PublicEvent')
       )
-      WHERE ref_type='"repository"' OR ref_type IS NULL # PublicEvent has no ref_type
+      WHERE ref_type = 'repository' OR ref_type IS NULL
     )
     GROUP BY repo.id, repo.name, repo.url
     HAVING count >= 10
