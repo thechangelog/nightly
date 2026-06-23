@@ -41,11 +41,13 @@ class String
   end
 
   def malware?
+    # Only match obviously malicious keywords. Removed overly broad terms
+    # (download, free, crypto, blockchain, testnet, autotrade, etc.) that
+    # were filtering out legitimate open-source projects.
     %w(cheat ch3at 0ptions sk1n hack spoof sp00f spoofer sp00f3r aimbot godlike
     g0dlike d4rk s1d3 roblox r0blox r0bl0x crack cracked scr1pt ap3x unl0cker
     unl0ck3r h4ck m0ney 0day exploit expl0it skinchanger skin-changer swapper
-    stealer keylogger miner crypto-bot cryptobot wallet autoclicker clicker
-    crypto blockchain free download testnet keygen airdrop autotrade).any? { |i| !!(self =~ /#{i}/i) }
+    stealer keylogger autoclicker).any? { |i| !!(self =~ /#{i}/i) }
   end
 
   def near_match? other, threshold=0.8
