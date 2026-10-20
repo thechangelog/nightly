@@ -20,11 +20,20 @@ This project would not be possible without [Ilya Grigorik][igvita] and the work 
 
 [See here.][contributing]
 
+## How an issue is picked
+
+- **Top Starred** comes from GitHub Archive via BigQuery: repos that gained at least 50 stars that day.
+- **Top New** comes from the GitHub search API: repos created that day with at least 10 stars. (It used to come from GitHub Archive too, but GitHub's event feed stopped carrying repository `CreateEvent`s in October 2025.)
+- Both lists are best-first, and keep going until there are 15 repos that pass every check or the lookup budget runs out.
+- Every repo that doesn't make it is logged to stderr as `[nightly] DATE skipped URL (N stars): reason`, so a thin issue explains itself in the logs.
+- Top New also screens for spam the keyword list can't see: lookalike repos (same stars, same size), throwaway accounts, and malware-list topics on accounts that haven't established themselves. See `lib/new_repos.rb`.
+
 ## Hacking
 
 1. Sign up for Google BigQuery and get an API key
-2. Copy `.env.example` to `.env` and configure for your environment
-3. run `rake -T` to see all the possible commands
+2. Create a GitHub token (no scopes needed) for `GITHUB_TOKEN`; it is used for repo, search and owner lookups
+3. Copy `.env.example` to `.env` and configure for your environment
+4. run `rake -T` to see all the possible commands
 
 ## License
 

@@ -1,11 +1,27 @@
 require "json"
-require "big_query"
+require_relative "./rejection_log"
+require_relative "./repo"
 
 class BqClient
   attr_reader :bq, :day
-  def initialize day
+  def initialize day, bq=nil
     @day = day
-    @bq = BigQuery::Client.new({
+    @bq = bq || default_client
+  end
+
+  # `limit` is how many repos we want back; `max_lookups` caps GitHub API
+  # calls. Spam (often already deleted by GitHub) can crowd the top of the
+  # BigQuery results, so we keep looking until we have `limit` repos that pass.
+  def top_all limit=15, max_lookups=200
+    response_to_repo_list bq.query(top_all_sql), limit, max_lookups
+  end
+
+  private
+
+  def default_client
+    require "big_query"
+
+    BigQuery::Client.new({
       "client_id"     => ENV.fetch("BQ_CLIENT_ID"),
       "service_email" => ENV.fetch("BQ_SERVICE_EMAIL"),
       "key"           => ENV.fetch("BQ_KEY", "bq-key.p12"),
@@ -13,35 +29,30 @@ class BqClient
     })
   end
 
-  def top_all limit=50
-    response_to_repo_list bq.query(top_all_sql), limit
-  end
-
-  def top_new limit=50
-    response_to_repo_list bq.query(top_new_sql), limit
-  end
-
-  private
-
-  def response_to_repo_list query_result, limit
+  def response_to_repo_list query_result, limit, max_lookups
     (query_result["rows"] || [])
       .map { |row| extract_fields_from_row row }
       .reject { |row| row[:url].malware? } # run before GH API (rate limits)
-      .first(limit) # run before GH API (rate limits)
-      .map { |row|
-        begin
-          repo = Repo.from_github row[:url], row[:count]
-          next if repo.blocked?
-          next if repo.malware? # run it again now that we have more info
-          next if repo.description_too_short?
-          next if repo.description_too_long?
-          next if repo.obscene?
-          next if repo.too_many_new_stars?
-          repo
-        rescue
-          next
-        end
-      }.compact
+      .first(max_lookups) # run before GH API (rate limits)
+      .lazy
+      .map { |row| repo_from_row row }
+      .reject(&:nil?)
+      .first(limit)
+  end
+
+  def repo_from_row row
+    repo = Repo.from_github row[:url], row[:count]
+    reason = repo.rejection_reason
+
+    if reason
+      RejectionLog.skipped day, row[:url], row[:count], reason
+      nil
+    else
+      repo
+    end
+  rescue => e
+    RejectionLog.skipped day, row[:url], row[:count], "#{e.class}: #{e.message}"
+    nil
   end
 
   # each `row` hash has this format:
@@ -63,33 +74,6 @@ class BqClient
     WHERE type="WatchEvent"
     GROUP BY repo.id, repo.name, repo.url
     HAVING count >= 50
-    ORDER BY count DESC
-    LIMIT 1000
-    SQL
-  end
-
-  def top_new_sql
-    <<-SQL
-    SELECT repo.url, COUNT(repo.name) AS count FROM
-    TABLE_DATE_RANGE([githubarchive:day.],
-      TIMESTAMP("#{day}"),
-      TIMESTAMP("#{day}")
-    )
-    WHERE type="WatchEvent"
-    AND repo.url IN (
-      SELECT repo.url FROM (
-        SELECT repo.url,
-          JSON_EXTRACT(payload, '$.ref_type') AS ref_type,
-        FROM (TABLE_DATE_RANGE([githubarchive:day.],
-          TIMESTAMP("#{day}"),
-          TIMESTAMP("#{day}")
-        ))
-        WHERE type IN ("CreateEvent", "PublicEvent")
-      )
-      WHERE ref_type='"repository"' OR ref_type IS NULL # PublicEvent has no ref_type
-    )
-    GROUP BY repo.id, repo.name, repo.url
-    HAVING count >= 10
     ORDER BY count DESC
     LIMIT 1000
     SQL

@@ -12,6 +12,7 @@ require_relative "lib/core_ext/integer"
 require_relative "lib/bq_client"
 require_relative "lib/db"
 require_relative "lib/issue"
+require_relative "lib/new_repos"
 require_relative "lib/repo"
 require_relative "lib/template"
 require_relative "lib/buffer"
@@ -91,11 +92,9 @@ namespace :issue do
       next
     end
 
-    bq = BqClient.new DATE
-
     data = {
-      top_new: bq.top_new.first(MAX_REPOS),
-      top_all: bq.top_all.first(MAX_REPOS)
+      top_new: NewRepos.new(DATE).top(MAX_REPOS),
+      top_all: BqClient.new(DATE).top_all(MAX_REPOS)
     }
 
     data[:top_all].each do |repo|
